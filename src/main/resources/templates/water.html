@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--导入约束-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+</head>
+<body>
+<!--thymeleaf模板引擎,接管html-->
+
+<div class="venus">---国际多语言---[[#{login.title}]]</div>
+<a th:href="@{/water.html(lang='zh_CN')}">中文</a>
+<a th:href="@{/water.html(lang='en_US')}">英文</a>
+<hr><br>
+<img class="mercury" th:src="@{/img/bill@2x.png}">
+<h3 th:text="${msg}"></h3>
+<h3 th:utext="${msg}"></h3>
+<h3>[[${msg}]]</h3>
+<br>
+<h3 th:each="item:${users}" th:text="${item}"></h3>
+
+
+</body>
+</html>

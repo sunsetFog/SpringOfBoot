@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.7</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com</groupId>
+	<artifactId>core</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>core</name>
+	<description>Core project for Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+<!--	导入jar包  -->
+	<dependencies>
+		<!--token依赖-->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<!-- Shiro整合Spring,安全验证 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<!-- pagehelper 分页用 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+
+		<!--	操作Redis	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!--   邮件任务	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!--	Swagger	-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<!--  security安全  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!--  mybatis	-->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.76</version>
+		</dependency>
+		<!-- Druid数据源	-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.17</version>
+		</dependency>
+		<!--	JDBC API	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!--	springboot框架构建	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--MYSQL Driver-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!--单元测试	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!--lombok日志和生成实体类方法-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--	小而全的Java工具类库	-->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.1</version>
+		</dependency>
+		<!--jquery-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<!--web模板引擎-->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring5</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-java8time</artifactId>
+		</dependency>
+		<!-- 生产提示	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!--JSR303数据校验-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
