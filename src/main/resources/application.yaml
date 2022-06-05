@@ -1,7 +1,8 @@
+# 树形结构，可读性更强，更强约束性
 server:
   port: 8060
   servlet:
-    # 公共路径
+    # 虚拟路径
     context-path: /sky
   max-http-header-size: 102400
 
@@ -132,13 +133,42 @@ Person:
   dog:
     name: 旺财
     age: 3
+
+
 # 整合mybatis
 mybatis:
   type-aliases-package: com.core.pojo
   mapper-locations: classpath:mybatis_mapper/*.xml
+
+# 文件2
 ---
 
 server:
   port: 8062
 spring:
   profiles: dev
+
+---
+blossom2:
+  userName: "小桃"
+  egg: 18
+  # 属性占位符
+  age: ${blossom.egg}
+  birthday: 2020/01/01
+#  hobbies:
+#    - 唱歌
+#    - 跳舞
+  # 行内写法
+  hobbies: [唱歌,跳舞]
+#  girlFriend:
+#    18: 小华
+#    20: 迪丽热巴
+  # 行内写法
+  girlFriend: {18: 小华, 20: 迪丽热巴}
+  address:
+    # 随机值
+    id: ${random.int(3)}
+    desc: 北京
+
+
+  

@@ -18,6 +18,11 @@
 	</properties>
 <!--	导入jar包  -->
 	<dependencies>
+		<!--	JSR-303数据校验,要用javax里的	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 		<!--token依赖-->
 		<dependency>
 			<groupId>com.auth0</groupId>
@@ -139,13 +144,8 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!--JSR303数据校验-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
 	</dependencies>
-
+	<!--  部署插件	-->
 	<build>
 		<plugins>
 			<plugin>

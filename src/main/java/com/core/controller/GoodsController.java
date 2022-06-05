@@ -23,7 +23,7 @@ import java.util.List;
     报错：Cause: java.sql.SQLSyntaxErrorException: Table 'db_news.***' doesn't exist
     pojo文件名要与Mysql表名一致
 */
-@RestController
+@RestController// 等于@Controller + @ResponseBody
 @CrossOrigin
 public class GoodsController {
     @Autowired

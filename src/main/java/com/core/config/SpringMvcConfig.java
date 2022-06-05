@@ -10,8 +10,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+/*
+    SpringMvc配置
+*/
 @Configuration // 配置
-public class MyMvcConfig implements WebMvcConfigurer {
+public class SpringMvcConfig implements WebMvcConfigurer {
     // 路由视图
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

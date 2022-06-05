@@ -9,9 +9,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.core.common.util.JsonUtils;
 
 import com.core.pojo.news.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -44,7 +42,7 @@ public class JWTUtils {
                 .withAudience(audience)     //观众，相当于接受者
                 .withIssuedAt(new Date())   // 生成签名的时间
                 .withExpiresAt(instance.getTime())    // 生成签名的有效期
-                .withClaim("data", JsonUtils.obj2string(data)) //存数据
+                .withClaim("AnalogData", JsonUtils.obj2string(data)) //存数据
                 .withNotBefore(new Date())  //生效时间
                 .withJWTId(UUID.randomUUID().toString())    //编号
                 .sign(algorithm);                            //签入
@@ -87,14 +85,14 @@ public class JWTUtils {
                 .withIssuer(ISSUER)
                 .build(); //Reusable verifier instance 可复用的验证实例
         DecodedJWT decodedJWT = verifier.verify(token);
-        Claim data = decodedJWT.getClaim("data");
+        Claim data = decodedJWT.getClaim("AnalogData");
         System.out.println("--verifierTokenBySysUser-1-"+data);
         System.out.println("--verifierTokenBySysUser-2-"+data.asString());
         return JsonUtils.string2Obj(data.asString(), User.class);
     }
     // 获取user实体类
     public static User getSysUser(String token){
-        Claim data = JWT.decode(token).getClaim("data");
+        Claim data = JWT.decode(token).getClaim("AnalogData");
         return JsonUtils.string2Obj(data.asString(), User.class);
     }
 }
