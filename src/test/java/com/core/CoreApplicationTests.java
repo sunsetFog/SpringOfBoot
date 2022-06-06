@@ -1,32 +1,18 @@
 package com.core;
 
-import com.core.pojo.Cat;
-import com.core.pojo.Dog;
-import com.core.pojo.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.sql.DataSource;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 @SpringBootTest
 class CoreApplicationTests {
-	@Autowired // 写入
-	private Dog dog;
-	@Autowired
-	private Person person;
-	@Autowired
-	private Cat cat;
 	@Autowired
 	DataSource dataSource;
 	@Autowired
@@ -36,9 +22,6 @@ class CoreApplicationTests {
 
 	@Test
 	void contextLoads() throws SQLException {
-		System.out.println("测试Dog类：-------" + dog);
-		System.out.println("测试Person类：-------" + person);
-		System.out.println("测试Cat类：-------" + cat);
 
 		System.out.println("查看默认数据源：-------" + dataSource.getClass());
 
