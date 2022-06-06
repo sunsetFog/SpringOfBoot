@@ -116,23 +116,7 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-pets:
-  - cat
-  - dog
-  - pig
-#Person:
-#  name: tingting
-#  age: ${random.int}
-#  happy: false
-#  birth: 2019/11/02
-#  maps: { k1: v1, k2: v2 }
-#  lists:
-#    - code
-#    - music
-#    - girl
-#  dog:
-#    name: 旺财
-#    age: 3
+
 
 
 # 整合mybatis
