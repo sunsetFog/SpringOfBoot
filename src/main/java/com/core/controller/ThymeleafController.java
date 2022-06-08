@@ -1,16 +1,21 @@
 package com.core.controller;
 
+import com.core.common.util.ResponseData;
+import com.core.common.util.ResponseDataUtil;
+import com.core.pojo.news.User;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-@Controller // 走html
-//@RestController // 不走html
+//@Controller // 走html，接口会报错，因为设置了。。。
+@RestController // 不走html
 public class ThymeleafController {
     // 简单接口：http://localhost:8080/hello
     @GetMapping("/hello")
@@ -47,5 +52,27 @@ public class ThymeleafController {
     @GetMapping("/user/noauth")
     public String toBeNoauth() {
         return "/user/noauth";
+    }
+
+    /*
+        RestTemplate调用第三方接口
+    */
+    private final RestTemplate restTemplate;
+    public ThymeleafController(RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
+    @GetMapping("/toOrder")
+    public ResponseData toOrder() {
+        User user = new User();
+        user.setUsername("rafael");
+        user.setPassword("123456");
+        System.out.println("--user000-"+user);
+        ResponseData forObject = restTemplate.getForObject("http://localhost:8062/sky/toApple", ResponseData.class, user);
+        return forObject;
+    }
+    @GetMapping("/toApple")
+    public ResponseData toApple(User user) {
+        System.out.println("--user111-"+user);
+        return ResponseDataUtil.buildSuccess("200", "画好后", user);
     }
 }

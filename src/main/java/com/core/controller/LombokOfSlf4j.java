@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 /*
 lombok之日志
-
+日志级别：
+默认是info，那么trace < debug更低级的不会显示
+trace < debug < info < warn < error < fatal
+跟踪 < 调试 < 信息 < 警告 < 异常 < 危险
 */
-@Slf4j// 定义日志变量---方便
+@Slf4j// lombok定义日志变量---方便
 @RestController
 @CrossOrigin
 public class LombokOfSlf4j {
-    // 定义日志变量---不方便
+    // slf4j定义日志变量---不方便
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/journal")
@@ -25,6 +28,19 @@ public class LombokOfSlf4j {
         log.info("单精度季度奖金");
         log.info("占位日志--[{}]--", "可考虑");
         log.debug("开始校验[操作权限]");
+        return "Are you OK?";
+    }
+
+    @GetMapping("/Jul")
+    public String toJul() {
+        // Jul日志
+        java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LombokOfSlf4j.class.getName());
+        logger.info("崇尚官方开发组：Jul日志");
+
+        /*
+            log4j日志略，不维护了的，要配置文件才能用，淘汰了
+            org.apache.logging.log4j.Logger;
+        */
         return "Are you OK?";
     }
 

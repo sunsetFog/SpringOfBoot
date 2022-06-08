@@ -18,5 +18,28 @@ public class User implements Serializable {// 实体类序列化
     private String username;
     @ApiModelProperty("密码") // Swaggwer注解
     private String password;
-//    private String perms;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

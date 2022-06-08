@@ -18,6 +18,11 @@
 	</properties>
 <!--	导入jar包  -->
 	<dependencies>
+		<!--	热部署	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 		<!--	JSR-303数据校验,要用javax里的	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -124,6 +124,17 @@ mybatis:
   type-aliases-package: com.core.pojo
   mapper-locations: classpath:mybatis_mapper/*.xml
 
+# 日志级别
+logging:
+  level:
+    com:
+      core: trace
+  # 日志归档
+  file:
+    path: D:\mysql-5.7.19-winx64\data\journal
+
+
+
 # 文件2
 ---
 

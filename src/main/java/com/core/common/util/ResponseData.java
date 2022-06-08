@@ -55,4 +55,12 @@ public class ResponseData<T> implements Serializable {// 泛型类 + 序列化�
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "ResponseData{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }
