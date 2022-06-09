@@ -15,10 +15,19 @@ import java.util.Collection;
 Post获取form表单参数：
 方法1.public String seasonAdd(MapEmployeePojo mapEmployeePojo) {
 方法2.public String seasonAdd(Integer id, String lastName, String email, Integer gender, MapDepartmentPojo mapDepartmentPojo, Date birth) {
-Post接收JSON数据
-public String login(@RequestBody MapEmployeePojo mapEmployeePojo){
 
-@RequestParam("username") String username
+Post接收JSON数据
+1.public String login(@RequestBody MapEmployeePojo mapEmployeePojo){
+2.@RequestParam("username") String username
+
+Get接收JSON数据
+1.@RequestParam("username") String username
+2.HttpServletRequest request
+String username = request.getParameter("username");
+
+Get接收path参数
+@GetMapping("store/update/{id}")
+@PathVariable("id") int id
 */
 @Controller
 public class EmployeeController_01 {

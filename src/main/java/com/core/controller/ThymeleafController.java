@@ -4,12 +4,14 @@ import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.pojo.news.User;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -61,8 +63,8 @@ public class ThymeleafController {
     public ThymeleafController(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
-    @GetMapping("/toOrder")
-    public ResponseData toOrder() {
+    @GetMapping("/toOrder1")
+    public ResponseData toOrder1() {
         User user = new User();
         user.setUsername("rafael");
         user.setPassword("123456");
@@ -71,8 +73,24 @@ public class ThymeleafController {
         return forObject;
     }
     @GetMapping("/toApple")
-    public ResponseData toApple(User user) {
+    public ResponseData toApple(HttpServletRequest request) {
+        String user = request.getParameter("user");
         System.out.println("--user111-"+user);
+        return ResponseDataUtil.buildSuccess("200", "画好后", user);
+    }
+
+    @GetMapping("/toOrder2")
+    public ResponseData toOrder2() {
+        User user = new User();
+        user.setUsername("rafael");
+        user.setPassword("123456");
+        System.out.println("--user000-"+user);
+        ResponseEntity<ResponseData> responseDataResponseEntity = restTemplate.postForEntity("http://localhost:8062/sky/toApple", user, ResponseData.class);
+        return responseDataResponseEntity.getBody();
+    }
+    @PostMapping("/toApple")
+    public ResponseData toApple2(@RequestBody User user) {
+        System.out.println("--user222-"+user);
         return ResponseDataUtil.buildSuccess("200", "画好后", user);
     }
 }

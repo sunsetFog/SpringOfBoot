@@ -16,6 +16,8 @@ public class Router {
     private int parentId;
     private String path;
     private String metaTitle;
+    @ApiModelProperty("导入路径")
+    private String importPath;
 
     public int getId() {
         return id;
@@ -49,14 +51,6 @@ public class Router {
         this.metaTitle = metaTitle;
     }
 
-    public int getMetaKey() {
-        return metaKey;
-    }
-
-    public void setMetaKey(int metaKey) {
-        this.metaKey = metaKey;
-    }
-
     public String getImportPath() {
         return importPath;
     }
@@ -64,8 +58,4 @@ public class Router {
     public void setImportPath(String importPath) {
         this.importPath = importPath;
     }
-
-    private int metaKey;
-    @ApiModelProperty("导入路径")
-    private String importPath;
 }

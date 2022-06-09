@@ -8,14 +8,12 @@
         <result column="parentId" property="parentId"/>
         <result column="path" property="path"/>
         <result column="metaTitle" property="metaTitle"/>
-        <result column="metaKey" property="metaKey"/>
         <result column="importPath" property="importPath"/>
 <!--        <collection property="menuList" ofType="com.core.pojo.news.Router.Router">-->
 <!--            <id column="id" property="id"/>-->
 <!--            <result column="parentId" property="parentId"/>-->
 <!--            <result column="path" property="path"/>-->
 <!--            <result column="metaTitle" property="metaTitle"/>-->
-<!--            <result column="metaKey" property="metaKey"/>-->
 <!--            <result column="importPath" property="importPath"/>-->
 <!--        </collection>-->
     </resultMap>
@@ -25,7 +23,6 @@
                other5.parentId    parentId,
                other5.path     path,
                other5.metaTitle   metaTitle,
-               other5.metaKey     metaKey,
                other5.importPath   importPath
         from user other1
             LEFT JOIN user_to_role other2 on other1.id = other2.user_id
