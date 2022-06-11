@@ -1,5 +1,9 @@
 package com.core.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,12 +17,16 @@ import java.util.Date;
 @NoArgsConstructor // 无参构造
 @ApiModel("用户实体类")
 public class MapEmployeePojo_01 {
+    @JsonIgnore// jackson---排除Json序列化
     private Integer id;
     @ApiModelProperty("名字")
     private String lastName;
+    @JsonProperty("askEmail")// 字段别名
     private String email;
     private Integer gender; // 0:女  1:男
     private DepartmentPojo_01 departmentPojo01;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")// jackson---日期格式化
+    @JsonInclude(JsonInclude.Include.NON_NULL)// jackson---null时，不包含这属性
     private Date birth;
 
     public MapEmployeePojo_01(Integer id, String lastName, String email, Integer gender, DepartmentPojo_01 departmentPojo01) {

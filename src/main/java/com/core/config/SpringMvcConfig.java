@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+
 /*
     SpringMvc配置
 */
@@ -29,15 +27,15 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     // 写入redis
     @Autowired
     private RedisUtilsService redisUtilsService;
-    // 注册拦截器
+    // 注册http拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         /*
-            addPathPatterns使http拦截器触发：所有
-            excludePathPatterns使http拦截器不会触发：一个个加，登录接口不需要拦截
+            addPathPatterns拦截
+            excludePathPatterns不拦截
         */
 //        registry.addInterceptor(new HttpInterceptor(redisUtilsService)) // 实例化http拦截器，顺便带参构造
-//                .addPathPatterns("/**")
+//                .addPathPatterns("/**")// 拦截所有
 //                .excludePathPatterns("/","index.html","/user/login", "/shop/list","/css/**","/js/**","/img/**");
     }
     // 上传文件或图片 ----- 把逻辑路径自动映射为物理路径
@@ -49,5 +47,15 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         System.out.println("--fileUpload--"+fileUpload);
 //        registry.addResourceHandler(staticAccessPath).addResourceLocations(fileUpload);
         registry.addResourceHandler("/img/avatorImages/**").addResourceLocations(fileUpload);
+    }
+    /*
+        这里是全局跨域设置
+        局部跨域：@CrossOrigin
+    */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/sky/*")// 映射服务器接口，使跨域访问
+            // .allowedOrigins("http://localhost:8062")// 域名来源
+            .allowedMethods("GET", "POST", "DELETE", "PUT");// 允许请求方法
     }
 }
