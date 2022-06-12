@@ -1,11 +1,16 @@
 package com.core.controller;
 
+import com.core.exception.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /*
@@ -28,6 +33,16 @@ public class LombokOfSlf4j {
         log.info("单精度季度奖金");
         log.info("占位日志--[{}]--", "可考虑");
         log.debug("开始校验[操作权限]");
+        // 处理日期格式
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date isDate = new Date();
+        try {
+            isDate = dateFormat.parse("2YYU");
+        }catch (Exception e){
+//            e.printStackTrace();
+            log.info("---123----"+e.getMessage());
+        }
+        ApiException.fail("该优惠券不可用");
         return "Are you OK?";
     }
 

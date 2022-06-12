@@ -11,7 +11,7 @@ public class ResponseData<T> implements Serializable {// 泛型类 + 序列化�
 
     private String code;
 
-    private String msg;
+    private String message;
     // 泛型变量
     private T data;
 
@@ -20,15 +20,15 @@ public class ResponseData<T> implements Serializable {// 泛型类 + 序列化�
     }
 
     // 构造器里添加泛型变量值---type1---三个参数
-    public ResponseData(String code, String msg, T data) {
+    public ResponseData(String code, String message, T data) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.data = data;
     }
     // 构造器里添加泛型变量值---type2---两个参数
-    public ResponseData(String code, String msg) {
+    public ResponseData(String code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     public String getCode() {
@@ -39,12 +39,12 @@ public class ResponseData<T> implements Serializable {// 泛型类 + 序列化�
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
@@ -59,7 +59,7 @@ public class ResponseData<T> implements Serializable {// 泛型类 + 序列化�
     public String toString() {
         return "ResponseData{" +
                 "code='" + code + '\'' +
-                ", msg='" + msg + '\'' +
+                ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
     }

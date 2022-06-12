@@ -1,11 +1,14 @@
 package com.core.common.util;
+
+import com.core.common.interfaces.IErrorCode;
+
 /*
     http状态码
     枚举类更加直观，类型安全
 
     ResponseStatus.ERROR.getCode()
 */
-public enum ResponseStatus {
+public enum ResponseStatus implements IErrorCode {
 
     SUCCESS("200", "请求成功"),
     ERROR("1111", "请求失败"),
@@ -15,11 +18,11 @@ public enum ResponseStatus {
     PARAM_ERROR("2002", "业务参数错误");
 
     private String code;
-    private String msg;
+    private String message;
 
-    ResponseStatus(String code, String msg) {
+    ResponseStatus(String code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     public String getCode() {
@@ -30,11 +33,11 @@ public enum ResponseStatus {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
