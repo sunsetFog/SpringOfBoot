@@ -1,5 +1,6 @@
-package com.core.dao;
+package com.core.common.AnalogData;
 
+import com.core.common.AnalogData.MapDepartmentDao_01;
 import com.core.pojo.DepartmentPojo_01;
 import com.core.pojo.MapEmployeePojo_01;
 import org.springframework.beans.factory.annotation.Autowired;

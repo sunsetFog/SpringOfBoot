@@ -1,7 +1,7 @@
 package com.core.controller;
 
-import com.core.dao.MapDepartmentDao_01;
-import com.core.dao.MapEmployeeDao_01;
+import com.core.common.AnalogData.MapDepartmentDao_01;
+import com.core.common.AnalogData.MapEmployeeDao_01;
 import com.core.pojo.DepartmentPojo_01;
 import com.core.pojo.MapEmployeePojo_01;
 import org.springframework.beans.factory.annotation.Autowired;

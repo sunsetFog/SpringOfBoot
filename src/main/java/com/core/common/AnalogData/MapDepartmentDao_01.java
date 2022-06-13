@@ -1,4 +1,4 @@
-package com.core.dao;
+package com.core.common.AnalogData;
 
 import com.core.pojo.DepartmentPojo_01;
 import org.springframework.stereotype.Repository;
