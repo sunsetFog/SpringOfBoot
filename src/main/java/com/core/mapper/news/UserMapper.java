@@ -1,11 +1,11 @@
 package com.core.mapper.news;
 
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
 public interface UserMapper {
-    User loginVerify(String username, String password);
+    LoginParams loginVerify(String username, String password);
 }

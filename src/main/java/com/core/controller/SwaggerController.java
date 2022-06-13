@@ -1,6 +1,6 @@
 package com.core.controller;
 
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +17,8 @@ public class SwaggerController {
     // 返回值有实体类，就会扫描到Swagger里，显示在Models
     @ApiOperation("--看看就飒飒--")
     @PostMapping("/tongtong/bean")
-    public User penBean() {
-        return new User();
+    public LoginParams penBean() {
+        return new LoginParams();
     }
 
     @GetMapping("/xiaoyue/apple")

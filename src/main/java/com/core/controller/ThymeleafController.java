@@ -2,18 +2,14 @@ package com.core.controller;
 
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 //@Controller // 走html，接口会报错，因为设置了。。。
@@ -65,11 +61,11 @@ public class ThymeleafController {
     }
     @GetMapping("/toOrder1")
     public ResponseData toOrder1() {
-        User user = new User();
-        user.setUsername("rafael");
-        user.setPassword("123456");
-        System.out.println("--user000-"+user);
-        ResponseData forObject = restTemplate.getForObject("http://localhost:8062/sky/toApple", ResponseData.class, user);
+        LoginParams loginParams = new LoginParams();
+        loginParams.setUsername("rafael");
+        loginParams.setPassword("123456");
+        System.out.println("--user000-"+ loginParams);
+        ResponseData forObject = restTemplate.getForObject("http://localhost:8062/sky/toApple", ResponseData.class, loginParams);
         return forObject;
     }
     @GetMapping("/toApple")
@@ -81,16 +77,16 @@ public class ThymeleafController {
 
     @GetMapping("/toOrder2")
     public ResponseData toOrder2() {
-        User user = new User();
-        user.setUsername("rafael");
-        user.setPassword("123456");
-        System.out.println("--user000-"+user);
-        ResponseEntity<ResponseData> responseDataResponseEntity = restTemplate.postForEntity("http://localhost:8062/sky/toApple", user, ResponseData.class);
+        LoginParams loginParams = new LoginParams();
+        loginParams.setUsername("rafael");
+        loginParams.setPassword("123456");
+        System.out.println("--user000-"+ loginParams);
+        ResponseEntity<ResponseData> responseDataResponseEntity = restTemplate.postForEntity("http://localhost:8062/sky/toApple", loginParams, ResponseData.class);
         return responseDataResponseEntity.getBody();
     }
     @PostMapping("/toApple")
-    public ResponseData toApple2(@RequestBody User user) {
-        System.out.println("--user222-"+user);
-        return ResponseDataUtil.buildSuccess("200", "画好后", user);
+    public ResponseData toApple2(@RequestBody LoginParams loginParams) {
+        System.out.println("--user222-"+ loginParams);
+        return ResponseDataUtil.buildSuccess("200", "画好后", loginParams);
     }
 }

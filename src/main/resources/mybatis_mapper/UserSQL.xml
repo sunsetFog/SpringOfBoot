@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.core.mapper.news.UserMapper">
-    <select id="loginVerify" resultType="com.core.pojo.news.User">
-        SELECT * FROM user where username = #{username} and password = #{password};
+    <select id="loginVerify" resultType="com.core.pojo.news.LoginParams">
+        SELECT * FROM ums_admin where username = #{username} and password = #{password};
     </select>
 </mapper>

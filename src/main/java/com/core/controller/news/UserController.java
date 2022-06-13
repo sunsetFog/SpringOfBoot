@@ -5,7 +5,7 @@ import com.core.common.redis.RedisKeySplicing;
 import com.core.mapper.news.UserMapper;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import com.core.service.RedisUtilsService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -66,19 +66,19 @@ public class UserController {
             msg = "没有权限";
         }
         // 拿到User对象，认证return要传user进来
-        User currentUser= (User) subject.getPrincipal();
-        System.out.println("--currentUser--"+currentUser);
+        LoginParams currentLoginParams = (LoginParams) subject.getPrincipal();
+        System.out.println("--currentUser--"+ currentLoginParams);
         // 用户密码错误
-        if(currentUser == null) {
+        if(currentLoginParams == null) {
             return ResponseDataUtil.buildSuccess(code, msg);
         }
 
         String isToken = null;
         try {
-            isToken = JWTUtils.generTokenByRS256(currentUser);
+            isToken = JWTUtils.generTokenByRS256(currentLoginParams);
 
-            User beUser = JWTUtils.verifierTokenBySysUser(isToken);
-            System.out.println("--token校验--"+beUser);
+            LoginParams beLoginParams = JWTUtils.verifierTokenBySysUser(isToken);
+            System.out.println("--token校验--"+ beLoginParams);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,7 +93,7 @@ public class UserController {
 
 
         // redis存储token
-        String appleKey = RedisKeySplicing.getUserToken(currentUser.getUsername());
+        String appleKey = RedisKeySplicing.getUserToken(currentLoginParams.getUsername());
         System.out.println("--appleKey--"+appleKey);
         redisUtilsService.cacheStringInfoByDay(appleKey, isToken, 1);
         redisUtilsService.cacheStringInfoByDay("username", username, 1);

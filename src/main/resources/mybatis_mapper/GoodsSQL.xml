@@ -84,14 +84,14 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-<!--    <select id="queryUserById" resultType="com.core.pojo.news.User">-->
-<!--        select * from user where id = #{id}-->
+<!--    <select id="queryUserById" resultType="com.core.pojo.news.LoginParams">-->
+<!--        select * from loginParams where id = #{id}-->
 <!--    </select>-->
-<!--    <insert id="addUser" parameterType="com.core.pojo.news.User">-->
-<!--        insert into user (id,name,address) values (#{id},#{name},#{address})-->
+<!--    <insert id="addUser" parameterType="com.core.pojo.news.LoginParams">-->
+<!--        insert into loginParams (id,name,address) values (#{id},#{name},#{address})-->
 <!--    </insert>-->
-<!--    <update id="updateUser" parameterType="com.core.pojo.news.User">-->
-<!--        update user set name=#{name},address=#{address} where id = #{id}-->
+<!--    <update id="updateUser" parameterType="com.core.pojo.news.LoginParams">-->
+<!--        update loginParams set name=#{name},address=#{address} where id = #{id}-->
 <!--    </update>-->
     <delete id="deleteGoods" parameterType="java.lang.Integer">
         delete from goods where id = #{id,jdbcType=INTEGER}

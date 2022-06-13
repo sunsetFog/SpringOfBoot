@@ -8,7 +8,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.core.common.util.JsonUtils;
 
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -78,7 +78,7 @@ public class JWTUtils {
 //    }
 
     // 在http拦截器里token校验
-    public static User verifierTokenBySysUser(String token) throws Exception {
+    public static LoginParams verifierTokenBySysUser(String token) throws Exception {
         //其实按照规定只需要传递 publicKey 来校验即可，这可能是auth0 的缺点
         Algorithm algorithm = Algorithm.HMAC256(HMAC256_PWD);
         JWTVerifier verifier = JWT.require(algorithm)
@@ -88,11 +88,11 @@ public class JWTUtils {
         Claim data = decodedJWT.getClaim("AnalogData");
         System.out.println("--verifierTokenBySysUser-1-"+data);
         System.out.println("--verifierTokenBySysUser-2-"+data.asString());
-        return JsonUtils.string2Obj(data.asString(), User.class);
+        return JsonUtils.string2Obj(data.asString(), LoginParams.class);
     }
     // 获取user实体类
-    public static User getSysUser(String token){
+    public static LoginParams getSysUser(String token){
         Claim data = JWT.decode(token).getClaim("AnalogData");
-        return JsonUtils.string2Obj(data.asString(), User.class);
+        return JsonUtils.string2Obj(data.asString(), LoginParams.class);
     }
 }

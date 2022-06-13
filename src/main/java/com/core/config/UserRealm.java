@@ -1,7 +1,7 @@
 package com.core.config;
 
 import com.core.mapper.news.UserMapper;
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -27,8 +27,8 @@ public class UserRealm extends AuthorizingRealm {
         info.addStringPermission("user:update");
         // 拿到User对象，认证return要传user进来
         Subject subject = SecurityUtils.getSubject();
-        User currentUser= (User) subject.getPrincipal();
-        System.out.println("--currentUser--"+currentUser);
+        LoginParams currentLoginParams = (LoginParams) subject.getPrincipal();
+        System.out.println("--currentUser--"+ currentLoginParams);
         //添加角色
         info.addRole("user");
         // 设置当前用户的权限
@@ -50,11 +50,11 @@ public class UserRealm extends AuthorizingRealm {
         // char[] 类型转String类型
         String password = String.valueOf(userToken.getPassword());
         System.out.println("--password--"+password);
-        User user = userMapper.loginVerify(userToken.getUsername(), password);
-        System.out.println("--res-006-"+user);
+        LoginParams loginParams = userMapper.loginVerify(userToken.getUsername(), password);
+        System.out.println("--res-006-"+ loginParams);
 
 
-        if(user == null) {
+        if(loginParams == null) {
             return null;// 抛出异常
         }
 
@@ -66,6 +66,6 @@ public class UserRealm extends AuthorizingRealm {
 //            return null;// 抛出异常
 //        }
         // 密码认证，shiro做~
-        return new SimpleAuthenticationInfo(user, password, "");
+        return new SimpleAuthenticationInfo(loginParams, password, "");
     }
 }

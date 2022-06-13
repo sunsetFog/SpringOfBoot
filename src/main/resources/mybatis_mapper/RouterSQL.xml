@@ -24,7 +24,7 @@
                other5.path     path,
                other5.metaTitle   metaTitle,
                other5.importPath   importPath
-        from user other1
+        from ums_admin other1
             LEFT JOIN user_to_role other2 on other1.id = other2.user_id
             LEFT JOIN role other3 on other2.role_id = other3.id
             LEFT JOIN role_to_router other4 on other3.id = other4.role_id
@@ -47,7 +47,7 @@
                other5.operation_name    operation_name,
                other5.disabled     disabled,
                other5.hidden     hidden
-        from user other1
+        from ums_admin other1
             LEFT JOIN user_to_role other2 on other1.id = other2.user_id
             LEFT JOIN role other3 on other2.role_id = other3.id
             LEFT JOIN role_to_operation other4 on other3.id = other4.role_id

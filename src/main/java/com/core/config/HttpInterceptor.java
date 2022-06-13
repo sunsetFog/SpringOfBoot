@@ -9,16 +9,14 @@ import com.core.common.redis.RedisKeySplicing;
 import com.core.common.util.JsonUtils;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
-import com.core.pojo.news.User;
+import com.core.pojo.news.LoginParams;
 import com.core.service.RedisUtilsService;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 
 // http拦截器
 public class HttpInterceptor implements HandlerInterceptor {
@@ -60,8 +58,8 @@ public class HttpInterceptor implements HandlerInterceptor {
         }
         try {
             System.out.println("--222--");
-            User sysUser = JWTUtils.verifierTokenBySysUser(token);
-            if(!redisUtilsService.existsKey(RedisKeySplicing.getUserToken(sysUser.getUsername()))){
+            LoginParams sysLoginParams = JWTUtils.verifierTokenBySysUser(token);
+            if(!redisUtilsService.existsKey(RedisKeySplicing.getUserToken(sysLoginParams.getUsername()))){
                 penRenderJson(response, ResponseDataUtil.buildError("0", "Token 失效请重新登录"));
                 return false;
             }
