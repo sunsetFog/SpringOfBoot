@@ -3,7 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.core.mapper.GoodsMapper">
-<!--  与数据库字段不一致时改名  -->
+<!--
+resultType="com.core.pojo.Goods"   与  resultMap="BaseResultMap"  的区别？
+同样是用Goods实体类，不同的是resultMap能起字段别名
+-->
     <resultMap id="BaseResultMap" type="com.core.pojo.Goods" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
@@ -12,8 +15,8 @@
     <sql id="Base_Column_List" >
         id, name, imgUrl
     </sql>
-
-    <select id="goodsQueryList" resultType="com.core.pojo.Goods" parameterType="com.core.pojo.PageParams">
+<!-- parameterType是接口参数 -->
+    <select id="goodsQueryList" resultType="com.core.pojo.Goods" parameterType="java.lang.String">
         select * from goods
         where name like #{name, jdbcType=VARCHAR}
     </select>

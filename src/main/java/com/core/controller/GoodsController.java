@@ -2,22 +2,23 @@ package com.core.controller;
 
 import com.core.mapper.GoodsMapper;
 import com.core.pojo.Goods;
-import com.core.pojo.PageParams;
-import com.core.service.PageService;
+import com.core.apiParams.PageParams;
 import com.core.service.UploadService;
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 /*
     Mybatis操作Mysql
     报错：Cause: java.sql.SQLSyntaxErrorException: Table 'db_news.***' doesn't exist
@@ -29,17 +30,22 @@ public class GoodsController {
     @Autowired
     private GoodsMapper goodsMapper;
     @Autowired
-    private PageService pageService;
-    @Autowired
     private UploadService uploadService;
-    // 分页查询表所有数据与模糊搜索
+    /*
+        分页查询表所有数据
+        name字段模糊搜索
+    */
     @PostMapping("/shop/list")
-    public ResponseData shopList(@RequestBody PageParams pageParams, HttpServletRequest request) {
-        // 这是分页data里的数据
-        pageParams.setName('%'+pageParams.getName()+'%');
-        System.out.println("--pageParams--"+ pageParams);
-        PageResult pageResult = pageService.queryPage(pageParams, request);
-
+    @ResponseBody
+    public ResponseData shopList(@RequestParam(value = "name", required = false, defaultValue = "") String name,
+                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                 @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        name = '%' + name + '%';
+        PageHelper.startPage(pageNum, pageSize);
+        List<Goods> goodsList = goodsMapper.goodsQueryList(name);
+        System.out.println("--goodsList--"+goodsList);
+        PageInfo<Goods> goodsPageInfo = new PageInfo<Goods>(goodsList);
+        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }
     // 上传图片，修改imgUrl字段

@@ -1,5 +1,7 @@
 package com.core.common.util;
 
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -55,5 +57,16 @@ public class PageResult {
     }
     public void setContent(List<?> content) {
         this.content = content;
+    }
+
+
+    public static PageResult getPageResult(PageInfo<?> pageInfo) {
+        PageResult pageResult = new PageResult();
+        pageResult.setPageNum(pageInfo.getPageNum());
+        pageResult.setPageSize(pageInfo.getPageSize());
+        pageResult.setTotalSize(pageInfo.getTotal());
+        pageResult.setTotalPages(pageInfo.getPages());
+        pageResult.setContent(pageInfo.getList());
+        return pageResult;
     }
 }

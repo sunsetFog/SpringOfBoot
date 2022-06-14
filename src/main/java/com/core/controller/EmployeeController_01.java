@@ -28,6 +28,9 @@ String username = request.getParameter("username");
 Get接收path参数
 @GetMapping("store/update/{id}")
 @PathVariable("id") int id
+
+在GET请求中，不能使用@RequestBody。
+在POST请求，可以使用@RequestBody和@RequestParam， 注意：分别对应前端传参方式的data和params
 */
 @Controller
 public class EmployeeController_01 {

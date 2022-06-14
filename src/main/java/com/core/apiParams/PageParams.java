@@ -1,4 +1,4 @@
-package com.core.pojo;
+package com.core.apiParams;
 
 import lombok.Data;
 

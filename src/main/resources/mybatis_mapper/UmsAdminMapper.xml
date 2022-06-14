@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.shoppingMall.UmsAdminMapper">
+    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.UmsAdmin">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="icon" jdbcType="VARCHAR" property="icon" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="note" jdbcType="VARCHAR" property="note" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, username, password, icon, email, nick_name, note, create_time, login_time, status
+    </sql>
+
+
+<!--
+    原来   select * from ums_admin where username like #{username, jdbcType=VARCHAR} or nick_name like #{username, jdbcType=VARCHAR}
+
+    1   * 变 <include refid="Base_Column_List" />
+
+    2   where username like #{username, jdbcType=VARCHAR} or nick_name like #{username, jdbcType=VARCHAR}
+        变
+        <where>
+            <if test="username != null">
+                username like #{username, jdbcType=VARCHAR}
+            </if>
+            <if test="username != null">
+                or nick_name like #{username, jdbcType=VARCHAR}
+            </if>
+        </where>
+-->
+    <select id="selectWay" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from ums_admin
+        <where>
+            <if test="username != null">
+                username like #{username, jdbcType=VARCHAR}
+            </if>
+            <if test="username != null">
+                or nick_name like #{username, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+</mapper>
