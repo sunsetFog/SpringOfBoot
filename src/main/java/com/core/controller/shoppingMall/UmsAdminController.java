@@ -2,7 +2,6 @@ package com.core.controller.shoppingMall;
 
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
-import com.core.apiParams.PageParams;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsAdminMapper;
 import com.core.pojo.Goods;
@@ -25,7 +24,7 @@ public class UmsAdminController {
     private UmsAdminMapper umsAdminMapper;
 
     /*
-        分页查询表所有数据
+        分页查询,pageSize传9999查所有
         username和nick_name字段模糊搜索
     */
     @ApiOperation("根据用户名或姓名分页获取用户列表")
@@ -34,9 +33,11 @@ public class UmsAdminController {
                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         keyword = '%' + keyword + '%';
-        PageHelper.startPage(pageNum, pageSize);
+        // SQL查询
         List<UmsAdmin> adminList = umsAdminMapper.selectWay(keyword);
         System.out.println("--adminList--"+adminList);
+        // 分页
+        PageHelper.startPage(pageNum, pageSize);
         PageInfo<UmsAdmin> goodsPageInfo = new PageInfo<UmsAdmin>(adminList);
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);

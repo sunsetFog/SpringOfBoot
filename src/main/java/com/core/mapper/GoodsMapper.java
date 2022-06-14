@@ -1,7 +1,6 @@
 package com.core.mapper;
 
 import com.core.pojo.Goods;
-import com.core.apiParams.PageParams;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
