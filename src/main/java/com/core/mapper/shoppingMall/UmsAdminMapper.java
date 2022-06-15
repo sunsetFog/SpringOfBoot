@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface UmsAdminMapper {
     List<UmsAdmin> selectWay(String username);
+    int insertWay(UmsAdmin record);
+    int updateWay(UmsAdmin record);
+    int deleteWay(Long id);
 }

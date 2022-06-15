@@ -11,10 +11,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,5 +39,15 @@ public class UmsRoleController {
         PageInfo<UmsRole> goodsPageInfo = new PageInfo<UmsRole>(roleList);
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
+    }
+    @ApiOperation("修改角色")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData roleUpdate(@RequestBody UmsRole umsRole) {
+        int count = umsRoleMapper.updateWay(umsRole);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }
