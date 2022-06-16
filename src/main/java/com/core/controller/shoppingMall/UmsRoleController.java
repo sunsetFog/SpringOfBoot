@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,10 +41,43 @@ public class UmsRoleController {
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }
+    /*
+        添加角色
+        实际传参：
+            {
+                "name": "二哈将军",
+                "description": "熬~",
+                "status": 1
+            }
+    */
+    @ApiOperation("添加角色")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseData roleAdd(@RequestBody UmsRole umsRole) {
+        umsRole.setCreateTime(new Date());
+        umsRole.setAdminCount(0);
+        umsRole.setSort(0);
+        System.out.println("--umsRole--"+umsRole);
+        int count = umsRoleMapper.insertWay(umsRole);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
     @ApiOperation("修改角色")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData roleUpdate(@RequestBody UmsRole umsRole) {
         int count = umsRoleMapper.updateWay(umsRole);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("删除角色")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData adminDelete(@PathVariable Long id) {
+        int count = umsRoleMapper.deleteWay(id);
         if (count > 0) {
             return ResponseDataUtil.buildSuccess(count);
         } else {

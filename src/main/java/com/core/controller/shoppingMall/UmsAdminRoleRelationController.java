@@ -22,6 +22,13 @@ import java.util.List;
 public class UmsAdminRoleRelationController {
     @Autowired
     private UmsAdminRoleRelationMapper umsAdminRoleRelationMapper;
+    /*
+        传参：
+            {
+                "adminId": 1,
+                "roleIds": "2,5"
+            }
+    */
     @ApiOperation("给用户分配角色")
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public ResponseData adminRoleUpdate(@RequestParam("adminId") Long adminId,

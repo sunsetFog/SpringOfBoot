@@ -11,5 +11,7 @@ import java.util.List;
 @Repository
 public interface UmsRoleMapper {
     List<UmsRole> selectWay(String name);
+    int insertWay(UmsRole record);
     int updateWay(UmsRole record);
+    int deleteWay(Long id);
 }

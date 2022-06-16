@@ -5,7 +5,8 @@
 <mapper namespace="com.core.mapper.GoodsMapper">
 <!--
 resultType="com.core.pojo.Goods"   与  resultMap="BaseResultMap"  的区别？
-同样是用Goods实体类，不同的是resultMap能起字段别名
+resultType实体类字段必须与数据库字段一致，否则返回null
+resultMap能起字段别名，实体类字段与数据库字段不需要一致了
 -->
     <resultMap id="BaseResultMap" type="com.core.pojo.Goods" >
         <id column="id" property="id" jdbcType="INTEGER" />

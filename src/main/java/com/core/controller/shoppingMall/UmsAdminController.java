@@ -47,12 +47,21 @@ public class UmsAdminController {
         return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
-        添加用户
         加参数校验
+        实际传参：
+            修改传参多个id字段
+            {
+                "username": "erha",
+                "password": "123456",
+                "icon": "no",
+                "email": "1456300076@qq.com",
+                "nickName": "二哈",
+                "note": "二哈将军"
+            }
     */
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData register(@Validated @RequestBody UmsAdminParam umsAdminParam) {
+    public ResponseData adminAdd(@Validated @RequestBody UmsAdminParam umsAdminParam) {
         System.out.println("--UmsAdminParam参数校验类--"+umsAdminParam);
         UmsAdmin umsAdmin = new UmsAdmin();
         // 两个类复制
