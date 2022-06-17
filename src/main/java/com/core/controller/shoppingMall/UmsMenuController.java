@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -66,5 +67,72 @@ public class UmsMenuController {
         PageInfo<UmsMenu> goodsPageInfo = new PageInfo<UmsMenu>(umsMenus);
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
+    }
+    /*
+        传参：
+            {
+                "title": "呃呃呃",
+                "parentId": 7,
+                "name": "嗡嗡嗡",
+                "icon": "我11",
+                "hidden": 0,
+                "sort": 0
+            }
+    */
+    @ApiOperation("添加后台菜单")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseData menuAdd(@RequestBody UmsMenu umsMenu) {
+        umsMenu.setCreateTime(new Date());
+        updateLevel(umsMenu);
+        // SQL插入
+        int count = umsMenuMapper.insertWay(umsMenu);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+
+    @ApiOperation("修改后台菜单")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData menuUpdate(@RequestBody UmsMenu umsMenu) {
+        updateLevel(umsMenu);
+        // SQL修改
+        int count = umsMenuMapper.updateWay(umsMenu);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    /**
+     * setLevel修改菜单层级
+     */
+    private void updateLevel(UmsMenu umsMenu) {
+        if (umsMenu.getParentId() == 0) {
+            //没有父菜单时为一级菜单
+            umsMenu.setLevel(0);
+        } else {
+            //有父菜单时,根据parentId进行SQL查询，得出一条数据，获得level值
+//            UmsMenu parentMenu = umsMenuMapper.selectWay(umsMenu.getParentId());
+            List<UmsMenu> umsMenus = umsMenuMapper.selectWay(umsMenu.getParentId());
+            for(UmsMenu item: umsMenus) {
+                if (item != null) {
+                    umsMenu.setLevel(item.getLevel() + 1);
+                } else {
+                    umsMenu.setLevel(0);
+                }
+            }
+        }
+    }
+    @ApiOperation("根据ID删除后台菜单")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData menuDelete(@PathVariable Long id) {
+        int count = umsMenuMapper.deleteWay(id);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }
