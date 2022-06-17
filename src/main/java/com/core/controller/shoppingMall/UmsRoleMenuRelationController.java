@@ -20,7 +20,13 @@ import java.util.List;
 public class UmsRoleMenuRelationController {
     @Autowired
     private UmsRoleMenuRelationMapper umsRoleMenuRelationMapper;
-
+    /*
+        传参：
+            {
+                "roleId": 1,
+                "menuIds": "2,5"
+            }
+    */
     @ApiOperation("给角色分配菜单")
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public ResponseData roleMenuUpdate(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {

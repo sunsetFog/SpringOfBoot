@@ -17,9 +17,14 @@
     <sql id="Base_Column_List">
         id, parent_id, create_time, title, level, sort, name, icon, hidden
     </sql>
-    <select id="selectWay" resultMap="BaseResultMap">
+    <select id="selectWay" resultMap="BaseResultMap" parameterType="Long">
         select
         <include refid="Base_Column_List" />
-        from ums_menu;
+        from ums_menu
+        <where>
+            <if test="parentId != null">
+                parent_id = #{parentId, jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
 </mapper>
