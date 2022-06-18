@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface UmsResourceCategoryMapper {
     List<UmsResourceCategory> selectWay();
+    int insertWay(UmsResourceCategory umsResourceCategory);
+    int updateWay(UmsResourceCategory umsResourceCategory);
+    int deleteWay(Long id);
 }

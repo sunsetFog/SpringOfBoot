@@ -7,10 +7,9 @@ import com.core.pojo.shoppingMall.UmsResourceCategory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,5 +24,43 @@ public class UmsResourceCategoryController {
     public ResponseData resourceCategoryList() {
         List<UmsResourceCategory> umsResourceCategories = umsResourceCategoryMapper.selectWay();
         return ResponseDataUtil.buildSuccess(umsResourceCategories);
+    }
+    /*
+        实际传参：
+            {
+                "name": "二哈",
+                "sort": 0
+            }
+    */
+    @ApiOperation("添加后台资源分类")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseData resourceCategoryAdd(@RequestBody UmsResourceCategory umsResourceCategory) {
+        umsResourceCategory.setCreateTime(new Date());
+        int count = umsResourceCategoryMapper.insertWay(umsResourceCategory);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("修改后台资源分类")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData resourceCategoryUpdate(@RequestBody UmsResourceCategory umsResourceCategory) {
+        int count = umsResourceCategoryMapper.updateWay(umsResourceCategory);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("根据ID删除后台资源")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData resourceCategoryDelete(@PathVariable Long id) {
+        int count = umsResourceCategoryMapper.deleteWay(id);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }
