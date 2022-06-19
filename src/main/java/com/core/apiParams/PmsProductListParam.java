@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class PmsProductQueryParam {
+public class PmsProductListParam {
     @ApiModelProperty("上架状态")
     private Integer publishStatus;
     @ApiModelProperty("审核状态")

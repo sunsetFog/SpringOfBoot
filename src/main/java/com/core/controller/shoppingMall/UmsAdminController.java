@@ -1,11 +1,10 @@
 package com.core.controller.shoppingMall;
 
-import com.core.apiParams.UmsAdminParam;
+import com.core.apiParams.UmsAdminAddParam;
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsAdminMapper;
-import com.core.pojo.Goods;
 import com.core.pojo.shoppingMall.UmsAdmin;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -61,11 +59,11 @@ public class UmsAdminController {
     */
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData adminAdd(@Validated @RequestBody UmsAdminParam umsAdminParam) {
-        System.out.println("--UmsAdminParam参数校验类--"+umsAdminParam);
+    public ResponseData adminAdd(@Validated @RequestBody UmsAdminAddParam umsAdminAddParam) {
+        System.out.println("--UmsAdminParam参数校验类--"+ umsAdminAddParam);
         UmsAdmin umsAdmin = new UmsAdmin();
         // 两个类复制
-        BeanUtils.copyProperties(umsAdminParam, umsAdmin);
+        BeanUtils.copyProperties(umsAdminAddParam, umsAdmin);
         // 默认字段
         umsAdmin.setCreateTime(new Date());
         umsAdmin.setStatus(1);
