@@ -13,4 +13,6 @@ import java.util.List;
 public interface PmsProductMapper {
     List<PmsProduct> selectWay(PmsProductListParam productQueryParam);
     int insertWay(PmsProductAddParam pmsProductAddParam);
+    int updateWay(PmsProductAddParam pmsProductAddParam);
+    int update_deleteStatus(Long id, Integer deleteStatus);
 }

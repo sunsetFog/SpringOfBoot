@@ -3,6 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.core.mapper.shoppingMall.PmsMemberPriceMapper">
+    <delete id="deleteWay" parameterType="java.lang.Long">
+        delete from pms_member_price where product_id = #{productId,jdbcType=INTEGER}
+    </delete>
     <insert id="insertList">
         INSERT INTO pms_member_price (product_id, member_level_id, member_price,member_level_name) VALUES
         <foreach collection="list" separator="," item="item" index="index">

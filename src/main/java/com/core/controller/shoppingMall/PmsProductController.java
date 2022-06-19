@@ -77,6 +77,7 @@ public class PmsProductController {
         // 关系表的SQL批量插入
         // 根据促销类型设置价格：会员价格、阶梯价格、满减价格
         Long productId = pmsProductAddParam.getId();
+        System.out.println("---productId--add---"+productId);
         // 阶梯价格
         relateAndInsertList(pmsProductLadderMapper, pmsProductAddParam.getProductLadderList(), productId);
         //满减价格
@@ -98,6 +99,53 @@ public class PmsProductController {
         } else {
             return ResponseDataUtil.buildError();
         }
+    }
+    @ApiOperation("更新商品")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData productUpdate(@RequestBody PmsProductAddParam pmsProductAddParam) {
+        // SQL修改
+        int count = pmsProductMapper.updateWay(pmsProductAddParam);
+        // 关系表的SQL删除、批量插入
+        // 根据促销类型设置价格：会员价格、阶梯价格、满减价格
+        Long productId = pmsProductAddParam.getId();
+        System.out.println("---productId--update---"+productId);
+        // 阶梯价格
+        pmsProductLadderMapper.deleteWay(productId);
+        relateAndInsertList(pmsProductLadderMapper, pmsProductAddParam.getProductLadderList(), productId);
+        //满减价格
+        pmsProductFullReductionMapper.deleteWay(productId);
+        relateAndInsertList(pmsProductFullReductionMapper, pmsProductAddParam.getProductFullReductionList(), productId);
+        //会员价格
+        pmsMemberPriceMapper.deleteWay(productId);
+        relateAndInsertList(pmsMemberPriceMapper, pmsProductAddParam.getMemberPriceList(), productId);
+        // 添加sku库存信息
+        handleSkuStockCode(pmsProductAddParam.getSkuStockList(),productId);// 处理sku的编码
+        pmsSkuStockMapper.deleteWay(productId);
+        relateAndInsertList(pmsSkuStockMapper, pmsProductAddParam.getSkuStockList(), productId);
+        // 添加商品参数,添加自定义商品规格
+        pmsProductAttributeValueMapper.deleteWay(productId);
+        relateAndInsertList(pmsProductAttributeValueMapper, pmsProductAddParam.getProductAttributeValueList(), productId);
+        // 关联专题
+        cmsSubjectProductRelationMapper.deleteWay(productId);
+        relateAndInsertList(cmsSubjectProductRelationMapper, pmsProductAddParam.getSubjectProductRelationList(), productId);
+        // 关联优选
+        cmsPrefrenceAreaProductRelationMapper.deleteWay(productId);
+        relateAndInsertList(cmsPrefrenceAreaProductRelationMapper, pmsProductAddParam.getPrefrenceAreaProductRelationList(), productId);
+
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("批量修改删除状态")
+    @RequestMapping(value = "/deleteStatus", method = RequestMethod.GET)
+    public ResponseData productDelete(@RequestParam("ids") List<Long> ids,
+                                      @RequestParam("deleteStatus") Integer deleteStatus) {
+        for (Long item: ids) {
+            pmsProductMapper.update_deleteStatus(item, deleteStatus);
+        }
+        return ResponseDataUtil.buildSuccess(ids.size());
     }
     /**
      * 建立和插入关系表操作
