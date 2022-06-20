@@ -6,10 +6,12 @@ import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.PmsProductAttributeCategoryMapper;
 import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.PmsProductAttributeCategory;
+import com.core.pojo.shoppingMall.PmsProductAttributeCategoryItem;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,5 +39,11 @@ public class PmsProductAttributeCategoryController {
         PageInfo<PmsProductAttributeCategory> goodsPageInfo = new PageInfo<PmsProductAttributeCategory>(pmsProductAttributeCategories);
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
+    }
+    @ApiOperation("获取所有商品属性分类及其下属性")
+    @RequestMapping(value = "/list/withAttr", method = RequestMethod.GET)
+    public ResponseData getListWithAttr() {
+        List<PmsProductAttributeCategoryItem> pmsProductAttributeCategoryItems = pmsProductAttributeCategoryMapper.selectCategoryAndAttribute();
+        return ResponseDataUtil.buildSuccess(pmsProductAttributeCategoryItems);
     }
 }

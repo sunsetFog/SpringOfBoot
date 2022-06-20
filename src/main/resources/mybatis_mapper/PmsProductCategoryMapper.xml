@@ -29,5 +29,100 @@
         select
         <include refid="Base_Column_List" />
         from pms_product_category
+        <where>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
+
+    <select id="selectIdWay" resultMap="BaseResultMap" parameterType="Long">
+        select
+        <include refid="Base_Column_List" />
+        from pms_product_category
+        <where>
+            <if test="parentId != null">
+                id = #{parentId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.PmsProductCategory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pms_product_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="productCount != null">
+                product_count,
+            </if>
+            <if test="productUnit != null">
+                product_unit,
+            </if>
+            <if test="navStatus != null">
+                nav_status,
+            </if>
+            <if test="showStatus != null">
+                show_status,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="keywords != null">
+                keywords,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="productCount != null">
+                #{productCount,jdbcType=INTEGER},
+            </if>
+            <if test="productUnit != null">
+                #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="navStatus != null">
+                #{navStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showStatus != null">
+                #{showStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>
