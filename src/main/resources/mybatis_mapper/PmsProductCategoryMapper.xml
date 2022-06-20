@@ -125,4 +125,53 @@
             </if>
         </trim>
     </insert>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.PmsProductCategory">
+        update pms_product_category
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="productCount != null">
+                product_count = #{productCount,jdbcType=INTEGER},
+            </if>
+            <if test="productUnit != null">
+                product_unit = #{productUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="navStatus != null">
+                nav_status = #{navStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="keywords != null">
+                keywords = #{keywords,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <delete id="deleteWay" parameterType="java.lang.Long">
+        delete from pms_product_category
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

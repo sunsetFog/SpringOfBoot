@@ -18,7 +18,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,6 +67,21 @@ public class PmsProductCategoryController {
     }
     /*
         数据校验
+        传参：
+            {
+                "description": "22",
+                "icon": "",
+                "keywords": "11",
+                "name": "二哈",
+                "navStatus": 0,
+                "parentId": 0,
+                "productUnit": "个",
+                "showStatus": 0,
+                "sort": 0,
+                "productAttributeIdList": [
+                    33
+                ]
+            }
     */
     @ApiOperation("添加商品分类")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -113,5 +127,38 @@ public class PmsProductCategoryController {
             relationList.add(relation);
         }
         pmsProductCategoryAttributeRelationMapper.insertList(relationList);
+    }
+    @ApiOperation("修改商品分类")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData productCategoryUpdate(@Validated @RequestBody PmsProductCategoryAddParam pmsProductCategoryAddParam) {
+        PmsProductCategory pmsProductCategory = new PmsProductCategory();
+        // 类复制属性值
+        BeanUtils.copyProperties(pmsProductCategoryAddParam, pmsProductCategory);
+        // 设置level
+        setCategoryLevel(pmsProductCategory);
+        System.out.println("--pmsProductCategory--"+pmsProductCategory);
+        // SQL修改
+        int count = pmsProductCategoryMapper.updateWay(pmsProductCategory);
+        // SQL删除、插入筛选属性
+        List<Long> productAttributeIdList = pmsProductCategoryAddParam.getProductAttributeIdList();
+        if(!CollectionUtils.isEmpty(productAttributeIdList)){// 判断集合是否为空
+            Long productCategoryId = pmsProductCategory.getId();
+            pmsProductCategoryAttributeRelationMapper.deleteWay(productCategoryId);
+            insertRelationList(productCategoryId, productAttributeIdList);
+        }
+        return ResponseDataUtil.buildSuccess(count);
+    }
+    @ApiOperation("删除商品分类")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData productCategoryDelete(@PathVariable Long id) {
+        // SQL删除
+        int count = pmsProductCategoryMapper.deleteWay(id);
+        // SQL删关系表
+        pmsProductCategoryAttributeRelationMapper.deleteWay(id);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }

@@ -18,6 +18,17 @@
         from pms_product_attribute_category
     </select>
 
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pms_product_attribute_category
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
 <!--
     知识：
         extends继承resultMap
@@ -39,4 +50,60 @@
                 LEFT JOIN pms_product_attribute pa ON pac.id = pa.product_attribute_category_id
                 AND pa.type=1;
     </select>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into pms_product_attribute_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="attributeCount != null">
+                attribute_count,
+            </if>
+            <if test="paramCount != null">
+                param_count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeCount != null">
+                #{attributeCount,jdbcType=INTEGER},
+            </if>
+            <if test="paramCount != null">
+                #{paramCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
+        update pms_product_attribute_category
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="attributeCount != null">
+                attribute_count = #{attributeCount,jdbcType=INTEGER},
+            </if>
+            <if test="paramCount != null">
+                param_count = #{paramCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <delete id="deleteWay" parameterType="java.lang.Long">
+        delete from pms_product_attribute_category
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>

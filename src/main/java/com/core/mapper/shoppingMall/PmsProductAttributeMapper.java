@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface PmsProductAttributeMapper {
     List<PmsProductAttribute> selectWay(Long cid, Integer type);
+    PmsProductAttribute selectById(Long id);
+    int insertWay(PmsProductAttribute pmsProductAttribute);
+    int updateWay(PmsProductAttribute pmsProductAttribute);
+    int deleteWay(Long id);
 }

@@ -13,10 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,5 +42,36 @@ public class PmsProductAttributeCategoryController {
     public ResponseData getListWithAttr() {
         List<PmsProductAttributeCategoryItem> pmsProductAttributeCategoryItems = pmsProductAttributeCategoryMapper.selectCategoryAndAttribute();
         return ResponseDataUtil.buildSuccess(pmsProductAttributeCategoryItems);
+    }
+    @ApiOperation("添加商品属性分类")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseData PmsProductAttributeCategoryAdd(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
+        System.out.println("--PmsProductAttributeCategory--"+pmsProductAttributeCategory);
+        int count = pmsProductAttributeCategoryMapper.insertWay(pmsProductAttributeCategory);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("修改商品属性分类")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData PmsProductAttributeCategoryUpdate(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
+        int count = pmsProductAttributeCategoryMapper.updateWay(pmsProductAttributeCategory);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
+    }
+    @ApiOperation("删除单个商品属性分类")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData PmsProductAttributeCategoryDelete(@PathVariable Long id) {
+        int count = pmsProductAttributeCategoryMapper.deleteWay(id);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }

@@ -12,4 +12,6 @@ public interface PmsProductCategoryMapper {
     List<PmsProductCategory> selectWay(Long parentId);
     PmsProductCategory selectIdWay(Long parentId);
     int insertWay(PmsProductCategory pmsProductCategory);
+    int updateWay(PmsProductCategory pmsProductCategory);
+    int deleteWay(Long id);
 }

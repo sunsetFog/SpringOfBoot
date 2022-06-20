@@ -105,5 +105,12 @@ public class UmsAdminController {
             return ResponseDataUtil.buildError();
         }
     }
+    @ApiOperation(value = "获取当前登录用户信息")
+    @RequestMapping(value = "/information", method = RequestMethod.GET)
+    public void adminInformation() {
+        // 获取session缓存
+//        String username = redisUtilsService.getCacheStringInfo("username");
+//        System.out.println("---user--88--"+username);
+    }
 
 }
