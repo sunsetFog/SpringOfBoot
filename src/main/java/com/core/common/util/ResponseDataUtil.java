@@ -18,6 +18,14 @@ public class ResponseDataUtil {
         PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
         return buildSuccess(pageResult);
     }
+    // 判断count数量
+    public static ResponseData countJudge(int count) {
+        if (count > 0) {
+            return buildSuccess(count);
+        } else {
+            return buildError();
+        }
+    }
     // type1
     public static <T> ResponseData buildSuccess(String code, String message, T data) {
         return new ResponseData<T>(code, message, data);// 实例化，触发构造器
