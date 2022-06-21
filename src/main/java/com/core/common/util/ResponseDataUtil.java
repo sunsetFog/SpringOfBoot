@@ -1,10 +1,23 @@
 package com.core.common.util;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
+
 /*
     二、方法重载：接口成功与失败回调
     
     泛型方法：public static <T>
  */
 public class ResponseDataUtil {
+    // 分页结构
+    public static <T> ResponseData pageStructure(Integer pageNum, Integer pageSize, List<T> data) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageInfo<T> goodsPageInfo = new PageInfo<T>(data);
+        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
+        return buildSuccess(pageResult);
+    }
     // type1
     public static <T> ResponseData buildSuccess(String code, String message, T data) {
         return new ResponseData<T>(code, message, data);// 实例化，触发构造器

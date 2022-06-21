@@ -1,10 +1,12 @@
 package com.core.controller.shoppingMall;
 
 import com.core.apiParams.PmsBrandAddParam;
+import com.core.apiParams.PmsProductAddParam;
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.PmsBrandMapper;
+import com.core.mapper.shoppingMall.PmsProductMapper;
 import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.PmsProduct;
 import com.core.pojo.shoppingMall.UmsAdmin;
@@ -25,6 +27,8 @@ import java.util.List;
 public class PmsBrandController {
     @Autowired
     private PmsBrandMapper pmsBrandMapper;
+    @Autowired
+    private PmsProductMapper pmsProductMapper;
 
     /*
         分页查询,pageSize传9999查所有
@@ -70,8 +74,20 @@ public class PmsBrandController {
         }
         int count = pmsBrandMapper.updateWay(pmsBrand);
         //更新品牌时要更新商品中的品牌名称
-        PmsProduct product = new PmsProduct();
-        product.setBrandName(pmsBrand.getName());
+        PmsProductAddParam pmsProductAddParam = new PmsProductAddParam();
+        pmsProductAddParam.setId(pmsBrand.getId());
+        pmsProductAddParam.setBrandName(pmsBrand.getName());
+        pmsProductMapper.updateWay(pmsProductAddParam);
         return ResponseDataUtil.buildSuccess(count);
+    }
+    @ApiOperation(value = "删除品牌")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData brandDelete(@PathVariable Long id) {
+        int count = pmsBrandMapper.deleteWay(id);
+        if (count > 0) {
+            return ResponseDataUtil.buildSuccess(count);
+        } else {
+            return ResponseDataUtil.buildError();
+        }
     }
 }

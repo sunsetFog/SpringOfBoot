@@ -141,7 +141,7 @@ public class PmsProductController {
     @ApiOperation("批量修改删除状态")
     @RequestMapping(value = "/deleteStatus", method = RequestMethod.GET)
     public ResponseData productDelete(@RequestParam("ids") List<Long> ids,
-                                      @RequestParam("deleteStatus") Integer deleteStatus) {
+                                      @RequestParam(value = "deleteStatus", defaultValue = "1") Integer deleteStatus) {
         for (Long item: ids) {
             pmsProductMapper.update_deleteStatus(item, deleteStatus);
         }

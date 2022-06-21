@@ -12,4 +12,5 @@ public interface PmsBrandMapper {
     List<PmsBrand> selectWay(String keyword);
     int insertWay(PmsBrand pmsBrand);
     int updateWay(PmsBrand pmsBrand);
+    int deleteWay(Long id);
 }
