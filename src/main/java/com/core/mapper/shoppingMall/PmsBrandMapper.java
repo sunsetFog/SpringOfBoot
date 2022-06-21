@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface PmsBrandMapper {
     List<PmsBrand> selectWay(String keyword);
+    int insertWay(PmsBrand pmsBrand);
+    int updateWay(PmsBrand pmsBrand);
 }
