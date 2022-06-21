@@ -41,10 +41,7 @@ public class PmsProductAttributeController {
                                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<PmsProductAttribute> pmsProductAttributes = pmsProductAttributeMapper.selectWay(cid, type);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<PmsProductAttribute> goodsPageInfo = new PageInfo<PmsProductAttribute>(pmsProductAttributes);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductAttributes);
     }
     /*
         实际传参：
@@ -77,7 +74,7 @@ public class PmsProductAttributeController {
         }
         // SQL修改商品属性分类
         pmsProductAttributeCategoryMapper.updateWay(pmsProductAttributeCategory);
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("修改商品属性信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -85,11 +82,7 @@ public class PmsProductAttributeController {
         PmsProductAttribute pmsProductAttribute = new PmsProductAttribute();
         BeanUtils.copyProperties(pmsProductAttributeAddParam, pmsProductAttribute);
         int count = pmsProductAttributeMapper.updateWay(pmsProductAttribute);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("批量删除商品属性")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -124,6 +117,6 @@ public class PmsProductAttributeController {
         }
         // SQL修改商品属性分类
         pmsProductAttributeCategoryMapper.updateWay(pmsProductAttributeCategory);
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
 }

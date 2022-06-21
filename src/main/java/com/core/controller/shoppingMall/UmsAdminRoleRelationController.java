@@ -48,10 +48,6 @@ public class UmsAdminRoleRelationController {
         }
 
         int count = roleIds == null ? 0 : roleIds.size();
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

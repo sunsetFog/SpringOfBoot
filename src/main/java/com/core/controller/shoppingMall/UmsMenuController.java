@@ -63,10 +63,7 @@ public class UmsMenuController {
         // SQL查询
         List<UmsMenu> umsMenus = umsMenuMapper.selectWay(parentId);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<UmsMenu> goodsPageInfo = new PageInfo<UmsMenu>(umsMenus);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, umsMenus);
     }
     /*
         传参：
@@ -86,11 +83,7 @@ public class UmsMenuController {
         updateLevel(umsMenu);
         // SQL插入
         int count = umsMenuMapper.insertWay(umsMenu);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 
     @ApiOperation("修改后台菜单")
@@ -99,11 +92,7 @@ public class UmsMenuController {
         updateLevel(umsMenu);
         // SQL修改
         int count = umsMenuMapper.updateWay(umsMenu);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     /**
      * setLevel修改菜单层级
@@ -129,10 +118,6 @@ public class UmsMenuController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData menuDelete(@PathVariable Long id) {
         int count = umsMenuMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

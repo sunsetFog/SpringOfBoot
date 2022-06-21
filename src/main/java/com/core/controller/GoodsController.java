@@ -44,10 +44,7 @@ public class GoodsController {
         List<Goods> goodsList = goodsMapper.goodsQueryList(name);
         System.out.println("--goodsList--"+goodsList);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<Goods> goodsPageInfo = new PageInfo<Goods>(goodsList);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, goodsList);
     }
     // 上传图片，修改imgUrl字段
     @ResponseBody

@@ -36,10 +36,7 @@ public class UmsRoleController {
         List<UmsRole> roleList = umsRoleMapper.selectWay(keyword);
         System.out.println("--roleList--"+roleList);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<UmsRole> goodsPageInfo = new PageInfo<UmsRole>(roleList);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, roleList);
     }
     /*
         添加角色
@@ -58,30 +55,18 @@ public class UmsRoleController {
         umsRole.setSort(0);
         System.out.println("--umsRole--"+umsRole);
         int count = umsRoleMapper.insertWay(umsRole);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("修改角色")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData roleUpdate(@RequestBody UmsRole umsRole) {
         int count = umsRoleMapper.updateWay(umsRole);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("删除角色")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData adminDelete(@PathVariable Long id) {
         int count = umsRoleMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

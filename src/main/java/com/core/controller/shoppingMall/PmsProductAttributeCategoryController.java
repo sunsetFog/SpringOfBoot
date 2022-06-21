@@ -32,10 +32,7 @@ public class PmsProductAttributeCategoryController {
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         List<PmsProductAttributeCategory> pmsProductAttributeCategories = pmsProductAttributeCategoryMapper.selectWay();
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<PmsProductAttributeCategory> goodsPageInfo = new PageInfo<PmsProductAttributeCategory>(pmsProductAttributeCategories);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductAttributeCategories);
     }
     @ApiOperation("获取所有商品属性分类及其下属性")
     @RequestMapping(value = "/list/withAttr", method = RequestMethod.GET)
@@ -48,30 +45,18 @@ public class PmsProductAttributeCategoryController {
     public ResponseData PmsProductAttributeCategoryAdd(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
         System.out.println("--PmsProductAttributeCategory--"+pmsProductAttributeCategory);
         int count = pmsProductAttributeCategoryMapper.insertWay(pmsProductAttributeCategory);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("修改商品属性分类")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData PmsProductAttributeCategoryUpdate(@RequestBody PmsProductAttributeCategory pmsProductAttributeCategory) {
         int count = pmsProductAttributeCategoryMapper.updateWay(pmsProductAttributeCategory);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("删除单个商品属性分类")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData PmsProductAttributeCategoryDelete(@PathVariable Long id) {
         int count = pmsProductAttributeCategoryMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

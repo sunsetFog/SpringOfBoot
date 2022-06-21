@@ -60,10 +60,7 @@ public class PmsProductCategoryController {
                                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<PmsProductCategory> pmsProductCategories = pmsProductCategoryMapper.selectWay(parentId);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<PmsProductCategory> goodsPageInfo = new PageInfo<PmsProductCategory>(pmsProductCategories);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductCategories);
     }
     /*
         数据校验
@@ -99,7 +96,7 @@ public class PmsProductCategoryController {
         if(!CollectionUtils.isEmpty(productAttributeIdList)){// 判断集合是否为空
             insertRelationList(pmsProductCategory.getId(), productAttributeIdList);
         }
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
     /**
      * 根据分类的parentId设置分类的level
@@ -146,7 +143,7 @@ public class PmsProductCategoryController {
             pmsProductCategoryAttributeRelationMapper.deleteWay(productCategoryId);
             insertRelationList(productCategoryId, productAttributeIdList);
         }
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("删除商品分类")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -155,10 +152,6 @@ public class PmsProductCategoryController {
         int count = pmsProductCategoryMapper.deleteWay(id);
         // SQL删关系表
         pmsProductCategoryAttributeRelationMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

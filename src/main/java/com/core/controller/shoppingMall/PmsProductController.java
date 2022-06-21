@@ -64,10 +64,7 @@ public class PmsProductController {
         productQueryParam.setKeyword("%" + productQueryParam.getKeyword() + "%");
         List<PmsProduct> pmsProducts = pmsProductMapper.selectWay(productQueryParam);
         // 分页
-        PageHelper.startPage(productQueryParam.getPageNum(), productQueryParam.getPageSize());
-        PageInfo<PmsProduct> goodsPageInfo = new PageInfo<PmsProduct>(pmsProducts);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(productQueryParam.getPageNum(), productQueryParam.getPageSize(), pmsProducts);
     }
     @ApiOperation("创建商品")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -94,11 +91,7 @@ public class PmsProductController {
         // 关联优选
         relateAndInsertList(cmsPrefrenceAreaProductRelationMapper, pmsProductAddParam.getPrefrenceAreaProductRelationList(), productId);
 
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("更新商品")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -132,11 +125,7 @@ public class PmsProductController {
         cmsPrefrenceAreaProductRelationMapper.deleteWay(productId);
         relateAndInsertList(cmsPrefrenceAreaProductRelationMapper, pmsProductAddParam.getPrefrenceAreaProductRelationList(), productId);
 
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("批量修改删除状态")
     @RequestMapping(value = "/deleteStatus", method = RequestMethod.GET)

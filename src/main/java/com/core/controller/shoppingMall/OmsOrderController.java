@@ -88,7 +88,7 @@ public class OmsOrderController {
                     return history;
                 }).collect(Collectors.toList());
         omsOrderOperateHistoryMapper.insertList(operateHistoryList);
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
     /*
         传参：

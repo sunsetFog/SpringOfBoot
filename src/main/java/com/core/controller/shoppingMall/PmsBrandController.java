@@ -42,10 +42,7 @@ public class PmsBrandController {
         keyword = '%' + keyword + '%';
         List<PmsBrand> pmsBrands = pmsBrandMapper.selectWay(keyword);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<PmsBrand> goodsPageInfo = new PageInfo<PmsBrand>(pmsBrands);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsBrands);
     }
     @ApiOperation(value = "添加品牌")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -57,11 +54,7 @@ public class PmsBrandController {
             pmsBrand.setFirstLetter(pmsBrand.getName().substring(0, 1));
         }
         int count = pmsBrandMapper.insertWay(pmsBrand);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation(value = "更新品牌")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -78,16 +71,12 @@ public class PmsBrandController {
         pmsProductAddParam.setId(pmsBrand.getId());
         pmsProductAddParam.setBrandName(pmsBrand.getName());
         pmsProductMapper.updateWay(pmsProductAddParam);
-        return ResponseDataUtil.buildSuccess(count);
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation(value = "删除品牌")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData brandDelete(@PathVariable Long id) {
         int count = pmsBrandMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

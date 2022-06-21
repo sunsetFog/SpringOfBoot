@@ -41,10 +41,6 @@ public class UmsRoleResourceRelationController {
         }
 
         int count = resourceIds == null ? 0 : resourceIds.size();
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

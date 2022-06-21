@@ -39,10 +39,7 @@ public class UmsAdminController {
         List<UmsAdmin> adminList = umsAdminMapper.selectWay(keyword);
         System.out.println("--adminList--"+adminList);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<UmsAdmin> goodsPageInfo = new PageInfo<UmsAdmin>(adminList);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, adminList);
     }
     /*
         加参数校验
@@ -89,21 +86,13 @@ public class UmsAdminController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData adminUpdate(@RequestBody UmsAdmin umsAdmin) {
         int count = umsAdminMapper.updateWay(umsAdmin);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("删除指定用户信息")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData adminDelete(@PathVariable Long id) {
         int count = umsAdminMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation(value = "获取当前登录用户信息")
     @RequestMapping(value = "/information", method = RequestMethod.GET)

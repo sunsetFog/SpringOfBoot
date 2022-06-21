@@ -41,10 +41,6 @@ public class UmsRoleMenuRelationController {
         }
 
         int count = menuIds == null ? 0 : menuIds.size();
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

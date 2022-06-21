@@ -37,10 +37,7 @@ public class UmsResourceController {
         urlKeyword = '%' + urlKeyword + '%';
         List<UmsResource> umsResources = umsResourceMapper.selectWay(categoryId, nameKeyword, urlKeyword);
         // 分页
-        PageHelper.startPage(pageNum, pageSize);
-        PageInfo<UmsResource> goodsPageInfo = new PageInfo<UmsResource>(umsResources);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, umsResources);
     }
     /*
         实际传参：
@@ -56,30 +53,18 @@ public class UmsResourceController {
     public ResponseData resourceAdd(@RequestBody UmsResource umsResource) {
         umsResource.setCreateTime(new Date());
         int count = umsResourceMapper.insertWay(umsResource);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("修改后台资源")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData resourceUpdate(@RequestBody UmsResource umsResource) {
         int count = umsResourceMapper.updateWay(umsResource);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData resourceDelete(@PathVariable Long id) {
         int count = umsResourceMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }

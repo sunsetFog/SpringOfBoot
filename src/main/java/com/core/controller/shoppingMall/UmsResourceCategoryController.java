@@ -37,30 +37,18 @@ public class UmsResourceCategoryController {
     public ResponseData resourceCategoryAdd(@RequestBody UmsResourceCategory umsResourceCategory) {
         umsResourceCategory.setCreateTime(new Date());
         int count = umsResourceCategoryMapper.insertWay(umsResourceCategory);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("修改后台资源分类")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData resourceCategoryUpdate(@RequestBody UmsResourceCategory umsResourceCategory) {
         int count = umsResourceCategoryMapper.updateWay(umsResourceCategory);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("根据ID删除后台资源")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData resourceCategoryDelete(@PathVariable Long id) {
         int count = umsResourceCategoryMapper.deleteWay(id);
-        if (count > 0) {
-            return ResponseDataUtil.buildSuccess(count);
-        } else {
-            return ResponseDataUtil.buildError();
-        }
+        return ResponseDataUtil.countJudge(count);
     }
 }
