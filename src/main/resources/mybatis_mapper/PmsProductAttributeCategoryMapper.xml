@@ -34,6 +34,7 @@
         extends继承resultMap
         引入其他resultMap
         collection集合，resultMap的类型是Object，结果：[Object, Object]
+        association对象
 -->
     <resultMap id="getListWithAttrMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategoryItem" extends="BaseResultMap">
         <collection property="productAttributeList" columnPrefix="attr_" resultMap="com.core.mapper.shoppingMall.PmsProductAttributeMapper.BaseResultMap">

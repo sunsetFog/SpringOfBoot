@@ -11,4 +11,12 @@ import java.util.List;
 public class PmsProductCategoryNode extends PmsProductCategory {
     @ApiModelProperty(value = "子级")
     private List<PmsProductCategoryNode> children;
+
+    public List<PmsProductCategoryNode> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<PmsProductCategoryNode> children) {
+        this.children = children;
+    }
 }
