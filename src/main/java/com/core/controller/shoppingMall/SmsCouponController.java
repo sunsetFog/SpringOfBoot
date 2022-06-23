@@ -1,0 +1,91 @@
+package com.core.controller.shoppingMall;
+
+import com.core.apiParams.SmsCouponAddParam;
+import com.core.common.util.ResponseData;
+import com.core.common.util.ResponseDataUtil;
+import com.core.mapper.shoppingMall.SmsCouponMapper;
+import com.core.mapper.shoppingMall.SmsCouponProductCategoryRelationMapper;
+import com.core.mapper.shoppingMall.SmsCouponProductRelationMapper;
+import com.core.pojo.shoppingMall.SmsCoupon;
+import com.core.pojo.shoppingMall.SmsCouponProductCategoryRelation;
+import com.core.pojo.shoppingMall.SmsCouponProductRelation;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@Api(tags = "SmsCouponController", description = "优惠券管理")
+@RequestMapping("/coupon")
+public class SmsCouponController {
+    @Autowired
+    private SmsCouponMapper smsCouponMapper;
+    @Autowired
+    private SmsCouponProductRelationMapper smsCouponProductRelationMapper;
+    @Autowired
+    private SmsCouponProductCategoryRelationMapper smsCouponProductCategoryRelationMapper;
+
+    @ApiOperation("根据优惠券名称和类型分页获取优惠券列表")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseData couponList(@RequestParam(value = "name",required = false) String name,
+                                   @RequestParam(value = "type",required = false) Integer type,
+                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        List<SmsCoupon> smsCoupons = smsCouponMapper.selectWay(name, type);
+        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsCoupons);
+    }
+    @ApiOperation("添加优惠券")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResponseData couponAdd(@RequestBody SmsCouponAddParam smsCouponAddParam) {
+        smsCouponAddParam.setCount(smsCouponAddParam.getPublishCount());
+        smsCouponAddParam.setUseCount(0);
+        smsCouponAddParam.setReceiveCount(0);
+        //插入优惠券表
+        int count = smsCouponMapper.insertWay(smsCouponAddParam);
+        //插入优惠券和商品关系表
+        if(smsCouponAddParam.getUseType().equals(2)){
+            for(SmsCouponProductRelation item: smsCouponAddParam.getProductRelationList()){
+                item.setCouponId(smsCouponAddParam.getId());
+            }
+            smsCouponProductRelationMapper.insertList(smsCouponAddParam.getProductRelationList());
+        }
+        //插入优惠券和商品分类关系表
+        if(smsCouponAddParam.getUseType().equals(1)){
+            for (SmsCouponProductCategoryRelation item: smsCouponAddParam.getProductCategoryRelationList()) {
+                item.setCouponId(smsCouponAddParam.getId());
+            }
+            smsCouponProductCategoryRelationMapper.insertList(smsCouponAddParam.getProductCategoryRelationList());
+        }
+        return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("修改优惠券")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseData couponUpdate(@RequestBody SmsCouponAddParam smsCouponAddParam) {
+        int count = smsCouponMapper.updateWay(smsCouponAddParam);
+        //插入优惠券和商品关系表
+        if(smsCouponAddParam.getUseType().equals(2)){
+            for(SmsCouponProductRelation item: smsCouponAddParam.getProductRelationList()){
+                item.setCouponId(smsCouponAddParam.getId());
+            }
+            smsCouponProductRelationMapper.deleteWay(smsCouponAddParam.getId());
+            smsCouponProductRelationMapper.insertList(smsCouponAddParam.getProductRelationList());
+        }
+        //插入优惠券和商品分类关系表
+        if(smsCouponAddParam.getUseType().equals(1)){
+            for (SmsCouponProductCategoryRelation item: smsCouponAddParam.getProductCategoryRelationList()) {
+                item.setCouponId(smsCouponAddParam.getId());
+            }
+            smsCouponProductCategoryRelationMapper.deleteWay(smsCouponAddParam.getId());
+            smsCouponProductCategoryRelationMapper.insertList(smsCouponAddParam.getProductCategoryRelationList());
+        }
+        return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("删除优惠券")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseData couponDelete(@PathVariable Long id) {
+        int count = smsCouponMapper.deleteWay(id);
+        return ResponseDataUtil.countJudge(count);
+    }
+}

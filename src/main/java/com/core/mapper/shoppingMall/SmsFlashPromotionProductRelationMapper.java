@@ -1,7 +1,9 @@
 package com.core.mapper.shoppingMall;
 
+import com.core.pojo.shoppingMall.SmsFlashPromotionProduct;
 import com.core.pojo.shoppingMall.SmsFlashPromotionProductRelation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,4 +12,11 @@ import java.util.List;
 @Repository
 public interface SmsFlashPromotionProductRelationMapper {
     long selectCount(Long flashPromotionId, Long flashPromotionSessionId);
+    /**
+     * 获取限时购及相关商品信息
+     */
+    List<SmsFlashPromotionProduct> selectWay(Long flashPromotionId, Long flashPromotionSessionId);
+    int insertWay(SmsFlashPromotionProductRelation smsFlashPromotionProductRelation);
+    int updateWay(SmsFlashPromotionProductRelation smsFlashPromotionProductRelation);
+    int deleteWay(Long id);
 }

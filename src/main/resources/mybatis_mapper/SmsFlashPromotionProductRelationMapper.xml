@@ -30,4 +30,125 @@
             </if>
         </where>
     </select>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <resultMap id="flashProductMap" type="com.core.pojo.shoppingMall.SmsFlashPromotionProduct" extends="BaseResultMap">
+        <association property="product" resultMap="com.core.mapper.shoppingMall.PmsProductMapper.BaseResultMap" columnPrefix="p_"/>
+    </resultMap>
+    <select id="selectWay" resultMap="flashProductMap" parameterType="Map">
+        SELECT
+            r.id,
+            r.flash_promotion_price,
+            r.flash_promotion_count,
+            r.flash_promotion_limit,
+            r.flash_promotion_id,
+            r.flash_promotion_session_id,
+            r.product_id,
+            r.sort,
+            p.id p_id,
+            p.`name` p_name,
+            p.product_sn p_product_sn,
+            p.price p_price,
+            p.stock p_stock
+        FROM
+            sms_flash_promotion_product_relation r
+                LEFT JOIN pms_product p ON r.product_id = p.id
+        WHERE
+            r.flash_promotion_id = #{flashPromotionId}
+          AND r.flash_promotion_session_id = #{flashPromotionSessionId}
+        ORDER BY r.sort DESC
+    </select>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.SmsFlashPromotionProductRelation">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sms_flash_promotion_product_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="flashPromotionId != null">
+                flash_promotion_id,
+            </if>
+            <if test="flashPromotionSessionId != null">
+                flash_promotion_session_id,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="flashPromotionPrice != null">
+                flash_promotion_price,
+            </if>
+            <if test="flashPromotionCount != null">
+                flash_promotion_count,
+            </if>
+            <if test="flashPromotionLimit != null">
+                flash_promotion_limit,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="flashPromotionId != null">
+                #{flashPromotionId,jdbcType=BIGINT},
+            </if>
+            <if test="flashPromotionSessionId != null">
+                #{flashPromotionSessionId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="flashPromotionPrice != null">
+                #{flashPromotionPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="flashPromotionCount != null">
+                #{flashPromotionCount,jdbcType=INTEGER},
+            </if>
+            <if test="flashPromotionLimit != null">
+                #{flashPromotionLimit,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.SmsFlashPromotionProductRelation">
+        update sms_flash_promotion_product_relation
+        <set>
+            <if test="flashPromotionId != null">
+                flash_promotion_id = #{flashPromotionId,jdbcType=BIGINT},
+            </if>
+            <if test="flashPromotionSessionId != null">
+                flash_promotion_session_id = #{flashPromotionSessionId,jdbcType=BIGINT},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=BIGINT},
+            </if>
+            <if test="flashPromotionPrice != null">
+                flash_promotion_price = #{flashPromotionPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="flashPromotionCount != null">
+                flash_promotion_count = #{flashPromotionCount,jdbcType=INTEGER},
+            </if>
+            <if test="flashPromotionLimit != null">
+                flash_promotion_limit = #{flashPromotionLimit,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+
+    <delete id="deleteWay" parameterType="java.lang.Long">
+        delete from sms_flash_promotion_product_relation
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 </mapper>
