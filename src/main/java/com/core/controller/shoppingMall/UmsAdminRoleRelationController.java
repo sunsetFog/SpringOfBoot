@@ -4,6 +4,7 @@ import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsAdminRoleRelationMapper;
 import com.core.pojo.shoppingMall.UmsAdminRoleRelation;
+import com.core.pojo.shoppingMall.UmsRole;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,11 @@ public class UmsAdminRoleRelationController {
 
         int count = roleIds == null ? 0 : roleIds.size();
         return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("查找用户的所有角色")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseData adminRoleList(@RequestParam("adminId") Long adminId) {
+        List<UmsRole> roleList = umsAdminRoleRelationMapper.selectWay(adminId);
+        return ResponseDataUtil.buildSuccess(roleList);
     }
 }

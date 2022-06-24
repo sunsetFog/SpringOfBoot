@@ -1,6 +1,7 @@
 package com.core.mapper.shoppingMall;
 
 import com.core.pojo.shoppingMall.UmsAdminRoleRelation;
+import com.core.pojo.shoppingMall.UmsRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,8 @@ public interface UmsAdminRoleRelationMapper {
      * 批量插入用户角色关系
      */
     int insertList(@Param("list") List<UmsAdminRoleRelation> adminRoleRelationList);
+    /**
+     * 获取用于所有角色
+     */
+    List<UmsRole> selectWay(@Param("adminId") Long adminId);
 }
