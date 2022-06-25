@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsAdminController", description = "后台用户管理")
 @RequestMapping("/admin")
+@CrossOrigin
 public class UmsAdminController {
     @Autowired
     private UmsAdminMapper umsAdminMapper;
@@ -51,7 +52,8 @@ public class UmsAdminController {
                 "icon": "no",
                 "email": "1456300076@qq.com",
                 "nickName": "二哈",
-                "note": "二哈将军"
+                "note": "二哈将军",
+                "status": 1
             }
     */
     @ApiOperation(value = "用户注册")
