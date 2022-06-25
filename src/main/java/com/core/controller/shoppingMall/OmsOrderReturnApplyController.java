@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @Api(tags = "OmsOrderReturnApplyController", description = "订单退货申请管理")
 @RequestMapping("/returnApply")
+@CrossOrigin
 public class OmsOrderReturnApplyController {
     @Autowired
     private OmsOrderReturnApplyMapper omsOrderReturnApplyMapper;

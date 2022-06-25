@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Api(tags = "SmsCouponController", description = "优惠券管理")
 @RequestMapping("/coupon")
+@CrossOrigin
 public class SmsCouponController {
     @Autowired
     private SmsCouponMapper smsCouponMapper;

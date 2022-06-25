@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api(tags = "OmsOrderSettingController", description = "订单设置管理")
 @RequestMapping("/orderSetting")
+@CrossOrigin
 public class OmsOrderSettingController {
     @Autowired
     private OmsOrderSettingMapper omsOrderSettingMapper;

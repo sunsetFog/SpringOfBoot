@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 @RestController
 @Api(tags = "UmsMenuController", description = "后台菜单管理")
 @RequestMapping("/menu")
+@CrossOrigin
 public class UmsMenuController {
     @Autowired
     private UmsMenuMapper umsMenuMapper;

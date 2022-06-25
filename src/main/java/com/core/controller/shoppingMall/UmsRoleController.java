@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsRoleController", description = "后台用户角色管理")
 @RequestMapping("/role")
+@CrossOrigin
 public class UmsRoleController {
     @Autowired
     private UmsRoleMapper umsRoleMapper;

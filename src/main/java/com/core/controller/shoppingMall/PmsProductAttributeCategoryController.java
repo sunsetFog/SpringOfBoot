@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @Api(tags = "PmsProductAttributeCategoryController", description = "商品属性分类管理")
 @RequestMapping("/PmsProductAttributeCategory")
+@CrossOrigin
 public class PmsProductAttributeCategoryController {
     @Autowired
     private PmsProductAttributeCategoryMapper pmsProductAttributeCategoryMapper;

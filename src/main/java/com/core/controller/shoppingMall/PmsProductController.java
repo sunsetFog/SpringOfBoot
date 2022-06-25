@@ -26,6 +26,7 @@ import java.util.List;
 @Slf4j
 @Api(tags = "PmsProductController", description = "商品管理")
 @RequestMapping("/product")
+@CrossOrigin
 public class PmsProductController {
     @Autowired
     private PmsProductMapper pmsProductMapper;

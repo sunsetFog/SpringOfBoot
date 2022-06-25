@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @Api(tags = "PmsProductAttributeController", description = "商品属性管理")
 @RequestMapping("/productAttribute")
+@CrossOrigin
 public class PmsProductAttributeController {
     @Autowired
     private PmsProductAttributeMapper pmsProductAttributeMapper;

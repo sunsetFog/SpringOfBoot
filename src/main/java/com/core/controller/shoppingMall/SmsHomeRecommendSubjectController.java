@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @Api(tags = "SmsHomeRecommendSubjectController", description = "首页专题推荐管理")
 @RequestMapping("/homeRecommendSubject")
+@CrossOrigin
 public class SmsHomeRecommendSubjectController {
     @Autowired
     private SmsHomeRecommendSubjectMapper smsHomeRecommendSubjectMapper;

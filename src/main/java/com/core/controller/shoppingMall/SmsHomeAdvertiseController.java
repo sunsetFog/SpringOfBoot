@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @Api(tags = "SmsHomeAdvertiseController", description = "首页轮播广告管理")
 @RequestMapping("/homeAdvertise")
+@CrossOrigin
 public class SmsHomeAdvertiseController {
     @Autowired
     private SmsHomeAdvertiseMapper smsHomeAdvertiseMapper;

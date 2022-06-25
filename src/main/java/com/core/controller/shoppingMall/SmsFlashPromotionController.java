@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @Api(tags = "SmsFlashPromotionController", description = "限时购活动管理")
 @RequestMapping("/flashPromotion")
+@CrossOrigin
 public class SmsFlashPromotionController {
     @Autowired
     private SmsFlashPromotionMapper smsFlashPromotionMapper;

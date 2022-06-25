@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @Api(tags = "PmsBrandController", description = "商品品牌管理")
 @RequestMapping("/brand")
+@CrossOrigin
 public class PmsBrandController {
     @Autowired
     private PmsBrandMapper pmsBrandMapper;

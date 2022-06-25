@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsResourceCategoryController", description = "后台资源分类管理")
 @RequestMapping("/resourceCategory")
+@CrossOrigin
 public class UmsResourceCategoryController {
     @Autowired
     private UmsResourceCategoryMapper umsResourceCategoryMapper;

@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @Api(tags = "OmsOrderReturnReasonController", description = "退货原因管理")
 @RequestMapping("/returnReason")
+@CrossOrigin
 public class OmsOrderReturnReasonController {
     @Autowired
     private OmsOrderReturnReasonMapper omsOrderReturnReasonMapper;

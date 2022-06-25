@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RestController
 @Api(tags = "OmsOrderController", description = "订单管理")
 @RequestMapping("/order")
+@CrossOrigin
 public class OmsOrderController {
     @Autowired
     private OmsOrderMapper omsOrderMapper;

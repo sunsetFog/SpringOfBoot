@@ -7,16 +7,14 @@ import com.core.pojo.shoppingMall.UmsMemberLevel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @Api(tags = "UmsMemberLevelController", description = "会员等级管理")
 @RequestMapping("/memberLevel")
+@CrossOrigin
 public class UmsMemberLevelController {
     @Autowired
     private UmsMemberLevelMapper umsMemberLevelMapper;

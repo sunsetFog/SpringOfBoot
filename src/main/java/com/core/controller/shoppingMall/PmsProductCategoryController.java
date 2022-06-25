@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RestController
 @Api(tags = "PmsProductCategoryController", description = "商品分类管理")
 @RequestMapping("/productCategory")
+@CrossOrigin
 public class PmsProductCategoryController {
     @Autowired
     private PmsProductCategoryMapper pmsProductCategoryMapper;

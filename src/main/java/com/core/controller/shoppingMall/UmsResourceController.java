@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsResourceController", description = "后台资源管理")
 @RequestMapping("/resource")
+@CrossOrigin
 public class UmsResourceController {
     @Autowired
     private UmsResourceMapper umsResourceMapper;
