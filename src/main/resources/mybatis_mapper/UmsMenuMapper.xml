@@ -14,9 +14,17 @@
         <result column="icon" jdbcType="VARCHAR" property="icon" />
         <result column="hidden" jdbcType="INTEGER" property="hidden" />
     </resultMap>
+
     <sql id="Base_Column_List">
         id, parent_id, create_time, title, level, sort, name, icon, hidden
     </sql>
+
+    <select id="treeList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ums_menu
+    </select>
+
     <select id="selectWay" resultMap="BaseResultMap" parameterType="Long">
         select
         <include refid="Base_Column_List" />

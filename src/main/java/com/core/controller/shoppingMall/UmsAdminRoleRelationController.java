@@ -29,8 +29,8 @@ public class UmsAdminRoleRelationController {
             }
     */
     @ApiOperation("给用户分配角色")
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public ResponseData adminRoleUpdate(@RequestParam("adminId") Long adminId,
+    @RequestMapping(value = "/deleteAdd", method = RequestMethod.GET)
+    public ResponseData adminRoleDeleteAdd(@RequestParam("adminId") Long adminId,
                                         @RequestParam("roleIds") List<Long> roleIds) {
         // 删除adminId的数据
         umsAdminRoleRelationMapper.deleteWay(adminId);

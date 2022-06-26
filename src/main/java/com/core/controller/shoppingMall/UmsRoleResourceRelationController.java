@@ -3,6 +3,7 @@ package com.core.controller.shoppingMall;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsRoleResourceRelationMapper;
+import com.core.pojo.shoppingMall.UmsResource;
 import com.core.pojo.shoppingMall.UmsRoleResourceRelation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,8 +27,8 @@ public class UmsRoleResourceRelationController {
             }
     */
     @ApiOperation("给角色分配资源")
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public ResponseData roleResourceUpdate(@RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
+    @RequestMapping(value = "/deleteAdd", method = RequestMethod.GET)
+    public ResponseData roleResourceDeleteAdd(@RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
         // 删除roleId的数据
         umsRoleResourceRelationMapper.deleteWay(roleId);
         // 批量新增：一个角色多个菜单
@@ -40,5 +41,11 @@ public class UmsRoleResourceRelationController {
 
         int count = resourceIds == null ? 0 : resourceIds.size();
         return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("获取角色相关资源")
+    @RequestMapping(value = "/listResource/{roleId}", method = RequestMethod.GET)
+    public ResponseData listResource(@PathVariable Long roleId) {
+        List<UmsResource> resourceListByRoleId = umsRoleResourceRelationMapper.getResourceListByRoleId(roleId);
+        return ResponseDataUtil.buildSuccess(resourceListByRoleId);
     }
 }

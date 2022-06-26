@@ -31,13 +31,15 @@ public class UmsMenuController {
     @ApiOperation("树形结构返回所有菜单列表")
     @RequestMapping(value = "/treeList", method = RequestMethod.GET)
     public ResponseData treeList() {
-        List<UmsMenu> menuList = umsMenuMapper.selectWay(null);
+        List<UmsMenu> menuList = umsMenuMapper.treeList();
+        System.out.println("--menuList--"+menuList.size());
         /*
             list.stream.collect(Collectors.toList())去重
         */
         List<UmsMenuNode> result = menuList.stream()
                 .filter(menu -> menu.getParentId().equals(0L))
                 .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
+        System.out.println("--result--"+result.size());
         return ResponseDataUtil.buildSuccess(result);
     }
     /**

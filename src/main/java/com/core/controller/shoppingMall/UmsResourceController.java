@@ -25,13 +25,13 @@ public class UmsResourceController {
     private UmsResourceMapper umsResourceMapper;
     /*
         分页查询,pageSize传9999查所有
-        name和url字段模糊搜索
+        name和url字段模糊搜索----不加默认值会null+%，从而查询不到
     */
     @ApiOperation("查询所有后台资源")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData resourceList(@RequestParam(required = false) Long categoryId,
-                                     @RequestParam(required = false) String nameKeyword,
-                                     @RequestParam(required = false) String urlKeyword,
+                                     @RequestParam(required = false, defaultValue = "") String nameKeyword,
+                                     @RequestParam(required = false, defaultValue = "") String urlKeyword,
                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         nameKeyword = '%' + nameKeyword + '%';
