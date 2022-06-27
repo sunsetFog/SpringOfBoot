@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
@@ -7,6 +8,7 @@ public class UmsResource {
     private Long id;
 
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     @ApiModelProperty(value = "资源名称")

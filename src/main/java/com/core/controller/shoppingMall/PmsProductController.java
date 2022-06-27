@@ -62,7 +62,7 @@ public class PmsProductController {
     @ApiOperation("查询商品")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ResponseData productList(@RequestBody PmsProductListParam productQueryParam){
-        productQueryParam.setKeyword("%" + productQueryParam.getKeyword() + "%");
+        System.out.println("--productQueryParam--"+productQueryParam);
         List<PmsProduct> pmsProducts = pmsProductMapper.selectWay(productQueryParam);
         // 分页
         return ResponseDataUtil.pageStructure(productQueryParam.getPageNum(), productQueryParam.getPageSize(), pmsProducts);

@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 商品查询参数
  * Created by macro on 2018/4/27.
@@ -12,16 +14,22 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class PmsProductListParam {
     @ApiModelProperty("上架状态")
+    @NotEmpty
     private Integer publishStatus;
     @ApiModelProperty("审核状态")
+    @NotEmpty
     private Integer verifyStatus;
     @ApiModelProperty("商品名称模糊关键字")
+    @NotEmpty
     private String keyword;// name
     @ApiModelProperty("商品货号")
+    @NotEmpty
     private String productSn;
     @ApiModelProperty("商品分类编号")
+    @NotEmpty
     private Long productCategoryId;
     @ApiModelProperty("商品品牌编号")
+    @NotEmpty
     private Long brandId;
     private Integer pageNum;
     private Integer pageSize;

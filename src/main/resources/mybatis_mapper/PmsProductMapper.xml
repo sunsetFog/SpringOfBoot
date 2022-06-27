@@ -64,9 +64,9 @@
         from pms_product
         <where>
             <if test="keyword != null">
-                name like #{keyword, jdbcType=VARCHAR}
+                name like concat("%", #{keyword, jdbcType=VARCHAR}, "%")
             </if>
-            <if test="productSn != null">
+            <if test="productSn != null and productSn != ''">
                 and product_sn = #{productSn, jdbcType=VARCHAR}
             </if>
             <if test="productCategoryId != null">
