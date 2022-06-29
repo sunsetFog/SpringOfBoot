@@ -14,4 +14,5 @@ public interface PmsProductCategoryMapper {
     int insertWay(PmsProductCategory pmsProductCategory);
     int updateWay(PmsProductCategory pmsProductCategory);
     int deleteWay(Long id);
+    int statusWay(Long id, Integer navStatus, Integer showStatus);
 }

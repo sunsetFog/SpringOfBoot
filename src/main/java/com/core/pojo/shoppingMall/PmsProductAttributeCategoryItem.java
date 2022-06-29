@@ -16,6 +16,7 @@ public class PmsProductAttributeCategoryItem extends PmsProductAttributeCategory
     @ApiModelProperty(value = "商品属性列表")
     private List<PmsProductAttribute> productAttributeList;
 
+
     public List<PmsProductAttribute> getProductAttributeList() {
         return productAttributeList;
     }

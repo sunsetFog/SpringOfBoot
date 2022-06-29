@@ -137,7 +137,7 @@ public class PmsProductCategoryController {
         System.out.println("--pmsProductCategory--"+pmsProductCategory);
         // SQL修改
         int count = pmsProductCategoryMapper.updateWay(pmsProductCategory);
-        // SQL删除、插入筛选属性
+        // SQL删除、插入分类和属性关系表
         List<Long> productAttributeIdList = pmsProductCategoryAddParam.getProductAttributeIdList();
         if(!CollectionUtils.isEmpty(productAttributeIdList)){// 判断集合是否为空
             Long productCategoryId = pmsProductCategory.getId();
@@ -153,6 +153,12 @@ public class PmsProductCategoryController {
         int count = pmsProductCategoryMapper.deleteWay(id);
         // SQL删关系表
         pmsProductCategoryAttributeRelationMapper.deleteWay(id);
+        return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("修改导航栏和是否显示")
+    @RequestMapping(value = "/status", method = RequestMethod.GET)
+    public ResponseData productCategoryStatus(@RequestParam Long id, @RequestParam Integer navStatus, @RequestParam Integer showStatus) {
+        int count = pmsProductCategoryMapper.statusWay(id, navStatus, showStatus);
         return ResponseDataUtil.countJudge(count);
     }
 }

@@ -22,7 +22,7 @@
 
     <sql id="Base_Column_List">
         id, parent_id, name, level, product_count, product_unit, nav_status, show_status,
-    sort, icon, keywords
+    sort, icon, keywords, description
     </sql>
 
     <select id="selectWay" resultMap="BaseResultMap" parameterType="Long">
@@ -163,6 +163,19 @@
             </if>
             <if test="description != null">
                 description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="statusWay" parameterType="Map">
+        update pms_product_category
+        <set>
+            <if test="navStatus != null">
+                nav_status = #{navStatus,jdbcType=INTEGER},
+            </if>
+            <if test="showStatus != null">
+                show_status = #{showStatus,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}

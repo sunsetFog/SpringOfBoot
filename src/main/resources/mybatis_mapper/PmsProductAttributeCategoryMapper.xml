@@ -5,7 +5,7 @@
 <mapper namespace="com.core.mapper.shoppingMall.PmsProductAttributeCategoryMapper">
     <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="is_name" jdbcType="VARCHAR" property="name" />
         <result column="attribute_count" jdbcType="INTEGER" property="attributeCount" />
         <result column="param_count" jdbcType="INTEGER" property="paramCount" />
     </resultMap>
@@ -34,7 +34,9 @@
         *选取所有字段
         extends继承resultMap
         引入其他resultMap
-        collection集合，resultMap的类型是Object，结果：[Object, Object]
+        collection集合
+            resultMap的类型是Object，结果：[Object, Object]
+            columnPrefix="attr_"   列名前缀截取
         association对象
 -->
     <resultMap id="getListWithAttrMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategoryItem" extends="BaseResultMap">
@@ -44,9 +46,21 @@
     <select id="selectCategoryAndAttribute" resultMap="getListWithAttrMap">
         SELECT
             pac.id,
-            pac.name,
-            pa.id attr_id,
-            pa.name attr_name
+            pac.`name` is_name,
+            pac.attribute_count,
+            pac.param_count,
+            pa.`id` `attr_id`,
+            pa.product_attribute_category_id attr_product_attribute_category_id,
+            pa.`name` `attr_name`,
+            pa.select_type attr_select_type,
+            pa.input_type attr_input_type,
+            pa.input_list attr_input_list,
+            pa.sort attr_sort,
+            pa.filter_type attr_filter_type,
+            pa.search_type attr_search_type,
+            pa.related_status attr_related_status,
+            pa.hand_add_status attr_hand_add_status,
+            pa.type attr_type
         FROM
             pms_product_attribute_category pac
                 LEFT JOIN pms_product_attribute pa ON pac.id = pa.product_attribute_category_id
