@@ -86,7 +86,7 @@ public class PmsProductAttributeController {
         return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("批量删除商品属性")
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ResponseData productAttributeDelete(@RequestParam("ids") List<Long> ids) {
         // SQL查询一条商品属性，得出type值-----注意顺序，先删除就查询不出来了
         Long aLong = ids.get(0);

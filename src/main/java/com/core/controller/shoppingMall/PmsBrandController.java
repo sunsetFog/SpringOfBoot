@@ -40,11 +40,36 @@ public class PmsBrandController {
     public ResponseData brandList(@RequestParam(value = "keyword", required = false) String keyword,
                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        keyword = '%' + keyword + '%';
+        System.out.println("--pageNum--" + pageNum);
+        System.out.println("--pageSize--" + pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         List<PmsBrand> pmsBrands = pmsBrandMapper.selectWay(keyword);
+
+
+
+        PageInfo<PmsBrand> goodsPageInfo = new PageInfo<PmsBrand>(pmsBrands);
+        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
+
+        return ResponseDataUtil.buildSuccess(pageResult);
+
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsBrands);
+//        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsBrands);
     }
+    /*
+        传参：
+        {
+            "bigPic": "/images/20180518/5afd7778Nf7800b75.jpg",
+            "brandStory": "哈哥的故事",
+            "factoryStatus": 1,
+            "firstLetter": "M",
+            "logo": "/images/20180518/5a912944N474afb7a.png",
+            "name": "二哈62",
+            "productCommentCount": 100,
+            "productCount": 100,
+            "showStatus": 1,
+            "sort": 500
+        }
+    */
     @ApiOperation(value = "添加品牌")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseData brandAdd(@RequestBody PmsBrandAddParam pmsBrandAddParam) {

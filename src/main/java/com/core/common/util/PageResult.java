@@ -1,5 +1,6 @@
 package com.core.common.util;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -28,6 +29,17 @@ public class PageResult {
      * 数据模型
      */
     private List<?> content;
+
+//    public PageResult(Integer pageNum, Integer pageSize, List<T> data) {
+//        PageHelper.startPage(pageNum, pageSize);
+//        PageInfo<T> pageInfo = new PageInfo<T>(data);
+//        this.pageNum = pageInfo.getPageNum();
+//        this.pageSize = pageInfo.getPageSize();
+//        this.totalSize = pageInfo.getTotal();
+//        this.totalPages = pageInfo.getPages();
+//        this.content = pageInfo.getList();
+//    }
+
     public int getPageNum() {
         return pageNum;
     }

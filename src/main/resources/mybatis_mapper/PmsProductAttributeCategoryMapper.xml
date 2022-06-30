@@ -5,7 +5,7 @@
 <mapper namespace="com.core.mapper.shoppingMall.PmsProductAttributeCategoryMapper">
     <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="is_name" jdbcType="VARCHAR" property="name" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="attribute_count" jdbcType="INTEGER" property="attributeCount" />
         <result column="param_count" jdbcType="INTEGER" property="paramCount" />
     </resultMap>
@@ -46,7 +46,7 @@
     <select id="selectCategoryAndAttribute" resultMap="getListWithAttrMap">
         SELECT
             pac.id,
-            pac.`name` is_name,
+            pac.`name` name,
             pac.attribute_count,
             pac.param_count,
             pa.`id` `attr_id`,

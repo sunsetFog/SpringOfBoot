@@ -21,16 +21,16 @@
 
     <sql id="Base_Column_List">
         id, name, first_letter, sort, factory_status, show_status, product_count, product_comment_count,
-    logo, big_pic
+    logo, big_pic, brand_story
     </sql>
 
-    <select id="selectWay" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectWay" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List" />
         from pms_brand
         <where>
             <if test="keyword != null">
-                name like #{keyword, jdbcType=VARCHAR}
+                name like concat('%', #{keyword, jdbcType=VARCHAR}, '%')
             </if>
         </where>
     </select>
