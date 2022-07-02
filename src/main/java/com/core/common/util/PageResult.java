@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 分页返回结果
+ * PageHelper.startPage(1,10);只对该语句以后的第一个查询语句得到的数据进行分页
  */
 public class PageResult {
     /**

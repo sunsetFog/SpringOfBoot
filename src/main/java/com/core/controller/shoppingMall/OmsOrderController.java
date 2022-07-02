@@ -2,6 +2,7 @@ package com.core.controller.shoppingMall;
 
 import com.core.apiParams.OmsOrderDeliveryParam;
 import com.core.apiParams.OmsOrderListParam;
+import com.core.apiParams.OmsReceiverInfoParam;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.OmsOrderMapper;
@@ -49,7 +50,7 @@ public class OmsOrderController {
         return ResponseDataUtil.pageStructure(omsOrderListParam.getPageNum(), omsOrderListParam.getPageSize(), omsOrders);
     }
     @ApiOperation("获取订单详情：订单信息、商品信息、操作记录")
-    @RequestMapping(value = "details/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
     public ResponseData orderDetails(@PathVariable Long id) {
         OmsOrderDetail omsOrderDetail = omsOrderMapper.selectDetail(id);
         return ResponseDataUtil.buildSuccess(omsOrderDetail);
@@ -116,6 +117,32 @@ public class OmsOrderController {
         history.setOperateMan("后台管理员");
         history.setOrderStatus(status);
         history.setNote("修改备注信息："+note);
+        ArrayList<OmsOrderOperateHistory> omsOrderOperateHistories = new ArrayList<>();
+        omsOrderOperateHistories.add(history);
+        omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);
+        return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("修改收货人信息")
+    @RequestMapping(value = "/update/receiverInfo", method = RequestMethod.POST)
+    public ResponseData updateReceiverInfo(@RequestBody OmsReceiverInfoParam receiverInfoParam) {
+        OmsOrder order = new OmsOrder();
+        order.setId(receiverInfoParam.getOrderId());
+        order.setReceiverName(receiverInfoParam.getReceiverName());
+        order.setReceiverPhone(receiverInfoParam.getReceiverPhone());
+        order.setReceiverPostCode(receiverInfoParam.getReceiverPostCode());
+        order.setReceiverDetailAddress(receiverInfoParam.getReceiverDetailAddress());
+        order.setReceiverProvince(receiverInfoParam.getReceiverProvince());
+        order.setReceiverCity(receiverInfoParam.getReceiverCity());
+        order.setReceiverRegion(receiverInfoParam.getReceiverRegion());
+        order.setModifyTime(new Date());
+        int count = omsOrderMapper.updateWay(order);
+        //添加，操作记录表
+        OmsOrderOperateHistory history = new OmsOrderOperateHistory();
+        history.setOrderId(receiverInfoParam.getOrderId());
+        history.setCreateTime(new Date());
+        history.setOperateMan("后台管理员");
+        history.setOrderStatus(receiverInfoParam.getStatus());
+        history.setNote("修改收货人信息");
         ArrayList<OmsOrderOperateHistory> omsOrderOperateHistories = new ArrayList<>();
         omsOrderOperateHistories.add(history);
         omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);

@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class OmsOrder {
     private String orderSn;
 
     @ApiModelProperty(value = "提交时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     @ApiModelProperty(value = "用户帐号")
@@ -122,18 +124,23 @@ public class OmsOrder {
     private Integer useIntegration;
 
     @ApiModelProperty(value = "支付时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date paymentTime;
 
     @ApiModelProperty(value = "发货时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date deliveryTime;
 
     @ApiModelProperty(value = "确认收货时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date receiveTime;
 
     @ApiModelProperty(value = "评价时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date commentTime;
 
     @ApiModelProperty(value = "修改时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date modifyTime;
 
     private static final long serialVersionUID = 1L;
