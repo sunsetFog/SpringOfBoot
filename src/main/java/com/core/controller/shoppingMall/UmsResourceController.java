@@ -4,6 +4,7 @@ import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsResourceMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.UmsAdmin;
 import com.core.pojo.shoppingMall.UmsResource;
 import com.github.pagehelper.PageHelper;
@@ -33,12 +34,15 @@ public class UmsResourceController {
                                      @RequestParam(required = false, defaultValue = "") String nameKeyword,
                                      @RequestParam(required = false, defaultValue = "") String urlKeyword,
                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                     @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+                                     @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         nameKeyword = '%' + nameKeyword + '%';
         urlKeyword = '%' + urlKeyword + '%';
         List<UmsResource> umsResources = umsResourceMapper.selectWay(categoryId, nameKeyword, urlKeyword);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, umsResources);
+        PageInfo<UmsResource> pageInfo = new PageInfo<UmsResource>(umsResources);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         实际传参：

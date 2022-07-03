@@ -1,9 +1,13 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsCouponHistoryMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsCouponHistory;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +39,11 @@ public class SmsCouponHistoryController {
                                           @RequestParam(value = "orderSn", required = false) String orderSn,
                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SmsCouponHistory> smsCouponHistories = smsCouponHistoryMapper.selectWay(couponId, useStatus, orderSn);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsCouponHistories);
+        // 分页
+        PageInfo<SmsCouponHistory> pageInfo = new PageInfo<SmsCouponHistory>(smsCouponHistories);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
 }

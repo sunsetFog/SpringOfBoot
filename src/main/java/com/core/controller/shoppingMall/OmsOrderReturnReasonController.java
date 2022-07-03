@@ -1,9 +1,13 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.OmsOrderReturnReasonMapper;
 import com.core.pojo.shoppingMall.OmsOrderReturnReason;
+import com.core.pojo.shoppingMall.PmsBrand;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +28,12 @@ public class OmsOrderReturnReasonController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData returnReasonList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                          @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<OmsOrderReturnReason> omsOrderReturnReasons = omsOrderReturnReasonMapper.selectWay();
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, omsOrderReturnReasons);
+        // 分页
+        PageInfo<OmsOrderReturnReason> pageInfo = new PageInfo<OmsOrderReturnReason>(omsOrderReturnReasons);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：

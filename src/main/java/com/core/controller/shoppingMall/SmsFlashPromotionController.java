@@ -1,9 +1,13 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsFlashPromotionMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsFlashPromotion;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +28,13 @@ public class SmsFlashPromotionController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData flashPromotionList(@RequestParam(value = "keyword", required = false) String keyword,
                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SmsFlashPromotion> smsFlashPromotions = smsFlashPromotionMapper.selectWay(keyword);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsFlashPromotions);
+        // 分页
+        PageInfo<SmsFlashPromotion> pageInfo = new PageInfo<SmsFlashPromotion>(smsFlashPromotions);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：

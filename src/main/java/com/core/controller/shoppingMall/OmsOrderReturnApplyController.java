@@ -2,11 +2,15 @@ package com.core.controller.shoppingMall;
 
 import com.core.apiParams.OmsOrderReturnApplyListParam;
 import com.core.apiParams.OmsOrderReturnApplyStatusParam;
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.OmsOrderReturnApplyMapper;
 import com.core.pojo.shoppingMall.OmsOrderReturnApply;
 import com.core.pojo.shoppingMall.OmsOrderReturnApplyResult;
+import com.core.pojo.shoppingMall.PmsBrand;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +41,12 @@ public class OmsOrderReturnApplyController {
     @ApiOperation("分页查询退货申请")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ResponseData returnApplyList(@RequestBody OmsOrderReturnApplyListParam omsOrderReturnApplyListParam) {
+        PageHelper.startPage(omsOrderReturnApplyListParam.getPageNum(), omsOrderReturnApplyListParam.getPageSize());
         List<OmsOrderReturnApply> omsOrderReturnApplies = omsOrderReturnApplyMapper.selectWay(omsOrderReturnApplyListParam);
-        return ResponseDataUtil.pageStructure(omsOrderReturnApplyListParam.getPageNum(), omsOrderReturnApplyListParam.getPageSize(), omsOrderReturnApplies);
+        // 分页
+        PageInfo<OmsOrderReturnApply> pageInfo = new PageInfo<OmsOrderReturnApply>(omsOrderReturnApplies);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
 
     @ApiOperation("获取退货申请详情")

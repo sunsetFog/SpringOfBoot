@@ -1,10 +1,14 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsFlashPromotionProductRelationMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsFlashPromotionProduct;
 import com.core.pojo.shoppingMall.SmsFlashPromotionProductRelation;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +30,12 @@ public class SmsFlashPromotionProductRelationController {
                                                           @RequestParam(value = "flashPromotionSessionId") Long flashPromotionSessionId,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SmsFlashPromotionProduct> smsFlashPromotionProducts = smsFlashPromotionProductRelationMapper.selectWay(flashPromotionId, flashPromotionSessionId);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsFlashPromotionProducts);
+        // 分页
+        PageInfo<SmsFlashPromotionProduct> pageInfo = new PageInfo<SmsFlashPromotionProduct>(smsFlashPromotionProducts);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：

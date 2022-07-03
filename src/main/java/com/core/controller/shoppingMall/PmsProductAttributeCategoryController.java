@@ -31,9 +31,12 @@ public class PmsProductAttributeCategoryController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData PmsProductAttributeCategoryList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<PmsProductAttributeCategory> pmsProductAttributeCategories = pmsProductAttributeCategoryMapper.selectWay();
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductAttributeCategories);
+        PageInfo<PmsProductAttributeCategory> pageInfo = new PageInfo<PmsProductAttributeCategory>(pmsProductAttributeCategories);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     @ApiOperation("获取所有商品属性分类及其下属性")
     @RequestMapping(value = "/list/withAttr", method = RequestMethod.GET)

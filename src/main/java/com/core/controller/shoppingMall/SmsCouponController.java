@@ -1,14 +1,18 @@
 package com.core.controller.shoppingMall;
 
 import com.core.apiParams.SmsCouponAddParam;
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsCouponMapper;
 import com.core.mapper.shoppingMall.SmsCouponProductCategoryRelationMapper;
 import com.core.mapper.shoppingMall.SmsCouponProductRelationMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsCoupon;
 import com.core.pojo.shoppingMall.SmsCouponProductCategoryRelation;
 import com.core.pojo.shoppingMall.SmsCouponProductRelation;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +38,12 @@ public class SmsCouponController {
                                    @RequestParam(value = "type",required = false) Integer type,
                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SmsCoupon> smsCoupons = smsCouponMapper.selectWay(name, type);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsCoupons);
+        // 分页
+        PageInfo<SmsCoupon> pageInfo = new PageInfo<SmsCoupon>(smsCoupons);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     @ApiOperation("添加优惠券")
     @RequestMapping(value = "/add", method = RequestMethod.POST)

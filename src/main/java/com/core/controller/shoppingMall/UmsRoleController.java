@@ -4,6 +4,7 @@ import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsRoleMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.UmsAdmin;
 import com.core.pojo.shoppingMall.UmsRole;
 import com.github.pagehelper.PageHelper;
@@ -32,12 +33,15 @@ public class UmsRoleController {
     public ResponseData adminList(@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         keyword = '%' + keyword + '%';
         // SQL查询
         List<UmsRole> roleList = umsRoleMapper.selectWay(keyword);
         System.out.println("--roleList--"+roleList);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, roleList);
+        PageInfo<UmsRole> pageInfo = new PageInfo<UmsRole>(roleList);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         添加角色

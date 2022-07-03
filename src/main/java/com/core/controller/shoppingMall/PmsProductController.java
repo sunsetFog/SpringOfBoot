@@ -62,10 +62,13 @@ public class PmsProductController {
     @ApiOperation("查询商品")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ResponseData productList(@RequestBody PmsProductListParam productQueryParam){
+        PageHelper.startPage(productQueryParam.getPageNum(), productQueryParam.getPageSize());
         System.out.println("--productQueryParam--"+productQueryParam);
         List<PmsProduct> pmsProducts = pmsProductMapper.selectWay(productQueryParam);
         // 分页
-        return ResponseDataUtil.pageStructure(productQueryParam.getPageNum(), productQueryParam.getPageSize(), pmsProducts);
+        PageInfo<PmsProduct> pageInfo = new PageInfo<PmsProduct>(pmsProducts);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     @ApiOperation("创建商品")
     @RequestMapping(value = "/add", method = RequestMethod.POST)

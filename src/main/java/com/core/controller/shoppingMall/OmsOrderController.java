@@ -3,6 +3,7 @@ package com.core.controller.shoppingMall;
 import com.core.apiParams.OmsOrderDeliveryParam;
 import com.core.apiParams.OmsOrderListParam;
 import com.core.apiParams.OmsReceiverInfoParam;
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.OmsOrderMapper;
@@ -10,6 +11,9 @@ import com.core.mapper.shoppingMall.OmsOrderOperateHistoryMapper;
 import com.core.pojo.shoppingMall.OmsOrder;
 import com.core.pojo.shoppingMall.OmsOrderDetail;
 import com.core.pojo.shoppingMall.OmsOrderOperateHistory;
+import com.core.pojo.shoppingMall.PmsBrand;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +50,12 @@ public class OmsOrderController {
     @ApiOperation("查询订单")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public ResponseData orderList(@RequestBody OmsOrderListParam omsOrderListParam) {
+        PageHelper.startPage(omsOrderListParam.getPageNum(), omsOrderListParam.getPageSize());
         List<OmsOrder> omsOrders = omsOrderMapper.selectWay(omsOrderListParam);
-        return ResponseDataUtil.pageStructure(omsOrderListParam.getPageNum(), omsOrderListParam.getPageSize(), omsOrders);
+        // 分页
+        PageInfo<OmsOrder> pageInfo = new PageInfo<OmsOrder>(omsOrders);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     @ApiOperation("获取订单详情：订单信息、商品信息、操作记录")
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)

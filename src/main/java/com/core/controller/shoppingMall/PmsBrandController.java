@@ -39,21 +39,13 @@ public class PmsBrandController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData brandList(@RequestParam(value = "keyword", required = false) String keyword,
                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        System.out.println("--pageNum--" + pageNum);
-        System.out.println("--pageSize--" + pageSize);
+                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<PmsBrand> pmsBrands = pmsBrandMapper.selectWay(keyword);
-
-
-
-        PageInfo<PmsBrand> goodsPageInfo = new PageInfo<PmsBrand>(pmsBrands);
-        PageResult pageResult = PageResult.getPageResult(goodsPageInfo);
-
-        return ResponseDataUtil.buildSuccess(pageResult);
-
         // 分页
-//        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsBrands);
+        PageInfo<PmsBrand> pageInfo = new PageInfo<PmsBrand>(pmsBrands);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：

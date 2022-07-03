@@ -1,9 +1,13 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsHomeAdvertiseMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsHomeAdvertise;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +34,7 @@ public class SmsHomeAdvertiseController {
                                           @RequestParam(value = "endTime", defaultValue = "null") String endTime,
                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         System.out.println("--hhh.--"+name+"--2--"+type+"--3--"+endTime);
         Date start = null;
         Date end = null;
@@ -47,7 +52,10 @@ public class SmsHomeAdvertiseController {
         }
         System.out.println("--yyy.--"+name+"--2--"+type+"--3--"+end);
         List<SmsHomeAdvertise> smsHomeAdvertises = smsHomeAdvertiseMapper.selectWay(name, type, end);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsHomeAdvertises);
+        // 分页
+        PageInfo<SmsHomeAdvertise> pageInfo = new PageInfo<SmsHomeAdvertise>(smsHomeAdvertises);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：

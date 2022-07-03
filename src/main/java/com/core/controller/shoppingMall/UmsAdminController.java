@@ -5,6 +5,7 @@ import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsAdminMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.UmsAdmin;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,12 +36,15 @@ public class UmsAdminController {
     public ResponseData adminList(@RequestParam(value = "keyword", required = false, defaultValue = "") String keyword,
                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         keyword = '%' + keyword + '%';
         // SQL查询
         List<UmsAdmin> adminList = umsAdminMapper.selectWay(keyword);
         System.out.println("--adminList--"+adminList);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, adminList);
+        PageInfo<UmsAdmin> pageInfo = new PageInfo<UmsAdmin>(adminList);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         加参数校验

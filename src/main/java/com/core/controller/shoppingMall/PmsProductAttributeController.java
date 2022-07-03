@@ -6,6 +6,7 @@ import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.PmsProductAttributeCategoryMapper;
 import com.core.mapper.shoppingMall.PmsProductAttributeMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.PmsProductAttribute;
 import com.core.pojo.shoppingMall.PmsProductAttributeCategory;
 import com.core.pojo.shoppingMall.UmsAdmin;
@@ -40,9 +41,12 @@ public class PmsProductAttributeController {
                                              @RequestParam(value = "type") Integer type,
                                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<PmsProductAttribute> pmsProductAttributes = pmsProductAttributeMapper.selectWay(cid, type);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductAttributes);
+        PageInfo<PmsProductAttribute> pageInfo = new PageInfo<PmsProductAttribute>(pmsProductAttributes);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         实际传参：

@@ -1,9 +1,13 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.SmsHomeBrandMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.SmsHomeBrand;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +29,12 @@ public class SmsHomeBrandController {
                                       @RequestParam(value = "recommendStatus", required = false) Integer recommendStatus,
                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                       @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<SmsHomeBrand> smsHomeBrands = smsHomeBrandMapper.selectWay(brandName, recommendStatus);
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, smsHomeBrands);
+        // 分页
+        PageInfo<SmsHomeBrand> pageInfo = new PageInfo<SmsHomeBrand>(smsHomeBrands);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参:

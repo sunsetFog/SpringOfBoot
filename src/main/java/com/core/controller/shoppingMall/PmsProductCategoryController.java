@@ -59,9 +59,12 @@ public class PmsProductCategoryController {
     public ResponseData productCategoryList(@RequestParam(value = "parentId") Long parentId,
                                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<PmsProductCategory> pmsProductCategories = pmsProductCategoryMapper.selectWay(parentId);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, pmsProductCategories);
+        PageInfo<PmsProductCategory> pageInfo = new PageInfo<PmsProductCategory>(pmsProductCategories);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         数据校验

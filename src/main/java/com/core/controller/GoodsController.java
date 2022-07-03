@@ -2,6 +2,7 @@ package com.core.controller;
 
 import com.core.mapper.GoodsMapper;
 import com.core.pojo.Goods;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.service.UploadService;
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
@@ -40,11 +41,14 @@ public class GoodsController {
                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         name = '%' + name + '%';
+        PageHelper.startPage(pageNum, pageSize);
         // SQL查询
         List<Goods> goodsList = goodsMapper.goodsQueryList(name);
         System.out.println("--goodsList--"+goodsList);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, goodsList);
+        PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     // 上传图片，修改imgUrl字段
     @ResponseBody

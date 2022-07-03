@@ -4,6 +4,7 @@ import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.UmsMenuMapper;
+import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.pojo.shoppingMall.UmsAdmin;
 import com.core.pojo.shoppingMall.UmsMenu;
 import com.core.pojo.shoppingMall.UmsMenuNode;
@@ -63,10 +64,13 @@ public class UmsMenuController {
     public ResponseData menuList(@RequestParam(value = "parentId", defaultValue = "0") Long parentId,
                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                   @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         // SQL查询
         List<UmsMenu> umsMenus = umsMenuMapper.selectWay(parentId);
         // 分页
-        return ResponseDataUtil.pageStructure(pageNum, pageSize, umsMenus);
+        PageInfo<UmsMenu> pageInfo = new PageInfo<UmsMenu>(umsMenus);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
     /*
         传参：
