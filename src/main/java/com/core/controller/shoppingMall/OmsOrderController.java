@@ -1,5 +1,6 @@
 package com.core.controller.shoppingMall;
 
+import com.core.apiParams.OmsMoneyInfoParam;
 import com.core.apiParams.OmsOrderDeliveryParam;
 import com.core.apiParams.OmsOrderListParam;
 import com.core.apiParams.OmsReceiverInfoParam;
@@ -130,6 +131,28 @@ public class OmsOrderController {
         omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);
         return ResponseDataUtil.countJudge(count);
     }
+    @ApiOperation("关闭订单")
+    @RequestMapping(value = "/update/close", method = RequestMethod.GET)
+    public ResponseData orderClose(@RequestParam List<Long> ids, @RequestParam String note) {
+        ArrayList<OmsOrderOperateHistory> omsOrderOperateHistories = new ArrayList<>();
+        for (Long item: ids) {
+            OmsOrder order = new OmsOrder();
+            order.setId(item);
+            order.setStatus(4);
+            omsOrderMapper.updateWay(order);
+
+            //添加，操作记录表
+            OmsOrderOperateHistory history = new OmsOrderOperateHistory();
+            history.setOrderId(item);
+            history.setCreateTime(new Date());
+            history.setOperateMan("后台管理员");
+            history.setOrderStatus(4);
+            history.setNote("订单关闭："+note);
+            omsOrderOperateHistories.add(history);
+        }
+        omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);
+        return ResponseDataUtil.countJudge(ids.size());
+    }
     @ApiOperation("修改收货人信息")
     @RequestMapping(value = "/update/receiverInfo", method = RequestMethod.POST)
     public ResponseData updateReceiverInfo(@RequestBody OmsReceiverInfoParam receiverInfoParam) {
@@ -151,6 +174,28 @@ public class OmsOrderController {
         history.setOperateMan("后台管理员");
         history.setOrderStatus(receiverInfoParam.getStatus());
         history.setNote("修改收货人信息");
+        ArrayList<OmsOrderOperateHistory> omsOrderOperateHistories = new ArrayList<>();
+        omsOrderOperateHistories.add(history);
+        omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);
+        return ResponseDataUtil.countJudge(count);
+    }
+    @ApiOperation("修改订单费用信息")
+    @RequestMapping(value = "/update/moneyInfo", method = RequestMethod.POST)
+    public ResponseData orderMoneyInfo(@RequestBody OmsMoneyInfoParam moneyInfoParam) {
+        OmsOrder order = new OmsOrder();
+        order.setId(moneyInfoParam.getOrderId());
+        order.setFreightAmount(moneyInfoParam.getFreightAmount());
+        order.setDiscountAmount(moneyInfoParam.getDiscountAmount());
+        order.setModifyTime(new Date());
+        int count = omsOrderMapper.updateWay(order);
+
+        //添加，操作记录表
+        OmsOrderOperateHistory history = new OmsOrderOperateHistory();
+        history.setOrderId(moneyInfoParam.getOrderId());
+        history.setCreateTime(new Date());
+        history.setOperateMan("后台管理员");
+        history.setOrderStatus(moneyInfoParam.getStatus());
+        history.setNote("修改费用信息");
         ArrayList<OmsOrderOperateHistory> omsOrderOperateHistories = new ArrayList<>();
         omsOrderOperateHistories.add(history);
         omsOrderOperateHistoryMapper.insertList(omsOrderOperateHistories);

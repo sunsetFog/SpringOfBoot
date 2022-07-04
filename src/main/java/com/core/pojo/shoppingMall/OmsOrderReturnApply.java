@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class OmsOrderReturnApply {
     private String orderSn;
 
     @ApiModelProperty(value = "申请时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     @ApiModelProperty(value = "会员用户名")
@@ -38,6 +40,7 @@ public class OmsOrderReturnApply {
     private Integer status;
 
     @ApiModelProperty(value = "处理时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date handleTime;
 
     @ApiModelProperty(value = "商品图片")

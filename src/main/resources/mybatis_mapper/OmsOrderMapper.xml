@@ -292,4 +292,5 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
 </mapper>

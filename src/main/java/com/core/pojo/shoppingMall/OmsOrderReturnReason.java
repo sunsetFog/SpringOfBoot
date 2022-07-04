@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class OmsOrderReturnReason {
     private Integer status;
 
     @ApiModelProperty(value = "添加时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
