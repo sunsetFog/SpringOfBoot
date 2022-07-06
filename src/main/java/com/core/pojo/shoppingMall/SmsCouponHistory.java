@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,12 +20,14 @@ public class SmsCouponHistory {
     @ApiModelProperty(value = "获取类型：0->后台赠送；1->主动获取")
     private Integer getType;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     @ApiModelProperty(value = "使用状态：0->未使用；1->已使用；2->已过期")
     private Integer useStatus;
 
     @ApiModelProperty(value = "使用时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date useTime;
 
     @ApiModelProperty(value = "订单编号")

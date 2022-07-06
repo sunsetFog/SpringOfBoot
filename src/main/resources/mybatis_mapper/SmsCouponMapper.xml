@@ -29,27 +29,56 @@
     use_type, note, publish_count, use_count, receive_count, enable_time, code, member_level
     </sql>
 
-    <select id="selectWay" resultMap="BaseResultMap" parameterType="Map">
+    <resultMap id="getListWithAttrMap" type="com.core.apiParams.SmsCouponAddParam" extends="BaseResultMap">
+        <collection property="productRelationList" columnPrefix="attr_" resultMap="com.core.mapper.shoppingMall.SmsCouponProductRelationMapper.BaseResultMap"></collection>
+        <collection property="productCategoryRelationList" columnPrefix="cate_" resultMap="com.core.mapper.shoppingMall.SmsCouponProductCategoryRelationMapper.BaseResultMap"></collection>
+    </resultMap>
+
+    <select id="selectWay" resultMap="getListWithAttrMap" parameterType="Map">
         select
-        <include refid="Base_Column_List" />
-        from sms_coupon
+        youhuiquan.*,
+        pa.id attr_id,
+        pa.coupon_id attr_coupon_id,
+        pa.product_id attr_product_id,
+        pa.product_name attr_product_name,
+        pa.product_sn attr_product_sn,
+        ye.id cate_id,
+        ye.coupon_id cate_coupon_id,
+        ye.product_category_id cate_product_category_id,
+        ye.product_category_name cate_product_category_name,
+        ye.parent_category_name cate_parent_category_name
+        from sms_coupon youhuiquan
+        LEFT JOIN sms_coupon_product_relation pa ON youhuiquan.id = pa.coupon_id
+        LEFT JOIN sms_coupon_product_category_relation ye ON youhuiquan.id = ye.coupon_id
         <where>
             <if test="name != null">
-                name like concat("%", #{name, jdbcType=VARCHAR}, "%")
+                youhuiquan.name like concat("%", #{name, jdbcType=VARCHAR}, "%")
             </if>
             <if test="type != null">
-                and type = #{type, jdbcType=INTEGER}
+                and youhuiquan.type = #{type, jdbcType=INTEGER}
             </if>
         </where>
     </select>
 
-    <select id="selectRow" resultMap="BaseResultMap" parameterType="Long">
+    <select id="selectRow" resultMap="getListWithAttrMap" parameterType="Long">
         select
-        <include refid="Base_Column_List" />
-        from sms_coupon
+        youhuiquan.*,
+        pa.id attr_id,
+        pa.coupon_id attr_coupon_id,
+        pa.product_id attr_product_id,
+        pa.product_name attr_product_name,
+        pa.product_sn attr_product_sn,
+        ye.id cate_id,
+        ye.coupon_id cate_coupon_id,
+        ye.product_category_id cate_product_category_id,
+        ye.product_category_name cate_product_category_name,
+        ye.parent_category_name cate_parent_category_name
+        from sms_coupon youhuiquan
+        LEFT JOIN sms_coupon_product_relation pa ON youhuiquan.id = pa.coupon_id
+        LEFT JOIN sms_coupon_product_category_relation ye ON youhuiquan.id = ye.coupon_id
         <where>
             <if test="id != null">
-                id = #{id, jdbcType=INTEGER}
+                youhuiquan.id = #{id, jdbcType=INTEGER}
             </if>
         </where>
     </select>

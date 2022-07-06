@@ -39,16 +39,16 @@ public class SmsCouponController {
                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<SmsCoupon> smsCoupons = smsCouponMapper.selectWay(name, type);
+        List<SmsCouponAddParam> smsCoupons = smsCouponMapper.selectWay(name, type);
         // 分页
-        PageInfo<SmsCoupon> pageInfo = new PageInfo<SmsCoupon>(smsCoupons);
+        PageInfo<SmsCouponAddParam> pageInfo = new PageInfo<SmsCouponAddParam>(smsCoupons);
         PageResult pageResult = PageResult.getPageResult(pageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }
     @ApiOperation("根据id,查询一行")
     @RequestMapping(value = "/row", method = RequestMethod.GET)
     public ResponseData couponRow(@RequestParam Long id) {
-        SmsCoupon smsCoupon = smsCouponMapper.selectRow(id);
+        SmsCouponAddParam smsCoupon = smsCouponMapper.selectRow(id);
         return ResponseDataUtil.buildSuccess(smsCoupon);
     }
     @ApiOperation("添加优惠券")
