@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface SmsCouponMapper {
     List<SmsCoupon> selectWay(String name, Integer type);
+    SmsCoupon selectRow(Long id);
     int insertWay(SmsCoupon smsCoupon);
     int updateWay(SmsCoupon smsCoupon);
     int deleteWay(Long id);

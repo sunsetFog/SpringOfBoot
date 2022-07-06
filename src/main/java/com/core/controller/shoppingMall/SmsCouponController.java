@@ -45,13 +45,19 @@ public class SmsCouponController {
         PageResult pageResult = PageResult.getPageResult(pageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }
+    @ApiOperation("根据id,查询一行")
+    @RequestMapping(value = "/row", method = RequestMethod.GET)
+    public ResponseData couponRow(@RequestParam Long id) {
+        SmsCoupon smsCoupon = smsCouponMapper.selectRow(id);
+        return ResponseDataUtil.buildSuccess(smsCoupon);
+    }
     @ApiOperation("添加优惠券")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseData couponAdd(@RequestBody SmsCouponAddParam smsCouponAddParam) {
         smsCouponAddParam.setCount(smsCouponAddParam.getPublishCount());
         smsCouponAddParam.setUseCount(0);
         smsCouponAddParam.setReceiveCount(0);
-        //插入优惠券表
+        //插入优惠券表   smsCouponAddParam自动有了id值
         int count = smsCouponMapper.insertWay(smsCouponAddParam);
         //插入优惠券和商品关系表
         if(smsCouponAddParam.getUseType().equals(2)){

@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
@@ -9,15 +10,18 @@ public class SmsFlashPromotion {
     private String title;
 
     @ApiModelProperty(value = "开始日期")
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     private Date startDate;
 
     @ApiModelProperty(value = "结束日期")
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     private Date endDate;
 
     @ApiModelProperty(value = "上下线状态")
     private Integer status;
 
     @ApiModelProperty(value = "秒杀时间段名称")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;

@@ -43,6 +43,17 @@
         </where>
     </select>
 
+    <select id="selectRow" resultMap="BaseResultMap" parameterType="Long">
+        select
+        <include refid="Base_Column_List" />
+        from sms_coupon
+        <where>
+            <if test="id != null">
+                id = #{id, jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
     <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.SmsCoupon">

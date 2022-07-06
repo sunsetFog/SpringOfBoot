@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,8 +28,10 @@ public class SmsCoupon {
     @ApiModelProperty(value = "使用门槛；0表示无门槛")
     private BigDecimal minPoint;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     private Date startTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     private Date endTime;
 
     @ApiModelProperty(value = "使用类型：0->全场通用；1->指定分类；2->指定商品")
@@ -47,6 +50,7 @@ public class SmsCoupon {
     private Integer receiveCount;
 
     @ApiModelProperty(value = "可以领取的日期")
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     private Date enableTime;
 
     @ApiModelProperty(value = "优惠码")
