@@ -16,6 +16,7 @@
         select
         <include refid="Base_Column_List" />
         from ums_resource_category
+        order by ums_resource_category.sort Desc
     </select>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->

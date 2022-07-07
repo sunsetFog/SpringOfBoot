@@ -18,6 +18,7 @@
         select
         <include refid="Base_Column_List" />
         from oms_order_return_reason
+        order by oms_order_return_reason.sort Desc
     </select>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->

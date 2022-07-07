@@ -33,6 +33,7 @@
                 and type = #{type,jdbcType=INTEGER}
             </if>
         </where>
+        order by pms_product_attribute.sort Desc
     </select>
 
     <select id="selectById" resultMap="BaseResultMap" parameterType="Long">

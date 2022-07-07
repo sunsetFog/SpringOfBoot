@@ -82,6 +82,7 @@
                 and verify_status = #{verifyStatus, jdbcType=INTEGER}
             </if>
         </where>
+        order by pms_product.sort Desc
     </select>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->

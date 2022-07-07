@@ -20,5 +20,6 @@
         select
         <include refid="Base_Column_List" />
         from cms_prefrence_area
+        order by cms_prefrence_area.sort Desc
     </select>
 </mapper>

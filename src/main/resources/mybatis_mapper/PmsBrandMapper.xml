@@ -33,6 +33,7 @@
                 name like concat('%', #{keyword, jdbcType=VARCHAR}, '%')
             </if>
         </where>
+        order by pms_brand.sort Desc
     </select>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->

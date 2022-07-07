@@ -34,6 +34,7 @@
                 parent_id = #{parentId,jdbcType=INTEGER}
             </if>
         </where>
+        order by pms_product_category.sort Desc
     </select>
 
     <select id="selectIdWay" resultMap="BaseResultMap" parameterType="Long">
