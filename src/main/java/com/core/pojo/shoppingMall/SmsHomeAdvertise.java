@@ -1,5 +1,6 @@
 package com.core.pojo.shoppingMall;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
@@ -13,8 +14,10 @@ public class SmsHomeAdvertise {
 
     private String pic;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date startTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")
     private Date endTime;
 
     @ApiModelProperty(value = "上下线状态：0->下线；1->上线")

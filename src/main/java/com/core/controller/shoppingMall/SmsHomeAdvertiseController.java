@@ -31,27 +31,27 @@ public class SmsHomeAdvertiseController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseData homeAdvertiseList(@RequestParam(value = "name", required = false) String name,
                                           @RequestParam(value = "type", required = false) Integer type,
-                                          @RequestParam(value = "endTime", defaultValue = "null") String endTime,
+                                          @RequestParam(value = "endTime") String endTime,
                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         System.out.println("--hhh.--"+name+"--2--"+type+"--3--"+endTime);
-        Date start = null;
-        Date end = null;
-        if (!StringUtils.isEmpty(endTime)) {
-            System.out.println("---------不等于空---------");
-            String startStr = endTime + " 00:00:00";
-            String endStr = endTime + " 23:59:59";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            try {
-                start = sdf.parse(startStr);
-                end = sdf.parse(endStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("--yyy.--"+name+"--2--"+type+"--3--"+end);
-        List<SmsHomeAdvertise> smsHomeAdvertises = smsHomeAdvertiseMapper.selectWay(name, type, end);
+//        Date start = null;
+//        Date end = null;
+//        if (!StringUtils.isEmpty(endTime)) {
+//            System.out.println("---------不等于空---------");
+//            String startStr = endTime + " 00:00:00";
+//            String endStr = endTime + " 23:59:59";
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            try {
+//                start = sdf.parse(startStr);
+//                end = sdf.parse(endStr);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        System.out.println("--yyy.--"+name+"--2--"+type+"--3--"+end);
+        List<SmsHomeAdvertise> smsHomeAdvertises = smsHomeAdvertiseMapper.selectWay(name, type, endTime);
         // 分页
         PageInfo<SmsHomeAdvertise> pageInfo = new PageInfo<SmsHomeAdvertise>(smsHomeAdvertises);
         PageResult pageResult = PageResult.getPageResult(pageInfo);

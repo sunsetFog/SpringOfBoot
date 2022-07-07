@@ -1,16 +1,17 @@
 package com.core.controller.shoppingMall;
 
+import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;
 import com.core.mapper.shoppingMall.CmsSubjectMapper;
 import com.core.pojo.shoppingMall.CmsSubject;
+import com.core.pojo.shoppingMall.SmsHomeRecommendSubject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +25,14 @@ public class CmsSubjectController {
 
     @ApiOperation("获取全部商品专题")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseData subjectList() {
-        List<CmsSubject> cmsSubjects = cmsSubjectMapper.selectWay();
-        return ResponseDataUtil.buildSuccess(cmsSubjects);
+    public ResponseData subjectList(@RequestParam(value = "keyword", required = false) String keyword,
+                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                    @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<CmsSubject> cmsSubjects = cmsSubjectMapper.selectWay(keyword);
+        // 分页
+        PageInfo<CmsSubject> pageInfo = new PageInfo<CmsSubject>(cmsSubjects);
+        PageResult pageResult = PageResult.getPageResult(pageInfo);
+        return ResponseDataUtil.buildSuccess(pageResult);
     }
 }

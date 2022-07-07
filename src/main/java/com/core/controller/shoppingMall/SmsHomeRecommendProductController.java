@@ -57,11 +57,9 @@ public class SmsHomeRecommendProductController {
     }
     @ApiOperation("批量修改首页推荐")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseData homeRecommendProductUpdate(@RequestBody List<SmsHomeRecommendProduct> homeRecommendProductList) {
-        for(SmsHomeRecommendProduct item: homeRecommendProductList) {
-            smsHomeRecommendProductMapper.updateWay(item);
-        }
-        return ResponseDataUtil.countJudge(homeRecommendProductList.size());
+    public ResponseData homeRecommendProductUpdate(@RequestBody SmsHomeRecommendProduct homeRecommendProductList) {
+        int count = smsHomeRecommendProductMapper.updateWay(homeRecommendProductList);
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("批量删除推荐")
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

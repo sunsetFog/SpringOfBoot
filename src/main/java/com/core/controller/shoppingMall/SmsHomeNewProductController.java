@@ -57,11 +57,9 @@ public class SmsHomeNewProductController {
     }
     @ApiOperation("修改首页新品")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseData homeNewProductUpdate(@RequestBody List<SmsHomeNewProduct> homeNewProductList) {
-        for (SmsHomeNewProduct item: homeNewProductList) {
-            smsHomeNewProductMapper.updateWay(item);
-        }
-        return ResponseDataUtil.countJudge(homeNewProductList.size());
+    public ResponseData homeNewProductUpdate(@RequestBody SmsHomeNewProduct homeNewProductList) {
+        int count = smsHomeNewProductMapper.updateWay(homeNewProductList);
+        return ResponseDataUtil.countJudge(count);
     }
     @ApiOperation("批量删除首页新品")
     @RequestMapping(value = "/delete", method = RequestMethod.GET)

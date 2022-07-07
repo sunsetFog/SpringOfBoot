@@ -29,9 +29,14 @@
     read_count, comment_count, album_pics, description, show_status, forward_count, category_name
     </sql>
 
-    <select id="selectWay" resultMap="BaseResultMap">
+    <select id="selectWay" resultMap="BaseResultMap" parameterType="String">
         select
         <include refid="Base_Column_List" />
         from cms_subject
+        <where>
+            <if test="keyword != null">
+                title like concat("%", #{keyword, jdbcType=VARCHAR}, "%")
+            </if>
+        </where>
     </select>
 </mapper>
