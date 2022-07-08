@@ -6,11 +6,18 @@ import lombok.NoArgsConstructor;
 
 // 部门表
 @Data
-@AllArgsConstructor // 有参
-@NoArgsConstructor // 无参
+//@AllArgsConstructor // 有参
+//@NoArgsConstructor // 无参
 public class DepartmentPojo_01 {
     private Integer id;
     private String departmentName;
+
+    public DepartmentPojo_01(Integer id, String departmentName) {
+        this.id = id;
+        this.departmentName = departmentName;
+    }
+
+
 
     public Integer getId() {
         return id;

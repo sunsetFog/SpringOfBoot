@@ -79,7 +79,7 @@ public class SmsCouponController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData couponUpdate(@RequestBody SmsCouponAddParam smsCouponAddParam) {
         int count = smsCouponMapper.updateWay(smsCouponAddParam);
-        //插入优惠券和商品关系表
+        //插入和删除优惠券和商品关系表
         if(smsCouponAddParam.getUseType().equals(2)){
             for(SmsCouponProductRelation item: smsCouponAddParam.getProductRelationList()){
                 item.setCouponId(smsCouponAddParam.getId());
@@ -87,7 +87,7 @@ public class SmsCouponController {
             smsCouponProductRelationMapper.deleteWay(smsCouponAddParam.getId());
             smsCouponProductRelationMapper.insertList(smsCouponAddParam.getProductRelationList());
         }
-        //插入优惠券和商品分类关系表
+        //插入和删除优惠券和商品分类关系表
         if(smsCouponAddParam.getUseType().equals(1)){
             for (SmsCouponProductCategoryRelation item: smsCouponAddParam.getProductCategoryRelationList()) {
                 item.setCouponId(smsCouponAddParam.getId());
@@ -100,7 +100,12 @@ public class SmsCouponController {
     @ApiOperation("删除优惠券")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public ResponseData couponDelete(@PathVariable Long id) {
+        // 删除优惠券
         int count = smsCouponMapper.deleteWay(id);
+        // 删除优惠券和商品关系表
+        smsCouponProductRelationMapper.deleteWay(id);
+        // 删除优惠券和商品分类关系表
+        smsCouponProductCategoryRelationMapper.deleteWay(id);
         return ResponseDataUtil.countJudge(count);
     }
 }
