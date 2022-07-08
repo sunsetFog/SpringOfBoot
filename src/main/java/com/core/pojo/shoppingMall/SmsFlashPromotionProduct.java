@@ -13,4 +13,13 @@ public class SmsFlashPromotionProduct extends SmsFlashPromotionProductRelation{
     @Setter
     @ApiModelProperty("关联商品")
     private PmsProduct product;
+
+
+    public com.core.pojo.shoppingMall.PmsProduct getProduct() {
+        return product;
+    }
+
+    public void setProduct(com.core.pojo.shoppingMall.PmsProduct product) {
+        this.product = product;
+    }
 }

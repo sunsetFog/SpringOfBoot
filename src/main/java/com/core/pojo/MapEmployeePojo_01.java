@@ -38,4 +38,53 @@ public class MapEmployeePojo_01 {
         this.birth = birth;
 //        this.birth = new Date(); // 默认创建日期
     }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
+    public com.core.pojo.DepartmentPojo_01 getDepartmentPojo01() {
+        return departmentPojo01;
+    }
+
+    public void setDepartmentPojo01(com.core.pojo.DepartmentPojo_01 departmentPojo01) {
+        this.departmentPojo01 = departmentPojo01;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
 }

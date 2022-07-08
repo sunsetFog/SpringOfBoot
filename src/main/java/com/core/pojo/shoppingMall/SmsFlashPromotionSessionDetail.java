@@ -13,4 +13,13 @@ public class SmsFlashPromotionSessionDetail extends SmsFlashPromotionSession {
     @Getter
     @ApiModelProperty("商品数量")
     private Long productCount;
+
+
+    public Long getProductCount() {
+        return productCount;
+    }
+
+    public void setProductCount(Long productCount) {
+        this.productCount = productCount;
+    }
 }
