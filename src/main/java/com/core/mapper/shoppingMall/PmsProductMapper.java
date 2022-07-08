@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper // 扫描文件 mybatis的mapper类
 @Repository
 public interface PmsProductMapper {
-    List<PmsProduct> selectWay(PmsProductListParam productQueryParam);
+    List<PmsProductAddParam> selectWay(PmsProductListParam productQueryParam);
     int insertWay(PmsProductAddParam pmsProductAddParam);
     int updateWay(PmsProductAddParam pmsProductAddParam);
     int update_deleteStatus(Long id, Integer deleteStatus);

@@ -64,9 +64,9 @@ public class PmsProductController {
     public ResponseData productList(@RequestBody PmsProductListParam productQueryParam){
         PageHelper.startPage(productQueryParam.getPageNum(), productQueryParam.getPageSize());
         System.out.println("--productQueryParam--"+productQueryParam);
-        List<PmsProduct> pmsProducts = pmsProductMapper.selectWay(productQueryParam);
+        List<PmsProductAddParam> pmsProducts = pmsProductMapper.selectWay(productQueryParam);
         // 分页
-        PageInfo<PmsProduct> pageInfo = new PageInfo<PmsProduct>(pmsProducts);
+        PageInfo<PmsProductAddParam> pageInfo = new PageInfo<PmsProductAddParam>(pmsProducts);
         PageResult pageResult = PageResult.getPageResult(pageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }

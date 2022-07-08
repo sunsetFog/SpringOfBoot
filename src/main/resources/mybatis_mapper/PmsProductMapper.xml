@@ -68,101 +68,102 @@
         <collection property="prefrenceAreaProductRelationList" columnPrefix="you_" resultMap="com.core.mapper.shoppingMall.CmsPrefrenceAreaProductRelationMapper.BaseResultMap"></collection>
     </resultMap>
 
-    <!--    <select id="selectWay" resultMap="getListWithAttrMap" parameterType="com.core.apiParams.PmsProductListParam">-->
-    <!--        select-->
-    <!--        pin.*,-->
-    <!--        wa.id ti_id,-->
-    <!--        wa.product_id ti_product_id,-->
-    <!--        wa.count ti_count,-->
-    <!--        wa.discount ti_discount,-->
-    <!--        wa.price ti_price,-->
-    <!--        sa.id man_id,-->
-    <!--        sa.product_id man_product_id,-->
-    <!--        sa.full_price man_full_price,-->
-    <!--        sa.reduce_price man_reduce_price,-->
-    <!--        ta.id huiyuan_id,-->
-    <!--        ta.product_id huiyuan_product_id,-->
-    <!--        ta.member_level_id huiyuan_member_level_id,-->
-    <!--        ta.member_price huiyuan_member_price,-->
-    <!--        ta.member_level_name huiyuan_member_level_name,-->
-    <!--        ya.id cun_id,-->
-    <!--        ya.product_id cun_product_id,-->
-    <!--        ya.sku_code cun_sku_code,-->
-    <!--        ya.price cun_price,-->
-    <!--        ya.stock cun_stock,-->
-    <!--        ya.low_stock cun_low_stock,-->
-    <!--        ya.pic cun_pic,-->
-    <!--        ya.sale cun_sale,-->
-    <!--        ya.promotion_price cun_promotion_price,-->
-    <!--        ya.lock_stock cun_lock_stock,-->
-    <!--        ya.sp_data cun_sp_data,-->
-    <!--        va.id xing_id,-->
-    <!--        va.product_id xing_product_id,-->
-    <!--        va.product_attribute_id xing_product_attribute_id,-->
-    <!--        va.value xing_value,-->
-    <!--        fa.id zhuan_id,-->
-    <!--        fa.subject_id zhuan_subject_id,-->
-    <!--        fa.product_id zhuan_product_id,-->
-    <!--        xa.id you_id,-->
-    <!--        xa.prefrence_area_id you_prefrence_area_id,-->
-    <!--        xa.product_id you_product_id-->
-    <!--        from pms_product pin-->
-    <!--        LEFT JOIN pms_product_ladder wa ON pin.id = wa.product_id-->
-    <!--        LEFT JOIN pms_product_full_reduction sa ON pin.id = sa.product_id-->
-    <!--        LEFT JOIN pms_member_price ta ON pin.id = ta.product_id-->
-    <!--        LEFT JOIN pms_sku_stock ya ON pin.id = ya.product_id-->
-    <!--        LEFT JOIN pms_product_attribute_value va ON pin.id = va.product_id-->
-    <!--        LEFT JOIN cms_subject_product_relation fa ON pin.id = fa.product_id-->
-    <!--        LEFT JOIN cms_prefrence_area_product_relation xa ON pin.id = xa.product_id-->
-    <!--        <where>-->
-    <!--            <if test="keyword != null">-->
-    <!--                pin.name like concat("%", #{keyword, jdbcType=VARCHAR}, "%")-->
-    <!--            </if>-->
-    <!--            <if test="productSn != null and productSn != ''">-->
-    <!--                and pin.product_sn = #{productSn, jdbcType=VARCHAR}-->
-    <!--            </if>-->
-    <!--            <if test="productCategoryId != null">-->
-    <!--                and pin.product_category_id = #{productCategoryId, jdbcType=INTEGER}-->
-    <!--            </if>-->
-    <!--            <if test="brandId != null">-->
-    <!--                and pin.brand_id = #{brandId, jdbcType=INTEGER}-->
-    <!--            </if>-->
-    <!--            <if test="publishStatus != null">-->
-    <!--                and pin.publish_status = #{publishStatus, jdbcType=INTEGER}-->
-    <!--            </if>-->
-    <!--            <if test="verifyStatus != null">-->
-    <!--                and pin.verify_status = #{verifyStatus, jdbcType=INTEGER}-->
-    <!--            </if>-->
-    <!--        </where>-->
-    <!--        order by pin.sort Desc-->
-    <!--    </select>-->
+        <select id="selectWay" resultMap="getListWithAttrMap" parameterType="com.core.apiParams.PmsProductListParam">
+            select
+            pin.*,
+            wa.id ti_id,
+            wa.product_id ti_product_id,
+            wa.count ti_count,
+            wa.discount ti_discount,
+            wa.price ti_price,
+            sa.id man_id,
+            sa.product_id man_product_id,
+            sa.full_price man_full_price,
+            sa.reduce_price man_reduce_price,
+            ta.id huiyuan_id,
+            ta.product_id huiyuan_product_id,
+            ta.member_level_id huiyuan_member_level_id,
+            ta.member_price huiyuan_member_price,
+            ta.member_level_name huiyuan_member_level_name,
+            ya.id cun_id,
+            ya.product_id cun_product_id,
+            ya.sku_code cun_sku_code,
+            ya.price cun_price,
+            ya.stock cun_stock,
+            ya.low_stock cun_low_stock,
+            ya.pic cun_pic,
+            ya.sale cun_sale,
+            ya.promotion_price cun_promotion_price,
+            ya.lock_stock cun_lock_stock,
+            ya.sp_data cun_sp_data,
+            va.id xing_id,
+            va.product_id xing_product_id,
+            va.product_attribute_id xing_product_attribute_id,
+            va.value xing_value,
+            fa.id zhuan_id,
+            fa.subject_id zhuan_subject_id,
+            fa.product_id zhuan_product_id,
+            xa.id you_id,
+            xa.prefrence_area_id you_prefrence_area_id,
+            xa.product_id you_product_id
+            from pms_product pin
+            LEFT JOIN pms_product_ladder wa ON pin.id = wa.product_id
+            LEFT JOIN pms_product_full_reduction sa ON pin.id = sa.product_id
+            LEFT JOIN pms_member_price ta ON pin.id = ta.product_id
+            LEFT JOIN pms_sku_stock ya ON pin.id = ya.product_id
+            LEFT JOIN pms_product_attribute_value va ON pin.id = va.product_id
+            LEFT JOIN cms_subject_product_relation fa ON pin.id = fa.product_id
+            LEFT JOIN cms_prefrence_area_product_relation xa ON pin.id = xa.product_id
+            <where>
+                <if test="keyword != null">
+                    pin.name like concat("%", #{keyword, jdbcType=VARCHAR}, "%")
+                </if>
+                <if test="productSn != null and productSn != ''">
+                    and pin.product_sn = #{productSn, jdbcType=VARCHAR}
+                </if>
+                <if test="productCategoryId != null">
+                    and pin.product_category_id = #{productCategoryId, jdbcType=INTEGER}
+                </if>
+                <if test="brandId != null">
+                    and pin.brand_id = #{brandId, jdbcType=INTEGER}
+                </if>
+                <if test="publishStatus != null">
+                    and pin.publish_status = #{publishStatus, jdbcType=INTEGER}
+                </if>
+                <if test="verifyStatus != null">
+                    and pin.verify_status = #{verifyStatus, jdbcType=INTEGER}
+                </if>
+            </where>
+            group by pin.id
+            order by pin.sort Desc
+        </select>
 
-    <select id="selectWay" resultMap="BaseResultMap" parameterType="com.core.apiParams.PmsProductListParam">
-        select
-        *
-        from pms_product
-        <where>
-            <if test="keyword != null">
-                name like concat("%", #{keyword, jdbcType=VARCHAR}, "%")
-            </if>
-            <if test="productSn != null and productSn != ''">
-                and product_sn = #{productSn, jdbcType=VARCHAR}
-            </if>
-            <if test="productCategoryId != null">
-                and product_category_id = #{productCategoryId, jdbcType=INTEGER}
-            </if>
-            <if test="brandId != null">
-                and brand_id = #{brandId, jdbcType=INTEGER}
-            </if>
-            <if test="publishStatus != null">
-                and publish_status = #{publishStatus, jdbcType=INTEGER}
-            </if>
-            <if test="verifyStatus != null">
-                and verify_status = #{verifyStatus, jdbcType=INTEGER}
-            </if>
-        </where>
-        order by pms_product.sort Desc
-    </select>
+<!--    <select id="selectWay" resultMap="BaseResultMap" parameterType="com.core.apiParams.PmsProductListParam">-->
+<!--        select-->
+<!--        *-->
+<!--        from pms_product-->
+<!--        <where>-->
+<!--            <if test="keyword != null">-->
+<!--                name like concat("%", #{keyword, jdbcType=VARCHAR}, "%")-->
+<!--            </if>-->
+<!--            <if test="productSn != null and productSn != ''">-->
+<!--                and product_sn = #{productSn, jdbcType=VARCHAR}-->
+<!--            </if>-->
+<!--            <if test="productCategoryId != null">-->
+<!--                and product_category_id = #{productCategoryId, jdbcType=INTEGER}-->
+<!--            </if>-->
+<!--            <if test="brandId != null">-->
+<!--                and brand_id = #{brandId, jdbcType=INTEGER}-->
+<!--            </if>-->
+<!--            <if test="publishStatus != null">-->
+<!--                and publish_status = #{publishStatus, jdbcType=INTEGER}-->
+<!--            </if>-->
+<!--            <if test="verifyStatus != null">-->
+<!--                and verify_status = #{verifyStatus, jdbcType=INTEGER}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        order by pms_product.sort Desc-->
+<!--    </select>-->
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
