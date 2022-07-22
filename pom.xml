@@ -40,7 +40,7 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.4.1</version>
 		</dependency>
-		<!-- pagehelper 分页用 -->
+		<!-- pagehelper 分页用  要先yml配置DataSource，否则报错Failed to configure a DataSource -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -68,12 +68,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		<!--  security安全  -->
+		<!--  security安全  装上就要配置授权，否则报错：401  Unauthorized  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!--  mybatis	-->
+		<!--  mybatis  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -85,13 +85,13 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.76</version>
 		</dependency>
-		<!-- Druid数据源	-->
+		<!-- Druid数据源  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
 			<version>1.1.17</version>
 		</dependency>
-		<!--	JDBC API	-->
+		<!--	JDBC API  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -101,7 +101,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--MYSQL Driver-->
+		<!--MYSQL Driver  要先yml配置DataSource，否则报错Failed to configure a DataSource-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
