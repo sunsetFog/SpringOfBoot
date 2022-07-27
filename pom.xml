@@ -18,6 +18,12 @@
 	</properties>
 <!--	导入jar包  -->
 	<dependencies>
+		<!--excel导出导入-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>easyexcel</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 		<!--	热部署	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

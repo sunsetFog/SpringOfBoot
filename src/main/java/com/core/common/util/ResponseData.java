@@ -3,6 +3,7 @@ package com.core.common.util;
 import java.io.Serializable;
 
 /*
+    util工具类
     Springboot三部曲之ResponseData<T>   https://blog.csdn.net/weixin_33863087/article/details/89540234
 
     一、接口返回的数据结构

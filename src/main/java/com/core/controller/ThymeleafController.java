@@ -81,6 +81,17 @@ public class ThymeleafController {
         loginParams.setUsername("rafael");
         loginParams.setPassword("123456");
         System.out.println("--user000-"+ loginParams);
+        /*
+            getForObject：
+            参数1：url
+            参数2：接口返回类型
+            参数3：传参
+
+            postForObject：
+            参数1：url
+            参数2：传参
+            参数3：接口返回类型
+         */
         ResponseEntity<ResponseData> responseDataResponseEntity = restTemplate.postForEntity("http://localhost:8062/sky/toApple", loginParams, ResponseData.class);
         return responseDataResponseEntity.getBody();
     }
