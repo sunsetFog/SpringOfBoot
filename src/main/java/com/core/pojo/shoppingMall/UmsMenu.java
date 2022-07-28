@@ -21,14 +21,20 @@ public class UmsMenu {
     @ApiModelProperty(value = "菜单排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "前端名称")
+    @ApiModelProperty(value = "路由名称")
     private String name;
 
-    @ApiModelProperty(value = "前端图标")
+    @ApiModelProperty(value = "图标")
     private String icon;
 
-    @ApiModelProperty(value = "前端隐藏")
+    @ApiModelProperty(value = "菜单隐藏")
     private Integer hidden;
+
+    @ApiModelProperty(value = "组件路径")
+    private String path;
+
+    @ApiModelProperty(value = "是否缓存")
+    private Integer cache;
 
     private static final long serialVersionUID = 1L;
 
@@ -104,23 +110,40 @@ public class UmsMenu {
         this.hidden = hidden;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Integer getCache() {
+        return cache;
+    }
+
+    public void setCache(Integer cache) {
+        this.cache = cache;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", parentId=").append(parentId);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", title=").append(title);
-        sb.append(", level=").append(level);
-        sb.append(", sort=").append(sort);
-        sb.append(", name=").append(name);
-        sb.append(", icon=").append(icon);
-        sb.append(", hidden=").append(hidden);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "UmsMenu{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", createTime=" + createTime +
+                ", title='" + title + '\'' +
+                ", level=" + level +
+                ", sort=" + sort +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", hidden=" + hidden +
+                ", path='" + path + '\'' +
+                ", cache=" + cache +
+                '}';
     }
 }

@@ -10,8 +10,9 @@ import java.util.List;
 @Repository
 public interface UmsMenuMapper {
     List<UmsMenu> treeList();
-    List<UmsMenu> selectWay(Long parentId);
+    List<UmsMenu> selectWay();
+    UmsMenu rowWay(Long parentId);
     int insertWay(UmsMenu umsMenu);
     int updateWay(UmsMenu umsMenu);
-    int deleteWay(Long id);
+    int deleteWay(List<Long> ids);
 }

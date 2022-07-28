@@ -60,17 +60,11 @@ public class UmsMenuController {
         parentId条件筛选
     */
     @ApiOperation("分页查询后台菜单")
-    @PostMapping("/list")
-    public ResponseData menuList(@RequestParam(value = "parentId", defaultValue = "0") Long parentId,
-                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    @PostMapping("/routerList")
+    public ResponseData menuList() {
         // SQL查询
-        List<UmsMenu> umsMenus = umsMenuMapper.selectWay(parentId);
-        // 分页
-        PageInfo<UmsMenu> pageInfo = new PageInfo<UmsMenu>(umsMenus);
-        PageResult pageResult = PageResult.getPageResult(pageInfo);
-        return ResponseDataUtil.buildSuccess(pageResult);
+        List<UmsMenu> umsMenus = umsMenuMapper.selectWay();
+        return ResponseDataUtil.buildSuccess(umsMenus);
     }
     /*
         传参：
@@ -102,7 +96,7 @@ public class UmsMenuController {
         return ResponseDataUtil.countJudge(count);
     }
     /**
-     * setLevel修改菜单层级
+     * setLevel算法
      */
     private void updateLevel(UmsMenu umsMenu) {
         if (umsMenu.getParentId() == 0) {
@@ -110,21 +104,14 @@ public class UmsMenuController {
             umsMenu.setLevel(0);
         } else {
             //有父菜单时,根据parentId进行SQL查询，得出一条数据，获得level值
-//            UmsMenu parentMenu = umsMenuMapper.selectWay(umsMenu.getParentId());
-            List<UmsMenu> umsMenus = umsMenuMapper.selectWay(umsMenu.getParentId());
-            for(UmsMenu item: umsMenus) {
-                if (item != null) {
-                    umsMenu.setLevel(item.getLevel() + 1);
-                } else {
-                    umsMenu.setLevel(0);
-                }
-            }
+            UmsMenu parentMenu = umsMenuMapper.rowWay(umsMenu.getParentId());
+            umsMenu.setLevel(parentMenu.getLevel() + 1);
         }
     }
-    @ApiOperation("根据ID删除后台菜单")
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ResponseData menuDelete(@PathVariable Long id) {
-        int count = umsMenuMapper.deleteWay(id);
+    @ApiOperation("根据ID批量删除后台菜单")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ResponseData menuDelete(@RequestParam List<Long> ids) {
+        int count = umsMenuMapper.deleteWay(ids);
         return ResponseDataUtil.countJudge(count);
     }
 }

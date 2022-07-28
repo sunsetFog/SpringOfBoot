@@ -13,28 +13,37 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="icon" jdbcType="VARCHAR" property="icon" />
         <result column="hidden" jdbcType="INTEGER" property="hidden" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="cache" jdbcType="INTEGER" property="cache" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, parent_id, create_time, title, level, sort, name, icon, hidden
+        id, parent_id, create_time, title, level, sort, name, icon, hidden, path, cache
     </sql>
 
     <select id="treeList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from ums_menu
+        order by ums_menu.sort Desc
     </select>
 
-    <select id="selectWay" resultMap="BaseResultMap" parameterType="Long">
+    <select id="selectWay" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ums_menu
+        order by ums_menu.sort Desc
+    </select>
+
+    <select id="rowWay" resultMap="BaseResultMap" parameterType="Long">
         select
         <include refid="Base_Column_List" />
         from ums_menu
         <where>
             <if test="parentId != null">
-                parent_id = #{parentId, jdbcType=INTEGER}
+                id = #{parentId, jdbcType=INTEGER}
             </if>
         </where>
-        order by ums_menu.sort Desc
     </select>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
@@ -45,10 +54,10 @@
         </selectKey>
         insert into ums_menu (parent_id, create_time, title,
         level, sort, name,
-        icon, hidden)
+        icon, hidden, path, cache)
         values (#{parentId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR},
         #{level,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-        #{icon,jdbcType=VARCHAR}, #{hidden,jdbcType=INTEGER})
+        #{icon,jdbcType=VARCHAR}, #{hidden,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, #{cache,jdbcType=INTEGER})
     </insert>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
@@ -80,14 +89,24 @@
             <if test="hidden != null">
                 hidden = #{hidden,jdbcType=INTEGER},
             </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="cache != null">
+                cache = #{cache,jdbcType=INTEGER},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <delete id="deleteWay" parameterType="java.lang.Long">
+    <delete id="deleteWay" parameterType="List">
         delete from ums_menu
-        where id = #{id,jdbcType=BIGINT}
+        where id in(
+        <foreach collection="ids" item="item" separator="," index="index">
+            #{item,jdbcType=BIGINT}
+        </foreach>
+        )
     </delete>
 </mapper>
