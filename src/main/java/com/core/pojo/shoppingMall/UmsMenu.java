@@ -6,8 +6,11 @@ import java.util.Date;
 public class UmsMenu {
     private Long id;
 
-    @ApiModelProperty(value = "父级ID")
-    private Long parentId;
+    @ApiModelProperty(value = "菜单父级ID")
+    private Long menuParentId;
+
+    @ApiModelProperty(value = "路由父级ID")
+    private Long routerParentId;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -16,7 +19,10 @@ public class UmsMenu {
     private String title;
 
     @ApiModelProperty(value = "菜单级数")
-    private Integer level;
+    private Integer menuLevel;
+
+    @ApiModelProperty(value = "路由级数")
+    private Integer routerLevel;
 
     @ApiModelProperty(value = "菜单排序")
     private Integer sort;
@@ -36,7 +42,11 @@ public class UmsMenu {
     @ApiModelProperty(value = "是否缓存")
     private Integer cache;
 
+    @ApiModelProperty(value = "主题项目")
+    private String subject;
+
     private static final long serialVersionUID = 1L;
+
 
     public Long getId() {
         return id;
@@ -46,12 +56,20 @@ public class UmsMenu {
         this.id = id;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getMenuParentId() {
+        return menuParentId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setMenuParentId(Long menuParentId) {
+        this.menuParentId = menuParentId;
+    }
+
+    public Long getRouterParentId() {
+        return routerParentId;
+    }
+
+    public void setRouterParentId(Long routerParentId) {
+        this.routerParentId = routerParentId;
     }
 
     public Date getCreateTime() {
@@ -70,12 +88,20 @@ public class UmsMenu {
         this.title = title;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getMenuLevel() {
+        return menuLevel;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setMenuLevel(Integer menuLevel) {
+        this.menuLevel = menuLevel;
+    }
+
+    public Integer getRouterLevel() {
+        return routerLevel;
+    }
+
+    public void setRouterLevel(Integer routerLevel) {
+        this.routerLevel = routerLevel;
     }
 
     public Integer getSort() {
@@ -126,6 +152,14 @@ public class UmsMenu {
         this.cache = cache;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -134,16 +168,19 @@ public class UmsMenu {
     public String toString() {
         return "UmsMenu{" +
                 "id=" + id +
-                ", parentId=" + parentId +
+                ", menuParentId=" + menuParentId +
+                ", routerParentId=" + routerParentId +
                 ", createTime=" + createTime +
                 ", title='" + title + '\'' +
-                ", level=" + level +
+                ", menuLevel=" + menuLevel +
+                ", routerLevel=" + routerLevel +
                 ", sort=" + sort +
                 ", name='" + name + '\'' +
                 ", icon='" + icon + '\'' +
                 ", hidden=" + hidden +
                 ", path='" + path + '\'' +
                 ", cache=" + cache +
+                ", subject='" + subject + '\'' +
                 '}';
     }
 }

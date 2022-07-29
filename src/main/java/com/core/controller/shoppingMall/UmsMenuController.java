@@ -30,47 +30,79 @@ public class UmsMenuController {
     private UmsMenuMapper umsMenuMapper;
 
     @ApiOperation("树形结构返回所有菜单列表")
-    @RequestMapping(value = "/treeList", method = RequestMethod.GET)
-    public ResponseData treeList() {
-        List<UmsMenu> menuList = umsMenuMapper.treeList();
+    @RequestMapping(value = "/treeMenu", method = RequestMethod.GET)
+    public ResponseData treeMenu(@RequestParam String subject) {
+        List<UmsMenu> menuList = umsMenuMapper.selectWay(subject);
         System.out.println("--menuList--"+menuList.size());
         /*
             list.stream.collect(Collectors.toList())去重
+            L表示long, 0L就是表示long类型的值是0
+            过滤获取到第一级id是0的数据，-1后面匹配不上了
         */
         List<UmsMenuNode> result = menuList.stream()
-                .filter(menu -> menu.getParentId().equals(0L))
-                .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
+                .filter(menu -> menu.getMenuParentId().equals(0L))
+                .map(menu -> covertMenuNode1(menu, menuList)).collect(Collectors.toList());
         System.out.println("--result--"+result.size());
         return ResponseDataUtil.buildSuccess(result);
     }
     /**
      * 将UmsMenu转化为UmsMenuNode并设置children属性
      */
-    private UmsMenuNode covertMenuNode(UmsMenu menu, List<UmsMenu> menuList) {
+    private UmsMenuNode covertMenuNode1(UmsMenu menu, List<UmsMenu> menuList) {
         UmsMenuNode node = new UmsMenuNode();
         BeanUtils.copyProperties(menu, node);
         List<UmsMenuNode> children = menuList.stream()
-                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
-                .map(subMenu -> covertMenuNode(subMenu, menuList)).collect(Collectors.toList());
+                .filter(subMenu -> subMenu.getMenuParentId().equals(menu.getId()))
+                .map(subMenu -> covertMenuNode1(subMenu, menuList)).collect(Collectors.toList());
         node.setChildren(children);
         return node;
     }
+    //    ------------------------------------------------------------------------------------
+    @ApiOperation("树形结构返回所有路由列表")
+    @RequestMapping(value = "/treeRouter", method = RequestMethod.GET)
+    public ResponseData treeRouter(@RequestParam String subject) {
+        List<UmsMenu> menuList = umsMenuMapper.selectWay(subject);
+        System.out.println("--menuList--"+menuList.size());
+        /*
+            list.stream.collect(Collectors.toList())去重
+            L表示long, 0L就是表示long类型的值是0
+            过滤获取到第一级id是0的数据，-1后面匹配不上了
+        */
+        List<UmsMenuNode> result = menuList.stream()
+                .filter(menu -> menu.getRouterParentId().equals(0L))
+                .map(menu -> covertMenuNode2(menu, menuList)).collect(Collectors.toList());
+        System.out.println("--result--"+result.size());
+        return ResponseDataUtil.buildSuccess(result);
+    }
+    /**
+     * 将UmsMenu转化为UmsMenuNode并设置children属性
+     */
+    private UmsMenuNode covertMenuNode2(UmsMenu menu, List<UmsMenu> menuList) {
+        UmsMenuNode node = new UmsMenuNode();
+        BeanUtils.copyProperties(menu, node);
+        List<UmsMenuNode> children = menuList.stream()
+                .filter(subMenu -> subMenu.getRouterParentId().equals(menu.getId()))
+                .map(subMenu -> covertMenuNode2(subMenu, menuList)).collect(Collectors.toList());
+        node.setChildren(children);
+        return node;
+    }
+    //    ------------------------------------------------------------------------------------
     /*
         分页查询,pageSize传9999查所有
-        parentId条件筛选
+        menuParentId条件筛选
     */
     @ApiOperation("分页查询后台菜单")
     @PostMapping("/routerList")
-    public ResponseData menuList() {
+    public ResponseData menuList(@RequestParam String subject) {
         // SQL查询
-        List<UmsMenu> umsMenus = umsMenuMapper.selectWay();
+        List<UmsMenu> umsMenus = umsMenuMapper.selectWay(subject);
         return ResponseDataUtil.buildSuccess(umsMenus);
     }
     /*
         传参：
             {
                 "title": "呃呃呃",
-                "parentId": 7,
+                "menuParentId": 7,
                 "name": "嗡嗡嗡",
                 "icon": "我11",
                 "hidden": 0,
@@ -96,16 +128,25 @@ public class UmsMenuController {
         return ResponseDataUtil.countJudge(count);
     }
     /**
-     * setLevel算法
+     * setMenuLevel算法
      */
     private void updateLevel(UmsMenu umsMenu) {
-        if (umsMenu.getParentId() == 0) {
+        System.out.println("--updateLevel--"+umsMenu);
+        if (umsMenu.getMenuParentId() == 0 || umsMenu.getMenuParentId() == -1) {
             //没有父菜单时为一级菜单
-            umsMenu.setLevel(0);
+            umsMenu.setMenuLevel(0);
         } else {
-            //有父菜单时,根据parentId进行SQL查询，得出一条数据，获得level值
-            UmsMenu parentMenu = umsMenuMapper.rowWay(umsMenu.getParentId());
-            umsMenu.setLevel(parentMenu.getLevel() + 1);
+            //有父菜单时,根据menuParentId进行SQL查询，得出一条数据，获得level值
+            UmsMenu parentMenu1 = umsMenuMapper.rowWay(umsMenu.getMenuParentId());
+            umsMenu.setMenuLevel(parentMenu1.getMenuLevel() + 1);
+        }
+        if (umsMenu.getRouterParentId() == 0 || umsMenu.getRouterParentId() == -1) {
+            //没有父菜单时为一级菜单
+            umsMenu.setRouterLevel(0);
+        } else {
+            //有父菜单时,根据routerParentId进行SQL查询，得出一条数据，获得level值
+            UmsMenu parentMenu2 = umsMenuMapper.rowWay(umsMenu.getRouterParentId());
+            umsMenu.setRouterLevel(parentMenu2.getRouterLevel() + 1);
         }
     }
     @ApiOperation("根据ID批量删除后台菜单")

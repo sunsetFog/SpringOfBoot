@@ -45,7 +45,7 @@ public class RouterController {
         List<Router> routerList = routerMapper.isRouterList(username);
         List<Operation> operationList = routerMapper.isOperationList(username);
         List<UmsRole> roleList = umsAdminRoleRelationMapper.selectWay(umsAdmin.getId());
-        List<UmsMenu> menuList = umsMenuMapper.selectWay();
+        List<UmsMenu> menuList = umsMenuMapper.selectWay("crm");
 
         PlayerInfo playerInfo = new PlayerInfo();
         playerInfo.setUsername(username);
