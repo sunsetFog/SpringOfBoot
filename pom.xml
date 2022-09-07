@@ -102,7 +102,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<!--	springboot框架构建	-->
+		<!--	springboot框架构建 web依赖 用于实现HTTP接口（包含springMVC） 内置tomcat运行服务器 必加jar包	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -113,7 +113,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!--单元测试	-->
+		<!-- 单元测试	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -134,7 +134,7 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.8.1</version>
 		</dependency>
-		<!--jquery-->
+		<!--jquery 支持静态资源的  WebMvcAutoConfiguration有用到-->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>

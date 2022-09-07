@@ -1,4 +1,7 @@
+# 配置呀ml   会注入到配置类中
 # 树形结构，可读性更强，更强约束性
+# 呀ml能读取的放置位置和优先级（顺序排了）  file:./config/   file:./   classpath:/config    classpath:/
+# 现在放这classpath:/    classpath（类目录）：项目/src/main/resources/    file（项目名下）：项目名/**
 server:
   port: 8060
   servlet:
@@ -16,12 +19,13 @@ spring:
   thymeleaf:
     cache: false
   mvc:
+    # 关闭默认浏览器窗口图标   2.*版本没有效果就算了
     favicon:
       enabled: false
     # 设置日期格式  yyyy-MM-dd HH:mm:ss
     format:
       date: yyyy-MM-dd
-  # 激活**环境
+  # 多环境配置  激活**环境
   profiles:
     active: dev
   # 连接数据库
@@ -135,14 +139,13 @@ logging:
 
 
 
-# 文件2
+# 多文件配置   文件2
 ---
 
 server:
   port: 8062
 spring:
   profiles: dev
-
 ---
 blossom2:
   userName: "小桃"
@@ -150,15 +153,16 @@ blossom2:
   # 属性占位符
   age: ${blossom.egg}
   birthday: 2020/01/01
+# 数组写法
 #  hobbies:
 #    - 唱歌
 #    - 跳舞
-  # 行内写法
+  # 数组行内写法
   hobbies: [唱歌,跳舞]
 #  girlFriend:
 #    18: 小华
 #    20: 迪丽热巴
-  # 行内写法
+  # 对象行内写法
   girlFriend: {18: 小华, 20: 迪丽热巴}
   address:
     # 随机值

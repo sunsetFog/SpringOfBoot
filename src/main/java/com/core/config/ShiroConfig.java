@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /*
+    谢咯：
     Shiro实现登录拦截，权限，密码安全
     1.Subject 用户
     2.SecurityManager 管理所有用户

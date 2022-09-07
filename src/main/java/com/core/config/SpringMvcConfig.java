@@ -9,11 +9,12 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 /*
-    SpringMvc配置
+   装配扩展SpringMvc配置
+   SpringMVC官方文档：https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-developing-web-applications.html
 */
 @Configuration // 配置
 public class SpringMvcConfig implements WebMvcConfigurer {
-    // 路由视图
+    // 配置路由视图  访问http://localhost:8062/sky/yuangong
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/viewWater").setViewName("water");

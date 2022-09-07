@@ -5,15 +5,25 @@ import com.core.common.util.ResponseDataUtil;
 import com.core.pojo.news.LoginParams;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-
-//@Controller // 走html，接口会报错，因为设置了。。。
-@RestController // 不走html
+/*
+引入Thymeleaf模板引擎
+静态资源可放置和优先级（顺序排了）：classpath:/resources/   classpath:/static/   classpath:/public/
+默认访问静态资源的首页html：http://localhost:8062/sky/
+访问文件：http://localhost:8062/sky/1.js
+模板引擎-Thymeleaf官网： https://www.thymeleaf.org/
+Thymeleaf在Github主页：https://github.com/thymeleaf/thymeleaf
+webjars官网  https://www.webjars.org/
+访问jquery  http://localhost:8062/sky/webjars/jquery/3.4.1/jquery.js
+*/
+@Controller// 跳html文件去
+//@RestController // 为了返回字符串
 public class ThymeleafController {
     // 简单接口：http://localhost:8080/hello
     @GetMapping("/hello")
@@ -23,11 +33,13 @@ public class ThymeleafController {
     }
 
     /*
+        访问使用模板引擎的html文件    html放置classpath:/templates
+        优先级：Controller的html跳转  >  SpringMVC视图默认跳转
         路由视图的两种方式：
         1.MyMvcConfig的路由视图
         2.@RequestMapping({"/", "/water.html"})
     */
-    @GetMapping({"/", "/water.html"})
+    @GetMapping({"/water", "/water.html"})
     public String water(Model model) {
         model.addAttribute("msg", "model信息<span>识别标签</span>");
         model.addAttribute("users", Arrays.asList("红红", "晴晴"));

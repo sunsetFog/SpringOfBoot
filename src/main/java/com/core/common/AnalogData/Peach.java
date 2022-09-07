@@ -12,19 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 /*
-属性注入：
-@ConfigurationProperties注解 作用 常用于bean和yaml配置文件的绑定
+yaml属性注入：
+@ConfigurationProperties注解 批量注入 常用于bean和yaml配置文件的绑定
 prefix可以指定配置文件中某一个节点，该节点中的子节点将自动和属性进行绑定
-批量注入
 可以松散绑定：
 username可以写成
 user-name
 user_name
 userName
 USERNAME
-
-@Validated约束注解   JSR-303数据校验，,要用javax里的
-@Validated要和@ConfigurationProperties一起用的
 
 生成构造器或get set或toString：鼠标右击---Generate
 
@@ -34,7 +30,7 @@ idea防止文件乱码设置：File 》Settings 》Editor 》File Encodings 》P
 
 @Component// 注册bean，使扫描识别到
 @ConfigurationProperties(prefix = "blossom")
-@Validated
+@Validated//约束注解 JSR-303数据校验（百度搜索看常用） 要用javax里的 要和@ConfigurationProperties一起用的
 @PropertySource(value = "classpath:cat.properties")
 public class Peach {
     /*

@@ -13,8 +13,10 @@ import javax.servlet.ServletRegistration;
 import javax.sql.DataSource;
 import java.beans.ConstructorProperties;
 import java.util.HashMap;
-
-// 后台数据源监控网站
+/*
+集成数据库
+后台数据源监控网站
+*/
 @Configuration
 public class DruidConfig {
     // 绑定yaml的数据源

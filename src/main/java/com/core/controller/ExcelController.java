@@ -2,6 +2,7 @@ package com.core.controller;
 
 import com.core.common.util.ExcelUtil;
 import com.core.pojo.ExcelStudent;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
     导入和导出
 */
 @RestController
+@CrossOrigin
 public class ExcelController {
     @GetMapping("/excel/file")
     @ResponseBody

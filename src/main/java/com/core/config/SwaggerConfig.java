@@ -20,8 +20,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
-
-//访问界面：http://localhost:8067/sky/swagger-ui.html
+/*
+s哇歌：接口文档
+运行后访问界面：http://localhost:8067/sky/swagger-ui.html
+*/
 @Configuration // 配置到Spring里
 @EnableSwagger2 // 开启Swagger2
 public class SwaggerConfig {

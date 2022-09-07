@@ -1,6 +1,7 @@
 package com.core.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class Download {
      * @param response
      * @功能描述 下载文件:
      */
-    @RequestMapping("/download")
+    @GetMapping("/download/files")
     public void download(String path, HttpServletResponse response) {
         try {
 // path是指想要下载的文件的路径

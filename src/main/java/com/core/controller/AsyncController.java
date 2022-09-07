@@ -4,7 +4,10 @@ import com.core.service.AsyncService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-// 异步任务
+/*
+任务调度：
+    异步任务
+*/
 @RestController
 public class AsyncController {
     @Autowired
