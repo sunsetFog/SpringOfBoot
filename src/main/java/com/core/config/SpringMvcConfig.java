@@ -20,7 +20,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/viewWater").setViewName("water");
         registry.addViewController("/yuangong").setViewName("/employee/list.html");
     }
-    // 注册自定义国际化组件
+    // 注册自定义国际语言组件，配置到spring容器@Bean
     @Bean
     public LocaleResolver localeResolver() {
         return new Lang8n();

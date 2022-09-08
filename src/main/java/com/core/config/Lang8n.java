@@ -6,7 +6,9 @@ import org.thymeleaf.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
-
+/*
+按钮切换语言配置
+*/
 public class Lang8n implements LocaleResolver {
     @Override
     public Locale resolveLocale(HttpServletRequest request) {

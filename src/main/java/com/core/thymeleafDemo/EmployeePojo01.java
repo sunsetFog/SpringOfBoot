@@ -35,7 +35,6 @@ public class EmployeePojo01 {
         this.email = email;
         this.gender = gender;
         this.departmentPojo01 = departmentPojo01;
-//        this.birth = birth;
         this.birth = new Date(); // 默认创建日期
     }
 

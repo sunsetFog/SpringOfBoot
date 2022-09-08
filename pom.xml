@@ -40,12 +40,7 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-		<!-- Shiro整合Spring,安全验证 -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-spring</artifactId>
-			<version>1.4.1</version>
-		</dependency>
+
 		<!-- pagehelper 分页用  要先yml配置DataSource，否则报错Failed to configure a DataSource -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -74,53 +69,14 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		<!--  security安全  装上就要配置授权，否则报错：401  Unauthorized  -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<!--  mybatis  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.2.2</version>
-		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.76</version>
 		</dependency>
-		<!-- Druid数据源  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>1.1.17</version>
-		</dependency>
-		<!--	JDBC API  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<!--	springboot框架构建 web依赖 用于实现HTTP接口（包含springMVC） 内置tomcat运行服务器 必加jar包	-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<!--MYSQL Driver  要先yml配置DataSource，否则报错Failed to configure a DataSource-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- 单元测试	-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
 		<!--lombok日志和生成实体类方法-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -134,6 +90,51 @@
 			<artifactId>hutool-all</artifactId>
 			<version>5.8.1</version>
 		</dependency>
+
+		<!--	++++++++++++++++授权与认证jar包+++++++++++++++ 	-->
+
+		<!--  security安全  装上就要配置授权，否则报错：401  Unauthorized  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- Shiro整合Spring,安全验证 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+
+		<!--	++++++++++++++++操作数据库jar包+++++++++++++++ 	-->
+
+		<!--  mybatis  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- Druid数据源  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.17</version>
+		</dependency>
+		<!--	JDBC API  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!--MYSQL Driver  要先yml配置DataSource，否则报错Failed to configure a DataSource-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<!--	++++++++++++++++前后端不分离开发jar包+++++++++++++++ 	-->
+
 		<!--jquery 支持静态资源的  WebMvcAutoConfiguration有用到-->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -148,6 +149,20 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-java8time</artifactId>
+		</dependency>
+
+		<!--	++++++++++++++++基础jar包+++++++++++++++ 	-->
+
+		<!--	springboot框架构建 web依赖 用于实现HTTP接口（包含springMVC） 内置tomcat运行服务器 必加jar包	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- 单元测试	-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<!-- 生产提示	-->
 		<dependency>

@@ -36,7 +36,7 @@ public class DruidConfig {
         objectObjectHashMap.put("loginUsername", "admin");
         objectObjectHashMap.put("loginPassword", "123456");
         // 允许谁可以访问
-        objectObjectHashMap.put("allow", "");
+        objectObjectHashMap.put("allow", "");// 所以能访问
         // 禁止谁访问
 //        objectObjectHashMap.put("小白", "192.168.11.123");
 

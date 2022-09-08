@@ -13,22 +13,16 @@ import java.sql.SQLException;
 
 @SpringBootTest
 class CoreApplicationTests {
-	@Autowired
-	DataSource dataSource;
+
 	@Autowired
 	JavaMailSenderImpl mailSender;
 	@Autowired // 写入Redis
 	private RedisTemplate redisTemplate;
 
 	@Test
-	void contextLoads() throws SQLException {
+	void contextLoads() {
 
-		System.out.println("查看默认数据源：-------" + dataSource.getClass());
 
-		Connection connection = dataSource.getConnection();
-		System.out.println("获得数据库连接：-------" + connection);
-		// 关闭数据库连接
-		connection.close();
 
 //		 简单邮件  自动配置类：MailSenderAutoConfiguration
 //		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();

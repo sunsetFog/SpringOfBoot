@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<!--  引入样式  -->
     <link th:href="@{/css/list.css}" rel="stylesheet">
 </head>
 <body>
 <div>
-    <!--  触发去添加接口  -->
+    <!--  跳转接口  -->
     <a th:href="@{/season/toAdd}">添加</a>
     <br>
     <table>
@@ -31,6 +32,7 @@
                 <td th:text="${item.departmentPojo01.getDepartmentName()}"></td>
                 <td th:text="${#dates.format(item.getBirth(), 'yyyy-MM-dd')}"></td>
                 <td>
+                <!--         字符串与变量拼接写法           -->
                     <a th:href="@{'/season/toUpdate/' + ${item.getId()} }">编辑</a>
                     <a th:href="@{'/season/delete/' + ${item.getId()} }">删除</a>
                 </td>

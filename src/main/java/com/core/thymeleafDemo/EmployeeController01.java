@@ -27,6 +27,9 @@ Get接收path参数
 
 在GET请求中，不能使用@RequestBody。
 在POST请求，可以使用@RequestBody和@RequestParam， 注意：分别对应前端传参方式的data和params
+
+这个是前后端不分离开发  独立化工程
+可用ui框架 bootstrap layui semantic-ui
 */
 @Controller
 public class EmployeeController01 {
