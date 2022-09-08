@@ -1,7 +1,6 @@
 package com.core.common.AnalogData;
 
-import com.core.common.AnalogData.MapDepartmentDao_01;
-import com.core.pojo.DepartmentPojo_01;
+import com.core.pojo.DepartmentPojo01;
 import com.core.pojo.MapEmployeePojo_01;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,11 +19,11 @@ public class MapEmployeeDao_01 {
     private MapDepartmentDao_01 mapDepartmentDao01;
      static {
          newTable = new HashMap<Integer, MapEmployeePojo_01>(); // 创建一个员工表
-         newTable.put(1001, new MapEmployeePojo_01(1001, "小白", "1929288@qq.com", 0, new DepartmentPojo_01(101, "A教学部")));
-         newTable.put(1002, new MapEmployeePojo_01(1002, "小兔", "2929288@qq.com", 0, new DepartmentPojo_01(102, "B市场部")));
-         newTable.put(1003, new MapEmployeePojo_01(1003, "小花", "3929288@qq.com", 1, new DepartmentPojo_01(103, "C教研部")));
-         newTable.put(1004, new MapEmployeePojo_01(1004, "小猫", "4929288@qq.com", 0, new DepartmentPojo_01(104, "D运营部")));
-         newTable.put(1005, new MapEmployeePojo_01(1005, "小狗", "5929288@qq.com", 0, new DepartmentPojo_01(105, "E后勤部")));
+         newTable.put(1001, new MapEmployeePojo_01(1001, "小白", "1929288@qq.com", 0, new DepartmentPojo01(101, "A教学部")));
+         newTable.put(1002, new MapEmployeePojo_01(1002, "小兔", "2929288@qq.com", 0, new DepartmentPojo01(102, "B市场部")));
+         newTable.put(1003, new MapEmployeePojo_01(1003, "小花", "3929288@qq.com", 1, new DepartmentPojo01(103, "C教研部")));
+         newTable.put(1004, new MapEmployeePojo_01(1004, "小猫", "4929288@qq.com", 0, new DepartmentPojo01(104, "D运营部")));
+         newTable.put(1005, new MapEmployeePojo_01(1005, "小狗", "5929288@qq.com", 0, new DepartmentPojo01(105, "E后勤部")));
      }
     // 主键自增
     private static Integer initId = 1006;

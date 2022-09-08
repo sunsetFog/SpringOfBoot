@@ -2,7 +2,7 @@ package com.core.controller;
 
 import com.core.common.AnalogData.MapDepartmentDao_01;
 import com.core.common.AnalogData.MapEmployeeDao_01;
-import com.core.pojo.DepartmentPojo_01;
+import com.core.pojo.DepartmentPojo01;
 import com.core.pojo.MapEmployeePojo_01;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +51,7 @@ public class EmployeeController_01 {
     @GetMapping("/season/queryAdd")
     public String seasonToAdd(Model model) {
         // 获取所有部门
-        Collection<DepartmentPojo_01> departmentList = mapDepartmentDao01.getDepartments();
+        Collection<DepartmentPojo01> departmentList = mapDepartmentDao01.getDepartments();
         model.addAttribute("departmentList", departmentList);
         return "employee/add";
     }

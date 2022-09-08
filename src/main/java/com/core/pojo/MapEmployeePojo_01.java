@@ -24,19 +24,20 @@ public class MapEmployeePojo_01 {
     @JsonProperty("askEmail")// 字段别名
     private String email;
     private Integer gender; // 0:女  1:男
-    private DepartmentPojo_01 departmentPojo01;
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")// jackson---日期格式化
+    private DepartmentPojo01 departmentPojo01;// 部门类
+    //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")// jackson---日期格式化
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
     @JsonInclude(JsonInclude.Include.NON_NULL)// jackson---null时，不包含这属性
     private Date birth;
-
-    public MapEmployeePojo_01(Integer id, String lastName, String email, Integer gender, DepartmentPojo_01 departmentPojo01) {
+    // 构造器
+    public MapEmployeePojo_01(Integer id, String lastName, String email, Integer gender, DepartmentPojo01 departmentPojo01) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
         this.departmentPojo01 = departmentPojo01;
-        this.birth = birth;
-//        this.birth = new Date(); // 默认创建日期
+//        this.birth = birth;
+        this.birth = new Date(); // 默认创建日期
     }
 
 
@@ -72,11 +73,11 @@ public class MapEmployeePojo_01 {
         this.gender = gender;
     }
 
-    public com.core.pojo.DepartmentPojo_01 getDepartmentPojo01() {
+    public DepartmentPojo01 getDepartmentPojo01() {
         return departmentPojo01;
     }
 
-    public void setDepartmentPojo01(com.core.pojo.DepartmentPojo_01 departmentPojo01) {
+    public void setDepartmentPojo01(DepartmentPojo01 departmentPojo01) {
         this.departmentPojo01 = departmentPojo01;
     }
 
