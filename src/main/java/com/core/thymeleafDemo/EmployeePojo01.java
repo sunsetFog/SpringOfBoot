@@ -16,7 +16,7 @@ import java.util.Date;
 //@AllArgsConstructor // 有参构造
 @NoArgsConstructor // 无参构造
 @ApiModel("用户实体类")
-public class MapEmployeePojo_01 {
+public class EmployeePojo01 {
     @JsonIgnore// jackson---排除Json序列化
     private Integer id;
     @ApiModelProperty("名字")
@@ -25,12 +25,11 @@ public class MapEmployeePojo_01 {
     private String email;
     private Integer gender; // 0:女  1:男
     private DepartmentPojo01 departmentPojo01;// 部门类
-    //@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", locale = "zh")// jackson---日期格式化
-    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh")// jackson---日期格式化  yyyy-MM-dd hh:mm:ss
     @JsonInclude(JsonInclude.Include.NON_NULL)// jackson---null时，不包含这属性
     private Date birth;
     // 构造器
-    public MapEmployeePojo_01(Integer id, String lastName, String email, Integer gender, DepartmentPojo01 departmentPojo01) {
+    public EmployeePojo01(Integer id, String lastName, String email, Integer gender, DepartmentPojo01 departmentPojo01) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;

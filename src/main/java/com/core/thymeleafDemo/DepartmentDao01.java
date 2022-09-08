@@ -1,6 +1,5 @@
 package com.core.thymeleafDemo;
 
-import com.core.thymeleafDemo.DepartmentPojo01;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 // 部门dao
 @Repository // 托管
-public class MapDepartmentDao_01 {
+public class DepartmentDao01 {
     // 模拟数据库中的数据
     private static Map<Integer, DepartmentPojo01> newTable = null;
      static {
@@ -21,11 +20,11 @@ public class MapDepartmentDao_01 {
          newTable.put(105, new DepartmentPojo01(105, "E后勤部"));
      }
     // 获得所有部门数据
-    public Collection<DepartmentPojo01> getDepartments() {
+    public Collection<DepartmentPojo01> departmentsWay() {
         return newTable.values();
     }
     // 通过id得到部门
-    public DepartmentPojo01 getDepartments(Integer id) {
+    public DepartmentPojo01 departmentsWay(Integer id) {
         return newTable.get(id);
     }
 }

@@ -29,57 +29,57 @@ Get接收path参数
 在POST请求，可以使用@RequestBody和@RequestParam， 注意：分别对应前端传参方式的data和params
 */
 @Controller
-public class EmployeeController_01 {
+public class EmployeeController01 {
     @Autowired
-    MapEmployeeDao_01 mapEmployeeDao01;
+    EmployeeDao01 employeeDao01;
     @Autowired
-    MapDepartmentDao_01 mapDepartmentDao01;
+    DepartmentDao01 departmentDao01;
 
     @RequestMapping("/season/list")
     public String seasonList(Model model){
         // 获取所有员工
-        Collection<MapEmployeePojo_01> all = mapEmployeeDao01.getAll();
+        Collection<EmployeePojo01> all = employeeDao01.allEmployee();
         model.addAttribute("employeeList", all);
         return "employee/list.html";
 
     }
     // 跳转添加页
-    @GetMapping("/season/queryAdd")
+    @GetMapping("/season/toAdd")
     public String seasonToAdd(Model model) {
         // 获取所有部门
-        Collection<DepartmentPojo01> departmentList = mapDepartmentDao01.getDepartments();
+        Collection<DepartmentPojo01> departmentList = departmentDao01.departmentsWay();
         model.addAttribute("departmentList", departmentList);
         return "employee/add";
     }
     // 用于添加   输入日期必须是yyyy-MM-dd格式，否则报400
     @PostMapping("/season/add")
-    public String seasonAdd(MapEmployeePojo_01 mapEmployeePojo01, Model model) {
-        System.out.println("--保存功能--：" + mapEmployeePojo01);
-        mapEmployeeDao01.save(mapEmployeePojo01);
+    public String seasonAdd(EmployeePojo01 employeePojo01, Model model) {
+        System.out.println("--保存功能--：" + employeePojo01);
+        employeeDao01.addEmployee(employeePojo01);
         seasonList(model);
         return "employee/list";
     }
     // 跳转修改页
-    @GetMapping("/season/strip/{id}")
+    @GetMapping("/season/toUpdate/{id}")
     public String seasonToUpdate(@PathVariable("id")Integer id, Model model) {
         // 获取id的那条数据
-        MapEmployeePojo_01 mapEmployeePojo01ById = mapEmployeeDao01.getEmployeeById(id);
-        model.addAttribute("tiao", mapEmployeePojo01ById);
+        EmployeePojo01 employeePojo01ById = employeeDao01.rowEmployeeById(id);
+        model.addAttribute("tiao", employeePojo01ById);
         seasonToAdd(model);
         return "employee/update";
     }
     // 修改
     @RequestMapping("/season/update")
-    public String seasonUpdate(MapEmployeePojo_01 mapEmployeePojo01, Model model) {
-        System.out.println("修改功能：" + mapEmployeePojo01);
-        mapEmployeeDao01.save(mapEmployeePojo01);
+    public String seasonUpdate(EmployeePojo01 employeePojo01, Model model) {
+        System.out.println("修改功能：" + employeePojo01);
+        employeeDao01.addEmployee(employeePojo01);
         seasonList(model);
         return "employee/list";
     }
     // 删除
     @GetMapping("/season/delete/{id}")
     public String seasonDelete(@PathVariable("id")Integer id, Model model) {
-        mapEmployeeDao01.delete(id);
+        employeeDao01.deleteEmployee(id);
         seasonList(model);
         return "employee/list";
     }

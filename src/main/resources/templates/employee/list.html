@@ -8,7 +8,7 @@
 <body>
 <div>
     <!--  触发去添加接口  -->
-    <a th:href="@{/season/queryAdd}">添加</a>
+    <a th:href="@{/season/toAdd}">添加</a>
     <br>
     <table>
         <thead>
@@ -31,7 +31,7 @@
                 <td th:text="${item.departmentPojo01.getDepartmentName()}"></td>
                 <td th:text="${#dates.format(item.getBirth(), 'yyyy-MM-dd')}"></td>
                 <td>
-                    <a th:href="@{'/season/strip/' + ${item.getId()} }">编辑</a>
+                    <a th:href="@{'/season/toUpdate/' + ${item.getId()} }">编辑</a>
                     <a th:href="@{'/season/delete/' + ${item.getId()} }">删除</a>
                 </td>
             </tr>

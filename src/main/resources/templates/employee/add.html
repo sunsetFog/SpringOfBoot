@@ -30,7 +30,7 @@
     </div>
     <div class="form-group">
         <label>部门：</label>
-        <!--    部门遍历    -->
+        <!--    部门遍历  注意这个name   -->
         <select name="departmentPojo01.id">
             <option th:each="item:${departmentList}" th:text="${item.getDepartmentName()}" th:value="${item.getId()}"></option>
         </select>
