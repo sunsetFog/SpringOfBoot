@@ -1,4 +1,4 @@
-package com.core.pojo;
+package com.core.thymeleafDemo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

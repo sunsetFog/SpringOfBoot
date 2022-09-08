@@ -1,4 +1,4 @@
-package com.core.controller;
+package com.core.thymeleafDemo;
 
 import com.core.common.util.ResponseData;
 import com.core.common.util.ResponseDataUtil;

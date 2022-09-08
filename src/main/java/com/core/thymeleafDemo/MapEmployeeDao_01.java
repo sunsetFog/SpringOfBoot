@@ -1,7 +1,5 @@
-package com.core.common.AnalogData;
+package com.core.thymeleafDemo;
 
-import com.core.pojo.DepartmentPojo01;
-import com.core.pojo.MapEmployeePojo_01;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

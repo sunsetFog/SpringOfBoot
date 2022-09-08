@@ -1,6 +1,6 @@
-package com.core.common.AnalogData;
+package com.core.thymeleafDemo;
 
-import com.core.pojo.DepartmentPojo01;
+import com.core.thymeleafDemo.DepartmentPojo01;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

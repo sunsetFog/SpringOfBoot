@@ -1,4 +1,4 @@
-package com.core.pojo;
+package com.core.thymeleafDemo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
