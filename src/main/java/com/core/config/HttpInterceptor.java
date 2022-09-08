@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-// http拦截器
+// http拦截器  在springMVC里实例化了
 public class HttpInterceptor implements HandlerInterceptor {
     private RedisUtilsService redisUtilsService;
     // 构造器 WebMvcConfigurer里用了
@@ -51,31 +51,31 @@ public class HttpInterceptor implements HandlerInterceptor {
         System.out.println("--http拦截器--" + token);
 
         // 下面是token校验
-        if(StringUtils.isEmpty(token)){
-            System.out.println("--111--");
-            penRenderJson(response, ResponseDataUtil.buildError("0", "请先登录"));
-            return false;// 拦截
-        }
-        try {
-            System.out.println("--222--");
-            LoginParams sysLoginParams = JWTUtils.verifierTokenBySysUser(token);
-            if(!redisUtilsService.existsKey(RedisKeySplicing.getUserToken(sysLoginParams.getUsername()))){
-                penRenderJson(response, ResponseDataUtil.buildError("0", "Token 失效请重新登录"));
-                return false;
-            }
-        } catch (SignatureVerificationException | AlgorithmMismatchException e) {
-            System.out.println("--333--");
-            penRenderJson(response, ResponseDataUtil.buildError("0", "Token 无效"));
-            return false;
-        } catch (TokenExpiredException e) {
-            System.out.println("--444--");
-            penRenderJson(response, ResponseDataUtil.buildError("0", "Token 失效请重新登录"));
-            return false;
-        } catch (Exception e) {
-            System.out.println("--555--");
-            penRenderJson(response, ResponseDataUtil.buildError("0", "请先登录！"));
-            return false;
-        }
+//        if(StringUtils.isEmpty(token)){
+//            System.out.println("--111--");
+//            penRenderJson(response, ResponseDataUtil.buildError("0", "请先登录"));
+//            return false;// 拦截
+//        }
+//        try {
+//            System.out.println("--222--");
+//            LoginParams sysLoginParams = JWTUtils.verifierTokenBySysUser(token);
+//            if(!redisUtilsService.existsKey(RedisKeySplicing.getUserToken(sysLoginParams.getUsername()))){
+//                penRenderJson(response, ResponseDataUtil.buildError("0", "Token 失效请重新登录"));
+//                return false;
+//            }
+//        } catch (SignatureVerificationException | AlgorithmMismatchException e) {
+//            System.out.println("--333--");
+//            penRenderJson(response, ResponseDataUtil.buildError("0", "Token 无效"));
+//            return false;
+//        } catch (TokenExpiredException e) {
+//            System.out.println("--444--");
+//            penRenderJson(response, ResponseDataUtil.buildError("0", "Token 失效请重新登录"));
+//            return false;
+//        } catch (Exception e) {
+//            System.out.println("--555--");
+//            penRenderJson(response, ResponseDataUtil.buildError("0", "请先登录！"));
+//            return false;
+//        }
 
         System.out.println("-通过-" + username);
 

@@ -6,7 +6,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-// 安全配置-拦截器
+/*
+安全配置-拦截器  前后端不分离用的
+*/
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter { // 继承类
     // 用户授权
@@ -21,25 +23,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // 继承类
                 .and().csrf().disable(); // springboot post 请求报 403错误 ---- 默认是可以自动防御 CSRF 攻击,把它关闭掉
         // 没有权限跳至登录页，需要开启登陆页面
         http.formLogin()
-                .loginPage("/toLogin")
+                .loginPage("/user/login")//定制登录页
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/"); //将此处的successForwardUrl使用defaultSuccessUrl替换
         // 注销，开启了注销功能，跳到首页
         http.logout().logoutSuccessUrl("/");
+        // 登录记住我，cookie 默认保存两周
+        http.rememberMe();
     }
 
     /*
-        用户认证
-        密码明文不安全，需要密码编码：PasswordEncoder
+        登陆时，用户认证，配置用户有哪些角色，角色权限和登录权限就产生了
+        这些数据正常从数据库里读
+        <div sec:authorize="hasRole('vip1')">
+            用户有该角色才会显示
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            登录才会显示
+        </div>
+
     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // 这些数据正常从数据库里读
         auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("localhost").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1", "vip2", "vip3")
-                .and()
-                .withUser("root").password(new BCryptPasswordEncoder().encode("123456")).roles("vip1", "vip2", "vip3");
+        .withUser("localhost").password(
+            new BCryptPasswordEncoder().encode("123456")//密码明文不安全，需要密码编码：PasswordEncoder
+        ).roles("vip1", "vip2", "vip3")
+        .and()
+        .withUser("root").password(
+            new BCryptPasswordEncoder().encode("123456")
+        ).roles("vip1", "vip2", "vip3");
     }
 }

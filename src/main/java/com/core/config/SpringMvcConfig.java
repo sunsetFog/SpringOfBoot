@@ -35,9 +35,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
             addPathPatterns拦截
             excludePathPatterns不拦截
         */
-//        registry.addInterceptor(new HttpInterceptor(redisUtilsService)) // 实例化http拦截器，顺便带参构造
-//                .addPathPatterns("/**")// 拦截所有
-//                .excludePathPatterns("/","index.html","/user/login", "/shop/list","/css/**","/js/**","/img/**");
+        registry.addInterceptor(new HttpInterceptor(redisUtilsService)) // 实例化http拦截器，顺便带参构造
+                .addPathPatterns("/**")// 拦截所有
+                .excludePathPatterns("/","index.html","/user/login", "/shop/list","/css/**","/js/**","/img/**");
     }
     // 上传文件或图片 ----- 把逻辑路径自动映射为物理路径
     @Value("${file.uploadFolder}")// 读取配置文件信息

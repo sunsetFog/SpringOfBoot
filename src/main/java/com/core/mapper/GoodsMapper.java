@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 // 实体类
 @Mapper // 扫描文件 mybatis的mapper类
-@Repository
+@Repository// 或者@component  注入spring里
 public interface GoodsMapper {
     // 分页查询
     List<Goods> goodsQueryList(String name);

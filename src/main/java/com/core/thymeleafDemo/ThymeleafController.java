@@ -46,7 +46,7 @@ public class ThymeleafController {
         return "water";// 跳转的页面    二层写法：employee/list
     }
 
-    @GetMapping("/user/isLogin")
+    @GetMapping("/user/login")
     public String toBeLogin(Model model) {
         model.addAttribute("message", "请输入用户名与密码");
         return "/user/login";

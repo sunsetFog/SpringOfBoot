@@ -2,7 +2,6 @@ package com.core.controller;
 
 import com.core.mapper.GoodsMapper;
 import com.core.pojo.Goods;
-import com.core.pojo.shoppingMall.PmsBrand;
 import com.core.service.UploadService;
 import com.core.common.util.PageResult;
 import com.core.common.util.ResponseData;
@@ -20,11 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 /*
-    Mybatis操作Mysql
+    Mybatis操作Mysql   MyBatis Plus增强版
     报错：Cause: java.sql.SQLSyntaxErrorException: Table 'db_news.***' doesn't exist
     pojo文件名要与Mysql表名一致
 */
-@RestController// 等于@Controller + @ResponseBody
+@RestController// 等于@Controller + @ResponseBody      web的jar包 springMVC
 @CrossOrigin
 public class GoodsController {
     @Autowired

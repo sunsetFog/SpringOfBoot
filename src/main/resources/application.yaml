@@ -126,7 +126,9 @@ pagehelper:
 
 # 整合mybatis
 mybatis:
+  # 别名的包
   type-aliases-package: com.core.pojo
+  #  mapper放置
   mapper-locations: classpath:mybatis_mapper/*.xml
 
 # 日志级别
