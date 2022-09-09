@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 /*
+@RequestMapping  支持请求方式：get,post,put,head，delete，options, patch
+
 Post获取form表单参数：
 方法1.public String seasonAdd(MapEmployeePojo mapEmployeePojo) {
 方法2.public String seasonAdd(Integer id, String lastName, String email, Integer gender, MapDepartmentPojo mapDepartmentPojo, Date birth) {

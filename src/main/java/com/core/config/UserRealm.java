@@ -12,7 +12,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /*
-自定义UserRealm
+Shiro自定义UserRealm
 1.登录，触发认证方法
 2.接着跳要授权的/user/add，触发授权方法
 */

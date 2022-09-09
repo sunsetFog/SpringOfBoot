@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor // 无参构造
 @AllArgsConstructor // 有参构造
-@ApiModel("用户实体类") // Swaggwer注解   或@Api("**")
+@ApiModel("用户实体类") // Swaggwer注解   Model模块名
 public class LoginParams implements Serializable {// 实体类序列化
     private int id;
     @ApiModelProperty("用户名") // Swaggwer注解

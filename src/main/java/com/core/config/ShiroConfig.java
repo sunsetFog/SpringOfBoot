@@ -11,10 +11,12 @@ import java.util.Map;
 
 /*
     谢咯：
-    Shiro实现登录拦截，权限，密码安全
+    Shiro实现登录拦截，认证、授权、加密、会话管理、Web集成、缓存等
     1.Subject 用户
     2.SecurityManager 管理所有用户
     3.Realm 连接数据
+    下载地址：https://shiro.apache.org/
+    官方文档：https://shiro.apache.org/tutorial.html
 */
 @Configuration
 public class ShiroConfig {

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 // 异步任务
 @Service
 public class AsyncService {
-    @Async // 注解是异步，需要开启才生效
+    @Async // 注解是异步，需要程序入口类中开启异步才生效
     public void yibu() {
         try {
             Thread.sleep(3000);// 停止三秒

@@ -16,6 +16,6 @@ public class AsyncController {
     @GetMapping("/yibu")
     public String yibu() {
         asyncService.yibu();// 停止三秒，转圈···
-        return "OK";
+        return "OK";// 等三秒才返回   优化：用异步秒返回，异步任务排最后执行
     }
 }

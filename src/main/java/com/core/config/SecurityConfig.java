@@ -8,6 +8,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /*
 安全配置-拦截器  前后端不分离用的
+设计之初的安全考虑   漏洞：隐私泄露
+security文档  https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/htmlsingle/
+15. Java Configuration  选15.1
 */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter { // 继承类

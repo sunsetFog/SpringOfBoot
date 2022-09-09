@@ -12,7 +12,7 @@ import java.util.Map;
 */
 @RestController
 @CrossOrigin
-@Api(tags="模块-类名")
+@Api(tags="模块-类名")// Swaggwer注解  Controller模块名
 public class SwaggerController {
     // 返回值有实体类，就会扫描到Swagger里，显示在Models
     @ApiOperation("--看看就飒飒--")
@@ -30,7 +30,7 @@ public class SwaggerController {
             , produces = "application/json"
             , protocols = "http"
     )
-    // 参数说明
+    // 参数说明   或者用(@ApiParam("商品名222") 形参名)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "goods", value = "商品名", dataType = "String", paramType = "query", required = false)
     })
@@ -46,7 +46,7 @@ public class SwaggerController {
 //    public String apple(@ApiParam("用户名") String username) {
 //        return "Hello " + username;
 //    }
-    public Map<String,Integer> apple(@RequestParam Integer id, @RequestParam String goodsName) {
+    public Map<String,Integer> apple(@RequestParam Integer id, @ApiParam("商品名222") @RequestParam String goodsName) {
         System.out.println("{ id : " + id + ", goodsName : " + goodsName + " }");
         Map<String,Integer>  myList =new HashMap<>();
         myList.put("鞋",400);

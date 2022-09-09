@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class ScheduledService {
     /*
         @EnableScheduling 需要开启定时任务
+        cron表达式
         搜索cron: https://www.bejson.com/othertools/cron/
         秒，分，时，日，月，周几
         每隔5分钟：0/5
