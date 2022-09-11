@@ -30,7 +30,9 @@ java源文件---java语法树---根据lombok注解修改语法树---class字节�
 public class Goods {
     private int id;
     private String name;
-    private String imgUrl;
+    private String img_url;
+    private Date create_time;
+    private Date update_time;
 
     public int getId() {
         return id;
@@ -48,12 +50,12 @@ public class Goods {
         this.name = name;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
     public Date getCreate_time() {
@@ -71,7 +73,4 @@ public class Goods {
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
     }
-
-    private Date create_time;
-    private Date update_time;
 }

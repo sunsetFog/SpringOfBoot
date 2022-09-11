@@ -59,7 +59,7 @@ public class GoodsController {
         // 设置实体类
         Goods goods = new Goods();
         goods.setId(id);
-        goods.setImgUrl(Sites.get("avator"));
+        goods.setImg_url(Sites.get("avator"));
         // sql语句操作
         int res = goodsMapper.uploadGoods(goods);
         System.out.println("--res--"+res);
