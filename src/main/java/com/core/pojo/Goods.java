@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -27,7 +28,7 @@ java源文件---java语法树---根据lombok注解修改语法树---class字节�
 @AllArgsConstructor// 全参构造
 @Accessors(chain = true)// 开启链式调用 就可以写法user.setName(77).setAge(18)
 @ApiModel("商品实体类")
-public class Goods {
+public class Goods implements Serializable {
     private int id;
     private String name;
     private String img_url;
@@ -72,5 +73,16 @@ public class Goods {
 
     public void setUpdate_time(Date update_time) {
         this.update_time = update_time;
+    }
+
+    @Override
+    public String toString() {
+        return "Goods{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", img_url='" + img_url + '\'' +
+                ", create_time=" + create_time +
+                ", update_time=" + update_time +
+                '}';
     }
 }

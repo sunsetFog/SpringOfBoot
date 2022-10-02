@@ -3,7 +3,6 @@ package com.core;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import javax.mail.MessagingException;
@@ -16,8 +15,7 @@ class CoreApplicationTests {
 
 	@Autowired
 	JavaMailSenderImpl mailSender;
-	@Autowired // 写入Redis
-	private RedisTemplate redisTemplate;
+
 
 	@Test
 	void contextLoads() {
@@ -56,23 +54,6 @@ class CoreApplicationTests {
 
 	}
 
-	@Test
-	void contextLoads3() {
-		/*
-			自动配置类 RedisAutoConfiguration
-		 	redisTemplate操作不同的数据类型, 事务
-		 	https://blog.csdn.net/qq_40580037/article/details/107508694
-		 	Redis下载安装：https://github.com/microsoftarchive/redis/releases
-		*/
-		//  操作字符串
-		redisTemplate.opsForValue().set("honey", "自来水");
-		System.out.println("redis字符串= " + redisTemplate.opsForValue().get("honey"));
-		// 操作List
-//		redisTemplate.opsForList();
-		// 获取redis的连接对象
-//		RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();
-//		connection.flushDb();
-//		connection.flushAll();
-	}
+
 
 }

@@ -14,6 +14,7 @@
 	<name>core</name>
 	<description>Core project for Spring Boot</description>
 	<properties>
+		<!-- JDK版本，要对应上 -->
 		<java.version>11</java.version>
 	</properties>
 <!--	导入jar包  -->
@@ -48,7 +49,13 @@
 			<version>1.2.5</version>
 		</dependency>
 
-		<!--	操作Redis	-->
+		<!--	操作Redis客服端，不推荐	-->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>4.2.3</version>
+		</dependency>
+		<!--	springboot集成redis，推荐	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
