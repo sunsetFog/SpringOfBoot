@@ -14,6 +14,8 @@ import java.net.UnknownHostException;
 
 /*
 redisTemplate.opsForValue().set("honey", 存类时，要序列化的实体类，否则报错);
+存对象和中文需要转字符串
+
 Redis自定义模板   序列化配置
 配置后需要flushdb，否则报错Could not read JSON: Invalid UTF-8 start byte 0x8c
 keys *   看见内容没有转义符了
