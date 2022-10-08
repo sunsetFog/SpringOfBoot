@@ -19,6 +19,12 @@
 	</properties>
 <!--	导入jar包  -->
 	<dependencies>
+		<!--	rabbitmq	-->
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>5.15.0</version>
+		</dependency>
 		<!--excel导出导入-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
