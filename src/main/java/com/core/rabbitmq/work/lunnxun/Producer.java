@@ -1,4 +1,4 @@
-package com.core.rabbitmq.simple;
+package com.core.rabbitmq.work.lunnxun;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -7,12 +7,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-/*
-简单模式
-生产者
-所有的中间件技术都是基于tcp/ip协议基础之上构建新型的协议规范，只不过rabbitmq遵循的是amqp
-协议都是有ip的port端口
-*/
+// work工作模式-轮询模式     两个消费者一个个分配，性能不好分的也是这么多
 public class Producer {
     public static void main(String[] args) {
         // 创建连接工程
@@ -30,17 +25,11 @@ public class Producer {
             newConnection = connectionFactory.newConnection("生产者");
             // 通过连接获取通道Channel
             channel = newConnection.createChannel();
-            // 通过创建交换机，声明队列，绑定关系，路由key，发送消息，和接收消息
-            // 参数1：队列名称  参数2：持久化   参数3：排他性  参数4：自动删除
-            // 持久化就是服务器重启后队列依然还在
-            // 非持久化和持久化都会存盘，等待接收消息
-            String queueName = "queue1";
-            channel.queueDeclare(queueName, false, false, false, null);
-            // 准备消息内容
-            String message = "Hello boy!";
-            // 发送消息给队列queue
-            // 参数1：交换机   参数2：队列名称/routingKey   参数3：属性配置   参数4：发送消息内容
-            channel.basicPublish("", queueName, null, message.getBytes());
+            for (int i = 0; i < 20; i++) {
+                String message = "Hello girl：" + i;
+                // 走默认交换机
+                channel.basicPublish("", "queue1", null, message.getBytes());
+            }
             System.out.println("消息发送成功！");
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
