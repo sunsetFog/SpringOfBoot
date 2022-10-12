@@ -4,6 +4,8 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+// 修改了配置，删掉队列，交换机，再运行
 @Configuration
 public class RabbitmqConfig {
     // 声明注册fanout模式的交换机
@@ -47,12 +49,35 @@ public class RabbitmqConfig {
     // 声明队列
     @Bean
     public Queue smsDirectQueue() {
-        return new Queue("sms.direct.queue", true);
+//        return new Queue("sms.direct.queue", true);
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("x-message-ttl", 5000);// 方式1：5秒后过期删除消息  有TTL过期队列标记
+        args.put("x-dead-letter-exchange", "dead_exchange");// 5秒后把消息发送给死信交换机
+        args.put("x-dead-letter-routing-key", "dead");// fanout不需要配置
+//        args.put("x-max-length", 10);// 设置最大消息数量
+        return new Queue("sms.direct.queue", true, false, false, args);
     }
     // 队列和交换机完成绑定关系
     @Bean
     public Binding smsDirectBangding() {
         // direct路由模式，需要绑定路由key
         return BindingBuilder.bind(smsDirectQueue()).to(directExchange()).with("sms");
+    }
+
+    // 声明注册dead死信交换机
+    @Bean
+    public DirectExchange deadExchange() {
+        return new DirectExchange("dead_exchange", true, false);
+    }
+    // 声明死信队列
+    @Bean
+    public Queue deadDirectQueue() {
+        return new Queue("dead.direct.queue", true);
+    }
+    // 队列和交换机完成绑定关系
+    @Bean
+    public Binding deadDirectBangding() {
+        // direct路由模式，需要绑定路由key
+        return BindingBuilder.bind(deadDirectQueue()).to(deadExchange()).with("dead");
     }
 }
