@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /*
-    谢咯：
+    Shiro谢咯：
     Shiro实现登录拦截，认证、授权、加密、会话管理、Web集成、缓存等
     1.Subject 用户
     2.SecurityManager 管理所有用户
@@ -20,6 +20,7 @@ import java.util.Map;
 */
 @Configuration
 public class ShiroConfig {
+    // Shiro过滤器
     @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
         ShiroFilterFactoryBean shiroBean = new ShiroFilterFactoryBean();

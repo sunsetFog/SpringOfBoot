@@ -90,7 +90,7 @@ public class JWTUtils {
         System.out.println("--verifierTokenBySysUser-2-"+data.asString());
         return JsonUtils.string2Obj(data.asString(), LoginParams.class);
     }
-    // 获取user实体类
+    // 从token里获取user实体类
     public static LoginParams getSysUser(String token){
         Claim data = JWT.decode(token).getClaim("AnalogData");
         return JsonUtils.string2Obj(data.asString(), LoginParams.class);

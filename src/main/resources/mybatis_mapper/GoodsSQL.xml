@@ -14,7 +14,7 @@ resultMap能起字段别名，实体类字段与数据库字段不需要一致�
     </resultMap>
 <!--  输出明确字段列表，不需要输出全部字段  -->
     <sql id="Base_Column_List" >
-        id, name, imgUrl
+        id, name, img_url
     </sql>
 <!-- parameterType是接口参数 -->
     <select id="goodsQueryList" resultType="com.core.pojo.Goods" parameterType="java.lang.String">
@@ -27,8 +27,8 @@ resultMap能起字段别名，实体类字段与数据库字段不需要一致�
     <update id="uploadGoods" parameterType="com.core.pojo.Goods">
         update goods
         <set>
-            <if test="imgUrl != null">
-                imgUrl = #{imgUrl,jdbcType=VARCHAR},
+            <if test="img_url != null">
+                img_url = #{img_url,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -46,8 +46,8 @@ resultMap能起字段别名，实体类字段与数据库字段不需要一致�
             <if test="create_time != null" >
                 create_time,
             </if>
-            <if test="imgUrl != null" >
-                imgUrl,
+            <if test="img_url != null" >
+                img_url,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -60,8 +60,8 @@ resultMap能起字段别名，实体类字段与数据库字段不需要一致�
             <if test="create_time != null" >
                 #{create_time,jdbcType=VARCHAR},
             </if>
-            <if test="imgUrl != null" >
-                #{imgUrl,jdbcType=VARCHAR},
+            <if test="img_url != null" >
+                #{img_url,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -82,8 +82,8 @@ resultMap能起字段别名，实体类字段与数据库字段不需要一致�
             <if test="update_time != null">
                 update_time = #{update_time,jdbcType=VARCHAR},
             </if>
-            <if test="imgUrl != null">
-                imgUrl = #{imgUrl,jdbcType=VARCHAR},
+            <if test="img_url != null">
+                img_url = #{img_url,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
