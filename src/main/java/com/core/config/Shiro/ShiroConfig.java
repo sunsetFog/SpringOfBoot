@@ -1,4 +1,4 @@
-package com.core.config;
+package com.core.config.Shiro;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

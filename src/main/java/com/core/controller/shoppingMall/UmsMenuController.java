@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,6 +29,13 @@ import java.util.stream.Stream;
 public class UmsMenuController {
     @Autowired
     private UmsMenuMapper umsMenuMapper;
+
+    @ApiOperation("根据用户查询用户权限")
+    @RequestMapping(value = "/auths", method = RequestMethod.GET)
+    public ResponseData menuAuths(@RequestParam String username) {
+        Set<String> list01 = umsMenuMapper.queryUserAuths(username);
+        return ResponseDataUtil.buildSuccess(list01);
+    }
 
     @ApiOperation("按钮权限列表")
     @RequestMapping(value = "/btnList", method = RequestMethod.GET)

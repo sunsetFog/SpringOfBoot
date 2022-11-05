@@ -10,6 +10,9 @@ public class UmsRole {
     @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty(value = "角色编码")
+    private String roleCode;
+
     @ApiModelProperty(value = "描述")
     private String description;
 
@@ -26,6 +29,14 @@ public class UmsRole {
     private Integer sort;
 
     private static final long serialVersionUID = 1L;
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
     public Long getId() {
         return id;

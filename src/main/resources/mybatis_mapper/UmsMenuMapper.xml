@@ -26,6 +26,21 @@
         id, menu_parent_id, create_time, title, perms, menu_level, router_level, sort, name, icon, hidden, disabled, path, cache, router_parent_id, subject
     </sql>
 
+    <select id="queryUserAuths" resultType="String" parameterType="String">
+        SELECT ask1.perms FROM (
+            SELECT p.*
+            FROM  ums_menu p
+            WHERE exists(
+                select a.id from ums_role_menu_relation a
+                join ums_role b on a.role_id = b.id
+                join ums_admin_role_relation c on c.role_id = b.id
+                join ums_admin d on d.id = c.admin_id
+                where p.id = a.menu_id AND d.username = #{username,jdbcType=VARCHAR}
+            )
+        ) ask1
+        order by ask1.sort Desc
+    </select>
+
     <select id="selectWay" resultMap="BaseResultMap" parameterType="String">
         select
         <include refid="Base_Column_List" />

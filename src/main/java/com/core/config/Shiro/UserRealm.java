@@ -1,6 +1,8 @@
-package com.core.config;
+package com.core.config.Shiro;
 
 import com.core.mapper.news.UserMapper;
+import com.core.mapper.shoppingMall.UmsMenuMapper;
+import com.core.mapper.shoppingMall.UmsRoleMapper;
 import com.core.pojo.news.LoginParams;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -17,6 +19,10 @@ Shiro自定义UserRealm
 2.接着跳要授权的/user/add，触发授权方法
 */
 public class UserRealm extends AuthorizingRealm {
+    @Autowired
+    private UmsRoleMapper umsRoleMapper;
+    @Autowired
+    private UmsMenuMapper umsMenuMapper;
     @Autowired
     private UserMapper userMapper;
 
