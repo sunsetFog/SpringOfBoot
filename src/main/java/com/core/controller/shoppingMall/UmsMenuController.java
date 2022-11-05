@@ -29,6 +29,13 @@ public class UmsMenuController {
     @Autowired
     private UmsMenuMapper umsMenuMapper;
 
+    @ApiOperation("按钮权限列表")
+    @RequestMapping(value = "/btnList", method = RequestMethod.GET)
+    public ResponseData btnList() {
+        List<UmsMenu> umsMenus = umsMenuMapper.btnWay();
+        return ResponseDataUtil.buildSuccess(umsMenus);
+    }
+
     @ApiOperation("树形结构返回所有菜单列表")
     @RequestMapping(value = "/treeMenu", method = RequestMethod.GET)
     public ResponseData treeMenu(@RequestParam String subject) {
@@ -132,7 +139,10 @@ public class UmsMenuController {
      */
     private void updateLevel(UmsMenu umsMenu) {
         System.out.println("--updateLevel--"+umsMenu);
-        if (umsMenu.getMenuParentId() == 0 || umsMenu.getMenuParentId() == -1) {
+        if(umsMenu.getPerms() != "" || umsMenu.getPerms() != "null") {
+            umsMenu.setMenuParentId(umsMenu.getRouterParentId());
+            umsMenu.setMenuLevel(-1);
+        } else if (umsMenu.getMenuParentId() == 0 || umsMenu.getMenuParentId() == -1) {
             //没有父菜单时为一级菜单
             umsMenu.setMenuLevel(0);
         } else {

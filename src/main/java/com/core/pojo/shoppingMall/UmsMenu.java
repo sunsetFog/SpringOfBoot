@@ -1,6 +1,7 @@
 package com.core.pojo.shoppingMall;
 
 import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 public class UmsMenu {
@@ -17,6 +18,9 @@ public class UmsMenu {
 
     @ApiModelProperty(value = "菜单名称")
     private String title;
+
+    @ApiModelProperty(value = "按钮编码")
+    private String perms;
 
     @ApiModelProperty(value = "菜单级数")
     private Integer menuLevel;
@@ -36,6 +40,9 @@ public class UmsMenu {
     @ApiModelProperty(value = "菜单隐藏")
     private Integer hidden;
 
+    @ApiModelProperty(value = "按钮禁用")
+    private Integer disabled;
+
     @ApiModelProperty(value = "组件路径")
     private String path;
 
@@ -47,6 +54,21 @@ public class UmsMenu {
 
     private static final long serialVersionUID = 1L;
 
+    public Integer getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Integer disabled) {
+        this.disabled = disabled;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
 
     public Long getId() {
         return id;
