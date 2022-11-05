@@ -37,7 +37,7 @@ Swagger作用:
     实时更新
     可以在线测试
 
-swagger2 注解说明   https://blog.csdn.net/jiangyu1013/article/details/83107255
+swagger2 注解   https://blog.csdn.net/jiangyu1013/article/details/83107255
 */
 @Configuration // 配置到Spring里
 @EnableSwagger2 // 开启Swagger2

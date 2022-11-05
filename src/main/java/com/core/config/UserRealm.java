@@ -24,15 +24,22 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
         System.out.println("--Shiro--授权--");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addStringPermission("user:update");
         // 拿到User对象，认证return要传user进来
         Subject subject = SecurityUtils.getSubject();
         LoginParams currentLoginParams = (LoginParams) subject.getPrincipal();
-        System.out.println("--currentUser--"+ currentLoginParams);
-        //添加角色
+        System.out.println("--需要根据用户名sql查询Set<String>集合--"+ currentLoginParams.getUsername());
+        /*
+            添加角色
+            @RequiresRoles("admin")  注在控制成的方法上
+            subject中有**角色才可以访问绑定的方法，否则抛出异常AuthorizationException
+         */
         info.addRole("user");
-        // 设置当前用户的权限
-//        info.addStringPermission(currentUser.getPerms());
+        /*
+            设置当前用户的权限
+            @RequiresPermissions("user:add")  注在控制成的方法上
+            subject中有**按钮权限才可以访问绑定的方法，否则抛出异常AuthorizationException
+         */
+        info.addStringPermission("user:update");
         return info;
     }
     @Override
@@ -66,6 +73,8 @@ public class UserRealm extends AuthorizingRealm {
 //            return null;// 抛出异常
 //        }
         // 密码认证，shiro做~
+
+        // 把用户信息设置在Subject里
         return new SimpleAuthenticationInfo(loginParams, password, "");
     }
 }
