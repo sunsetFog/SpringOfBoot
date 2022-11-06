@@ -38,6 +38,7 @@
                 where p.id = a.menu_id AND d.username = #{username,jdbcType=VARCHAR}
             )
         ) ask1
+        where ask1.perms is not null
         order by ask1.sort Desc
     </select>
 

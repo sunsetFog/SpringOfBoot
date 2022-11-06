@@ -17,7 +17,7 @@ public interface UmsRoleMapper {
      * @param username 用户账号名称
      * @return Set<String>
      */
-    @Select("select role_code from sys_role where id in (select role_id from sys_user_role where user_id = (select id from sys_user where username=#{username}))")
+    @Select("select role_code from ums_role where id in (select role_id from ums_admin_role_relation where admin_id = (select id from ums_admin where username=#{username}))")
     Set<String> queryUserRoles(String username);
     List<UmsRole> selectWay(String name);
     int insertWay(UmsRole record);

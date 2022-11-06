@@ -13,6 +13,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Set;
+
 /*
 Shiro自定义UserRealm
 1.登录，触发认证方法
@@ -39,13 +41,17 @@ public class UserRealm extends AuthorizingRealm {
             @RequiresRoles("admin")  注在控制成的方法上
             subject中有**角色才可以访问绑定的方法，否则抛出异常AuthorizationException
          */
-        info.addRole("user");
+        Set<String> list01 = umsRoleMapper.queryUserRoles(currentLoginParams.getUsername());
+//        info.addRole("admin");// 这只能一个个设置，需要循环里
+        info.setRoles(list01);
         /*
             设置当前用户的权限
             @RequiresPermissions("user:add")  注在控制成的方法上
             subject中有**按钮权限才可以访问绑定的方法，否则抛出异常AuthorizationException
          */
-        info.addStringPermission("user:update");
+        Set<String> list02 = umsMenuMapper.queryUserAuths(currentLoginParams.getUsername());
+//        info.addStringPermission("user:add");// 这只能一个个设置，需要循环里
+        info.addStringPermissions(list02);
         return info;
     }
     @Override

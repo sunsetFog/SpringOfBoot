@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Api(tags = "UmsRoleController", description = "后台用户角色管理")
@@ -24,6 +25,13 @@ import java.util.List;
 public class UmsRoleController {
     @Autowired
     private UmsRoleMapper umsRoleMapper;
+
+    @ApiOperation("通过用户账号查询角色集合")
+    @RequestMapping(value = "/roleCode", method = RequestMethod.GET)
+    public ResponseData roleCode(@RequestParam String username) {
+        Set<String> list01 = umsRoleMapper.queryUserRoles(username);
+        return ResponseDataUtil.buildSuccess(list01);
+    }
     /*
         分页查询,pageSize传9999查所有
         username和nick_name字段模糊搜索
