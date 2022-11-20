@@ -14,17 +14,17 @@ import java.util.Date;
 
 
 /*
-lombok之日志
+study: lombok日志@Slf4j
 日志级别：
 默认是info，那么trace < debug更低级的不会显示
 trace < debug < info < warn < error < fatal
 跟踪 < 调试 < 信息 < 警告 < 异常 < 危险
 */
-@Slf4j// lombok定义日志变量---方便
+@Slf4j// 方便
 @RestController
 @CrossOrigin
 public class LombokOfSlf4j {
-    // slf4j定义日志变量---不方便
+    // slf4j定义日志变量---要引入，不方便
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/journal")

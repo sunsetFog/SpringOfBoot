@@ -5,7 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
-// 修改了配置，删掉队列，交换机，再运行
+/**
+ * study: rabbitmq
+ * 修改了配置，删掉队列，交换机，再运行
+ */
 @Configuration
 public class RabbitmqConfig {
     // 声明注册fanout模式的交换机

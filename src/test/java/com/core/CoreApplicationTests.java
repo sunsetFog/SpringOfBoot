@@ -21,7 +21,7 @@ class CoreApplicationTests {
 	void contextLoads() {
 
 
-
+//      study: mail
 //		 简单邮件  自动配置类：MailSenderAutoConfiguration
 //		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 //		simpleMailMessage.setSubject("夕阳小月，你好呀！");

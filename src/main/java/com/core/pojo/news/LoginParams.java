@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * study: Swagger
+ */
 @Data
 @NoArgsConstructor // 无参构造
 @AllArgsConstructor // 有参构造

@@ -17,9 +17,9 @@
 		<!-- JDK版本，要对应上 -->
 		<java.version>11</java.version>
 	</properties>
-<!--	导入jar包  -->
+<!--	引入 maven 依赖      导入JAR包  -->
 	<dependencies>
-		<!--	rabbitmq	-->
+		<!--	study: rabbitmq	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
@@ -30,7 +30,7 @@
 			<artifactId>amqp-client</artifactId>
 			<version>5.15.0</version>
 		</dependency>
-		<!--excel导出导入-->
+		<!--study: EasyExcel导出导入-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>easyexcel</artifactId>
@@ -46,7 +46,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-		<!--token依赖-->
+		<!--study: token依赖-->
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
@@ -60,23 +60,23 @@
 			<version>1.2.5</version>
 		</dependency>
 
-		<!--	操作Redis客服端，不推荐	-->
+		<!-- study: redis   操作Redis客服端，不推荐	-->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>4.2.3</version>
 		</dependency>
-		<!--	springboot集成redis，推荐	-->
+		<!--	study: redis     springboot集成redis，推荐	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-		<!--   邮件任务	-->
+		<!--   study: mail 邮件任务	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		<!--	Swagger	-->
+		<!--	study: Swagger	-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -95,14 +95,16 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.76</version>
 		</dependency>
-		<!--lombok日志、实体类方法和注解-->
+		<!-- study: lombok
+			 作用：日志、实体类方法、注解
+		-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.20</version>
 			<scope>provided</scope>
 		</dependency>
-		<!--	小而全的Java工具类库	-->
+		<!-- study: hutool   小而全的Java工具类库	-->
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
@@ -111,12 +113,12 @@
 
 		<!--	++++++++++++++++授权与认证jar包+++++++++++++++ 	-->
 
-		<!--  security安全  装上就要配置授权，否则报错：401  Unauthorized  -->
+		<!--  study: security安全  装上就要配置授权，否则报错：401  Unauthorized  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!-- Shiro整合Spring,安全验证 -->
+		<!-- study: Shiro整合Spring,安全验证 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
@@ -126,13 +128,13 @@
 
 		<!--	++++++++++++++++操作数据库jar包+++++++++++++++ 	-->
 
-		<!--  mybatis  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
+		<!--  study: mybatis  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		<!-- Druid数据源  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
+		<!-- study: Druid数据源  要先yml配置DataSource，否则报错Failed to configure a DataSource	-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
@@ -143,7 +145,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<!--MYSQL Driver数据库驱动  要先yml配置DataSource，否则报错Failed to configure a DataSource-->
+		<!--study: MYSQL Driver数据库驱动  要先yml配置DataSource，否则报错Failed to configure a DataSource-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

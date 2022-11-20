@@ -14,7 +14,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-
+/**
+ * study: token
+ */
 public class JWTUtils {
     private static final String ISSUER = "Chat-API";
     private static final String HMAC256_PWD = ".,sd125@#zs1a3";

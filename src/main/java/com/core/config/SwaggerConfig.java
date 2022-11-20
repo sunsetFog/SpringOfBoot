@@ -22,6 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
 import java.util.List;
 /*
+study: Swagger
 s哇歌：接口文档
 运行后访问界面：http://localhost:8067/sky/swagger-ui.html
 Swagger官网 https://swagger.io/

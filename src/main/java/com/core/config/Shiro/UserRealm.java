@@ -45,7 +45,7 @@ public class UserRealm extends AuthorizingRealm {
 //        info.addRole("admin");// 这只能一个个设置，需要循环里
         info.setRoles(list01);
         /*
-            设置当前用户的权限
+            用户接口访问权限控制
             @RequiresPermissions("user:add")  注在控制成的方法上
             subject中有**按钮权限才可以访问绑定的方法，否则抛出异常AuthorizationException
          */

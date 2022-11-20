@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
+study: Swagger
 访问界面：http://localhost:8067/sky/swagger-ui.html
 */
 @RestController

@@ -3,6 +3,9 @@ package com.core.pojo;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
+/**
+ * study: EasyExcel导出导入
+ */
 @Data
 public class ExcelStudent {
     @ExcelProperty("姓名")
