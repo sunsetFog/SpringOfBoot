@@ -40,7 +40,10 @@ spring:
     username: root
     password: root
     # serverTimezone时区 中国    useSSL=false不使用安全连接    characterEncoding字符集编码
-    url: jdbc:mysql://localhost:3306/db_news?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    # 可选localhost、127.0.0.1、容器名
+    # C:\Windows\System32\drivers\etc\HOSTS文件需要映射才能连接上news-mysql容器
+    # 写容器名就不需要映射啦
+    url: jdbc:mysql://news-mysql:3306/db_news?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     # 驱动   mysql8: com.mysql.cj.jdbc.Driver      mysql5: com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
     # study: Druid切换数据源
@@ -103,7 +106,7 @@ spring:
     charse: UTF-8
   # study: redis  配置redis
   redis:
-    host: 127.0.0.1
+    host: news-redis
     port: 6379
   # study: mail  邮件任务   密码：我的qq邮箱--设置--账户--开启POP3
   mail:
