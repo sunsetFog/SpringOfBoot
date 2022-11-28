@@ -17,7 +17,7 @@ spring:
     virtual-host: /
     host: 39.108.174.145
     port: 5672
-  # 上传文件大小
+  # 上传文件大小  study: uploadImg
   servlet:
     multipart:
       max-file-size: 5MB
@@ -120,7 +120,7 @@ spring:
           ssl:
             enable: true
 
-# 公共文件路径 --- 使用
+# 文件上传根目录 设置   study: uploadImg
 # @Value("${file.uploadFolder}") // 读取配置文件信息
 # private String uploadFolder;
 file:

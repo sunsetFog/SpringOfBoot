@@ -49,6 +49,7 @@ public class GoodsController {
         PageResult pageResult = PageResult.getPageResult(pageInfo);
         return ResponseDataUtil.buildSuccess(pageResult);
     }
+    // study: uploadImg
     // 上传图片，修改imgUrl字段
     @ResponseBody
     @PostMapping("/shop/upload")

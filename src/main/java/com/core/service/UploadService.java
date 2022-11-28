@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * study: uploadImg
+ */
 @Service
 public class UploadService {
     private static final List<String> CONTENT_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
