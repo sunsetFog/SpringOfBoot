@@ -22,7 +22,8 @@ import java.util.Date;
 public class Download {
     /**
      * 网络文件保存到服务器，没有返回
-     * @param netAddress 网络地址：百度动漫图片》打开控制台》元素指定img标签》右键》复制链接地址     下载地址：下载按钮的a标签
+     * @param netAddress 网络地址：百度动漫图片》打开控制台》元素指定img标签》右键》复制链接地址  或  图片右击》复制图片地址
+     *                   下载地址：下载按钮的a标签
      */
     @RequestMapping("/netDownloadLocal")
     public void downloadNet(String netAddress) throws IOException {

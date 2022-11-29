@@ -41,20 +41,17 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     }
     // study: uploadImg
     // 上传文件或图片 ----- 把逻辑路径自动映射为物理路径
-    @Value("${file.uploadFolder}")// 读取配置文件信息
-    private String uploadFolder;
+    @Value("${rafael.file.basePath}")// 读取配置文件信息
+    private String basePath;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         /*
         MVC配置使http://IP:端口号/${server.context-path}/img/avatorImages/图片路径可以访问到配置的文件夹
-        http://localhost:8062/sky/img/avatorImages/1647277665830invoice.png
+        http://localhost:8062/sky/profile/1647277665830invoice.png
 
-        addResourceHandler加一个路径校验，路径必须要有img/avatorImages
+        addResourceHandler加一个路径校验，路径必须要有profile
          */
-        String fileUpload = "file:" + System.getProperty("user.dir") + uploadFolder;
-        System.out.println("--fileUpload--"+fileUpload);
-//        registry.addResourceHandler(staticAccessPath).addResourceLocations(fileUpload);
-        registry.addResourceHandler("/img/avatorImages/**").addResourceLocations(fileUpload);
+        registry.addResourceHandler("/profile/**").addResourceLocations("file:"+basePath);
     }
     /*
         这里是全局跨域设置
