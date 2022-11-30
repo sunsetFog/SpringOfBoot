@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.PmsProductAttributeMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.PmsProductAttribute">
+<mapper namespace="com.stars.mapper.shoppingMall.PmsProductAttributeMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.PmsProductAttribute">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="product_attribute_category_id" jdbcType="BIGINT" property="productAttributeCategoryId"/>
         <result column="name" jdbcType="VARCHAR" property="name" />
@@ -49,7 +49,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttribute">
+    <insert id="insertWay" parameterType="com.stars.pojo.shoppingMall.PmsProductAttribute">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -128,7 +128,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttribute">
+    <update id="updateWay" parameterType="com.stars.pojo.shoppingMall.PmsProductAttribute">
         update pms_product_attribute
         <set>
             <if test="productAttributeCategoryId != null">

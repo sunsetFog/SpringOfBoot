@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.OmsOrderReturnApplyMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.OmsOrderReturnApply">
+<mapper namespace="com.stars.mapper.shoppingMall.OmsOrderReturnApplyMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.OmsOrderReturnApply">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="order_id" jdbcType="BIGINT" property="orderId" />
         <result column="company_address_id" jdbcType="BIGINT" property="companyAddressId" />
@@ -32,8 +32,8 @@
         <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
         <result column="receive_note" jdbcType="VARCHAR" property="receiveNote" />
     </resultMap>
-    <resultMap id="returnApplyDetailResultMap" type="com.core.pojo.shoppingMall.OmsOrderReturnApplyResult" extends="BaseResultMap">
-        <association property="companyAddress" resultMap="com.core.mapper.shoppingMall.OmsCompanyAddressMapper.BaseResultMap" columnPrefix="ca_"/>
+    <resultMap id="returnApplyDetailResultMap" type="com.stars.pojo.shoppingMall.OmsOrderReturnApplyResult" extends="BaseResultMap">
+        <association property="companyAddress" resultMap="com.stars.mapper.shoppingMall.OmsCompanyAddressMapper.BaseResultMap" columnPrefix="ca_"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, order_id, company_address_id, product_id, order_sn, create_time, member_username,
@@ -41,7 +41,7 @@
     product_brand, product_attr, product_count, product_price, product_real_price, reason,
     description, proof_pics, handle_note, handle_man, receive_man, receive_time, receive_note
     </sql>
-    <select id="selectWay" resultMap="BaseResultMap" parameterType="com.core.apiParams.OmsOrderReturnApplyListParam">
+    <select id="selectWay" resultMap="BaseResultMap" parameterType="com.stars.apiParams.OmsOrderReturnApplyListParam">
         SELECT
         <include refid="Base_Column_List" />
         FROM
@@ -87,7 +87,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.OmsOrderReturnApply">
+    <update id="updateWay" parameterType="com.stars.pojo.shoppingMall.OmsOrderReturnApply">
         update oms_order_return_apply
         <set>
             <if test="orderId != null">

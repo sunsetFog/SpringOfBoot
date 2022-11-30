@@ -138,7 +138,7 @@ pagehelper:
 # study: mybatis  整合mybatis
 mybatis:
   # 别名的包
-  type-aliases-package: com.core.pojo
+  type-aliases-package: com.stars.pojo
   #  mapper放置
   mapper-locations: classpath:mybatis_mapper/*.xml
 

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>core</artifactId>
+	<artifactId>stars</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>core</name>
-	<description>Core project for Spring Boot</description>
+	<name>stars</name>
+	<description>Stars project for Spring Boot</description>
 	<properties>
 		<!-- JDK版本，要对应上 -->
 		<java.version>11</java.version>
@@ -197,7 +197,7 @@
 		<plugins>
 <!--
 https://blog.csdn.net/htx845928748/article/details/118766580
-Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project core: There are test failures.
+Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.2:test (default-test) on project stars: There are test failures.
 -->
 
 			<plugin>

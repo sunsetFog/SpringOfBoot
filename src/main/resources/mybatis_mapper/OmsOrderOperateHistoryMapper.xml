@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.OmsOrderOperateHistoryMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.OmsOrderOperateHistory">
+<mapper namespace="com.stars.mapper.shoppingMall.OmsOrderOperateHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.OmsOrderOperateHistory">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="order_id" jdbcType="BIGINT" property="orderId" />
         <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />

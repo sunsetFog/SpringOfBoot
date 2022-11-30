@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.UmsRoleMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.UmsRole">
+<mapper namespace="com.stars.mapper.shoppingMall.UmsRoleMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.UmsRole">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
@@ -32,7 +32,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.UmsRole">
+    <insert id="insertWay" parameterType="com.stars.pojo.shoppingMall.UmsRole">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -87,7 +87,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.UmsRole">
+    <update id="updateWay" parameterType="com.stars.pojo.shoppingMall.UmsRole">
         update ums_role
         <set>
             <if test="name != null">

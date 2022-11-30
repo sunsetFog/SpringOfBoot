@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.SmsCouponMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.SmsCoupon">
+<mapper namespace="com.stars.mapper.shoppingMall.SmsCouponMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.SmsCoupon">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="type" jdbcType="INTEGER" property="type" />
         <result column="name" jdbcType="VARCHAR" property="name" />
@@ -29,9 +29,9 @@
     use_type, note, publish_count, use_count, receive_count, enable_time, code, member_level
     </sql>
 
-    <resultMap id="getListWithAttrMap" type="com.core.apiParams.SmsCouponAddParam" extends="BaseResultMap">
-        <collection property="productRelationList" columnPrefix="attr_" resultMap="com.core.mapper.shoppingMall.SmsCouponProductRelationMapper.BaseResultMap"></collection>
-        <collection property="productCategoryRelationList" columnPrefix="cate_" resultMap="com.core.mapper.shoppingMall.SmsCouponProductCategoryRelationMapper.BaseResultMap"></collection>
+    <resultMap id="getListWithAttrMap" type="com.stars.apiParams.SmsCouponAddParam" extends="BaseResultMap">
+        <collection property="productRelationList" columnPrefix="attr_" resultMap="com.stars.mapper.shoppingMall.SmsCouponProductRelationMapper.BaseResultMap"></collection>
+        <collection property="productCategoryRelationList" columnPrefix="cate_" resultMap="com.stars.mapper.shoppingMall.SmsCouponProductCategoryRelationMapper.BaseResultMap"></collection>
     </resultMap>
 
     <select id="selectWay" resultMap="getListWithAttrMap" parameterType="Map">
@@ -85,7 +85,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.SmsCoupon">
+    <insert id="insertWay" parameterType="com.stars.pojo.shoppingMall.SmsCoupon">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -200,7 +200,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.SmsCoupon">
+    <update id="updateWay" parameterType="com.stars.pojo.shoppingMall.SmsCoupon">
         update sms_coupon
         <set>
             <if test="type != null">

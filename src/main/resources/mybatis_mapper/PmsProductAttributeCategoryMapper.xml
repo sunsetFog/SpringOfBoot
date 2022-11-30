@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.core.mapper.shoppingMall.PmsProductAttributeCategoryMapper">
-    <resultMap id="BaseResultMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
+<mapper namespace="com.stars.mapper.shoppingMall.PmsProductAttributeCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.stars.pojo.shoppingMall.PmsProductAttributeCategory">
         <id column="id" jdbcType="BIGINT" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="attribute_count" jdbcType="INTEGER" property="attributeCount" />
@@ -39,8 +39,8 @@
             columnPrefix="attr_"   列名前缀截取
         association对象
 -->
-    <resultMap id="getListWithAttrMap" type="com.core.pojo.shoppingMall.PmsProductAttributeCategoryItem" extends="BaseResultMap">
-        <collection property="productAttributeList" columnPrefix="attr_" resultMap="com.core.mapper.shoppingMall.PmsProductAttributeMapper.BaseResultMap">
+    <resultMap id="getListWithAttrMap" type="com.stars.pojo.shoppingMall.PmsProductAttributeCategoryItem" extends="BaseResultMap">
+        <collection property="productAttributeList" columnPrefix="attr_" resultMap="com.stars.mapper.shoppingMall.PmsProductAttributeMapper.BaseResultMap">
         </collection>
     </resultMap>
     <select id="selectCategoryAndAttribute" resultMap="getListWithAttrMap">
@@ -69,7 +69,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <insert id="insertWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
+    <insert id="insertWay" parameterType="com.stars.pojo.shoppingMall.PmsProductAttributeCategory">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -100,7 +100,7 @@
 
     <!--  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
 
-    <update id="updateWay" parameterType="com.core.pojo.shoppingMall.PmsProductAttributeCategory">
+    <update id="updateWay" parameterType="com.stars.pojo.shoppingMall.PmsProductAttributeCategory">
         update pms_product_attribute_category
         <set>
             <if test="name != null">
